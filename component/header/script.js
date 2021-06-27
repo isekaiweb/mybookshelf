@@ -12,6 +12,14 @@ function setHeader() {
 
   btnSearch.addEventListener('click', () => {});
 
+  btnSearch.addEventListener('mouseup', function () {
+    this.removeAttribute('class');
+  });
+
+  btnSearch.addEventListener('mousedown', function () {
+    this.classList.add('pressed');
+  });
+
   typeSearch.forEach((type) => {
     type.addEventListener('change', function () {
       select.children[0].innerText = this.value;
@@ -37,39 +45,41 @@ function setHeader() {
       });
     }
   });
-
-  if (window.innerWidth <= 360) {
-    const containerTypeSearch = chips[0].parentElement,
-      releaseGrabbing = () => {
-        isDown = false;
-        containerTypeSearch.removeAttribute('class');
-      };
-
-    let isDown = false,
-      startX,
-      scrollLeft;
-
-    containerTypeSearch.addEventListener('mousedown', function (e) {
-      isDown = true;
-      this.classList.add('grab');
-      startX = e.pageX - this.offsetLeft;
-      scrollLeft = this.scrollLeft;
-    });
-
-    containerTypeSearch.addEventListener('mouseleave', releaseGrabbing);
-    containerTypeSearch.addEventListener('mouseup', releaseGrabbing);
-
-    containerTypeSearch.addEventListener('mousemove', function (e) {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - this.offsetLeft,
-        walk = (x - startX) * 3; //scroll-fast
-
-      this.scrollLeft = scrollLeft - walk;
-    });
-  }
 }
 
-window.addEventListener('resize', setHeader);
+function setOverflowChip() {
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 360) {
+      const containerTypeSearch = chips[0].parentElement,
+        releaseGrabbing = () => {
+          isDown = false;
+          containerTypeSearch.removeAttribute('class');
+        };
 
-export default setHeader;
+      let isDown = false,
+        startX,
+        scrollLeft;
+
+      containerTypeSearch.addEventListener('mousedown', function (e) {
+        isDown = true;
+        this.classList.add('grab');
+        startX = e.pageX - this.offsetLeft;
+        scrollLeft = this.scrollLeft;
+      });
+
+      containerTypeSearch.addEventListener('mouseleave', releaseGrabbing);
+      containerTypeSearch.addEventListener('mouseup', releaseGrabbing);
+
+      containerTypeSearch.addEventListener('mousemove', function (e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - this.offsetLeft,
+          walk = (x - startX) * 3; //scroll-fast
+
+        this.scrollLeft = scrollLeft - walk;
+      });
+    }
+  });
+}
+
+export { setHeader, setOverflowChip };
