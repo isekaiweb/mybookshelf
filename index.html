@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/util/style.css" />
+    <link rel="icon" href="assets/ic_book.svg" />
+    <title>MyBookShelf</title>
+  </head>
+  <body>
+    <header>
+      <h1>MyBookShelf</h1>
+      <div>
+        <div id="select">
+          <span>title book</span>
+          <img src="/assets/ic_caret.svg" alt="caret" />
+        </div>
+        <input type="search" placeholder="enter title book here ..." />
+        <button><img src="/assets/ic_search.svg" alt="search" /></button>
+        <div id="type_search">
+          <input
+            type="radio"
+            name="type-search"
+            id="0"
+            value="title book"
+            checked
+          />
+          <label for="0">title book</label>
+          <input type="radio" name="type-search" id="1" value="writer book" />
+          <label for="1">writer book</label>
+          <input type="radio" name="type-search" id="2" value="hashtag" />
+          <label for="2">hashtag</label>
+        </div>
+      </div>
+
+      <div>
+        <span class="active">latest update</span>
+        <span>ongoing</span>
+        <span>finished</span>
+      </div>
+    </header>
+    <main>
+      <div></div>
+      <!-- <img src="/assets/ic_add.svg" alt="add_book" /> -->
+    </main>
+ 
+    <script type="module" src="/util/script.js"></script>
+  </body>
 </html>

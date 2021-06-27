@@ -16,6 +16,17 @@ button {
   margin: 0;
   padding: 0;
 }
+input,
+select {
+  border: none;
+  background-color: transparent;
+  caret-color: var(--active-dark);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+}
 
 h1,
 h2,
@@ -29,4 +40,9 @@ p {
 
 p {
   line-height: 1.5em;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
