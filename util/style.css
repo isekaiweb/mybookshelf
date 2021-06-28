@@ -3,7 +3,6 @@
 @import './reset.css';
 @import '../component/header/style.css';
 
-
 :root {
   /* color for dark theme */
   --background-dark: #212832;
@@ -37,8 +36,7 @@
 }
 
 body {
-  width: 100%;
-  max-width: 1920px;
+  width: 100vw;
   background-color: var(--background-dark);
   display: flex;
   flex-direction: column;
@@ -49,7 +47,8 @@ body {
 
 header,
 main,
-footer {
+footer,
+body > div > form {
   width: 80%;
   max-width: var(--breakpoint-xxl);
   min-width: 290px;
@@ -80,8 +79,19 @@ body > div {
   bottom: auto;
   opacity: 1;
   border-radius: 0;
-  width: 100%;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
   height: 100vh;
+}
+
+body > div > form {
+  height: 80%;
+  max-height: 1200px;
+  border-radius: calc(1em - 0.2vmax);
+  background-color: var(--card-dark);
 }
 
 @media (max-width: 1200px) {
