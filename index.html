@@ -46,20 +46,52 @@
     </main>
     <div>
       <form>
-        <input
-          type="text"
-          autocomplete="off"
-          placeholder="Title Book"
-          required
-        />
-        <input
-          type="text"
-          autocomplete="off"
-          placeholder="Writer Name"
-          required
-        />
-        <span>Year Book</span>
-        <img src="../assets/ic_book.svg" alt="book" />
+        <img src="/assets/ic_cover_placeholder.svg" alt="book" />
+        <div>
+          <div id="info_book">
+            <input
+              type="text"
+              autocomplete="off"
+              required
+              placeholder="title book"
+            />
+            <input
+              type="text"
+              autocomplete="off"
+              required
+              placeholder="writer name"
+            />
+            <input
+              type="text"
+              autocomplete="off"
+              required
+              placeholder="year book"
+            />
+          </div>
+
+          <div id="status_book">
+            <span>Status</span>
+
+            <label for="current_page">current page :</label>
+            <input
+              type="text"
+              autocomplete="off"
+              required
+              placeholder="0"
+              id="current_page"
+            />
+
+            <label for="total_page">total page :</label>
+            <input
+              type="text"
+              autocomplete="off"
+              required
+              placeholder="0"
+              id="total_page"
+            />
+          </div>
+          <input type="text" placeholder="#hashtag1 #hashtag2 #hashtag3" autocomplete="off" title="separate with spacing without (#)" />
+        </div>
       </form>
     </div>
     <script type="module" src="/util/script.js"></script>

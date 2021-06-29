@@ -17,6 +17,7 @@
   --fill: #278d82;
   --status: #2baea0;
   --cancel: #f55a6a;
+  --enable-input: #b6b6b6;
 
   /* html behavior */
   scroll-behavior: smooth;
@@ -89,9 +90,125 @@ body > div {
 
 body > div > form {
   height: 80%;
+  padding: 3em;
+  display: grid;
   max-height: 1200px;
   border-radius: calc(1em - 0.2vmax);
   background-color: var(--card-dark);
+  overflow: hidden;
+
+  grid-template-columns: minmax(30%, 500px);
+}
+
+body > div > form input,
+body > div > form span {
+  color: var(--passive-dark);
+  text-transform: capitalize;
+}
+
+body > div > form input::placeholder,
+body > div > form label {
+  color: var(--enable-input);
+}
+
+body > div > form > img {
+  grid-area: 1/1/1/1;
+  width: 80%;
+  cursor: pointer;
+  border-radius: calc(1em - 0.5vmax);
+}
+
+body > div > form > div {
+  grid-area: 1/2/1/2;
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+}
+
+#info_book {
+  grid-area: 1/1/1/1;
+  display: grid;
+  height: fit-content;
+  grid-template-rows: repeat(3, max-content);
+}
+
+#info_book > input:first-of-type {
+  grid-area: 1/1/1/1;
+  font-size: 5em;
+  width: 100%;
+  height: fit-content;
+  font-weight: 700;
+  grid-template-rows: repeat(2, fit-content);
+}
+
+#info_book > input:nth-of-type(2) {
+  grid-area: 2/1/2/1;
+  font-size: 3em;
+  width: 100%;
+  text-indent: 0.05em;
+  height: fit-content;
+  font-family: var(--font-secondary);
+}
+
+#info_book > input:last-of-type {
+  text-transform: capitalize;
+  font-size: 1.5em;
+  text-indent: 0.2em;
+  height: fit-content;
+  font-family: var(--font-secondary);
+}
+
+#status_book {
+  height: 12em;
+  align-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+}
+
+#status_book > span {
+  grid-area: 1/1/1/2;
+  width: fit-content;
+  font-size: 3em;
+  font-weight: 600;
+  text-indent: 0.2em;
+}
+
+#status_book > label {
+  width: fit-content;
+  font-size: 1.2em;
+  cursor: pointer;
+  align-self: center;
+  text-indent: 0.7em;
+}
+
+#status_book > input {
+  width: 50px;
+  transform: translateY(3px);
+}
+
+#status_book > label:first-of-type {
+  grid-area: 2/1/2/1;
+}
+
+#status_book > input:first-of-type {
+  grid-area: 2/2/2/2;
+}
+
+#status_book > label:last-of-type {
+  grid-area: 3/1/3/1;
+}
+
+#status_book > input:last-of-type {
+  grid-area: 3/2/3/2;
+}
+
+form > div > input::placeholder {
+  text-transform: lowercase;
+}
+
+form > div > input {
+  font-size: 1.5em;
+  text-indent: 0.5em;
+  text-transform: lowercase;
 }
 
 @media (max-width: 1200px) {
