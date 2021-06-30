@@ -49,8 +49,7 @@ body {
 
 header,
 main,
-footer,
-body > div > form {
+footer {
   width: 80%;
   max-width: var(--breakpoint-xxl);
   min-width: 290px;

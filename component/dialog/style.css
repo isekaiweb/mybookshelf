@@ -15,18 +15,6 @@ body > div {
   height: 100vh;
 }
 
-body > div > form {
-  height: 80vh;
-  padding: 3em;
-  display: grid;
-
-  border-radius: calc(1em - 0.2vmax);
-  background-color: var(--card-dark);
-  overflow: hidden;
-
-  grid-template-columns: minmax(30%, 500px) 1fr;
-}
-
 body > div > form input,
 body > div > form span {
   color: var(--passive-dark);
@@ -36,25 +24,47 @@ body > div > form span {
 body > div > form input::placeholder,
 body > div > form label {
   color: var(--enable-input);
+  text-transform: capitalize;
 }
 
-body > div > form > img {
-  grid-area: 1/1/1/1;
-  width: 80%;
-  cursor: pointer;
-  border-radius: calc(1em - 0.5vmax);
-}
-
-body > div > form > div {
-  grid-area: 1/2/1/2;
+body > div > form {
+  padding: 3em;
+  width: 80vw;
+  height: 80vh;
+  box-sizing: border-box;
+  max-width: var(--breakpoint-xxl);
+  min-width: 290px;
   display: grid;
-  grid-template-rows: repeat(3, max-content);
+  border-radius: calc(1em - 0.2vmax);
+  background-color: var(--card-dark);
+  column-gap: 1em;
+  grid-template-columns: 1fr 30%;
+  grid-template-rows: calc(6em + 4em + 1.6em) calc(4em + 1.5em * 2);
+}
+
+#cover_book {
+  grid-area: 1/2/3/2;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../assets/ic_cover_placeholder.svg);
+  background-size: cover;
+  align-self: start;
+  border-radius: calc(1vw - 0.2em);
+  box-sizing: border-box;
+}
+
+body > div > form > p {
+  grid-area: 4/2/4/2;
+  line-height: 1.2;
+  color: var(--passive-dark);
+  font-size: 1em;
 }
 
 #info_book {
   grid-area: 1/1/1/1;
   display: grid;
   height: fit-content;
+
   grid-template-rows: repeat(3, max-content);
 }
 
@@ -64,7 +74,6 @@ body > div > form > div {
   width: 100%;
   height: fit-content;
   font-weight: 700;
-  grid-template-rows: repeat(2, fit-content);
 }
 
 #info_book > input:nth-of-type(2) {
@@ -85,8 +94,7 @@ body > div > form > div {
 }
 
 #status_book {
-  height: 12em;
-  align-content: center;
+  grid-area: 2/1/2/1;
   display: grid;
   grid-template-columns: repeat(2, max-content);
 }
@@ -132,16 +140,17 @@ form > div > input::placeholder {
   text-transform: lowercase;
 }
 
-form > div > input {
+form > input {
+  grid-area: 3/1/3/1;
   font-size: 1.5em;
   text-indent: 0.5em;
   text-transform: lowercase;
 }
 
 #action_book {
+  grid-area: 4/1/4/1;
   display: grid;
-  justify-content: end;
-  align-content: end;
+  align-content: center;
   column-gap: 2em;
   grid-template-columns: repeat(2, minmax(180px, 20%));
 }
@@ -153,6 +162,11 @@ form > div > input {
   align-items: center;
   grid-template-columns: 2em 1fr;
   border-radius: calc(0.5em - 0.2vmax);
+}
+
+#action_book > button:hover,
+#action_book > button.clicked {
+  transform: scale(0.99);
 }
 
 #action_book > button > span {
@@ -175,7 +189,7 @@ form > div > input {
   background-color: var(--cancel);
 }
 
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   body > div > form {
     grid-template-columns: minmax(30%, 400px) 1fr;
   }
@@ -194,7 +208,6 @@ form > div > input {
   }
 
   #info_book > input:last-of-type {
-    font-size: 1.2em;
     text-indent: 0.3em;
   }
 
@@ -212,7 +225,7 @@ form > div > input {
   }
 }
 
-@media (max-width: 790px){
+@media (max-width: 790px) {
   body > div > form {
     grid-template-columns: none;
     grid-template-rows: minmax(30%, 280px) 1fr;
@@ -230,9 +243,58 @@ form > div > input {
     grid-area: 2/1/2/1;
     grid-template-rows: repeat(3, max-content);
   }
+
+  #status_book {
+    height: 10em;
+    align-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    margin-bottom: 1em;
+  }
 }
 
 @media (max-width: 576px) {
+  body > div > form {
+    row-gap: 0.5em;
+  }
+
+  body > div > form > div {
+    grid-template-columns: repeat(2, fit-content);
+    grid-template-rows: repeat(3, max-content);
+  }
+
+  #info_book {
+    width: 60%;
+  }
+
+  #info_book > input:first-of-type {
+    font-size: 3.4em;
+    width: 90%;
+  }
+
+  #info_book > input:nth-of-type(2) {
+    font-size: 2.4em;
+    width: 90%;
+  }
+
+  #info_book > input:last-of-type {
+    width: 90%;
+  }
+
+  #status_book {
+    height: fit-content;
+    grid-area: 1/2/1/2;
+    width: fit-content;
+  }
+
+  form > div > input {
+    grid-area: 2/1/2/2;
+  }
+
+  #action_book {
+    grid-area: 3/1/3/2;
+    grid-template-columns: repeat(2, max-content);
+  }
 }
 @media (max-width: 360px) {
-}
+} */
