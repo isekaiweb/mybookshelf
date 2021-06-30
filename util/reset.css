@@ -1,5 +1,6 @@
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 ul {
@@ -15,6 +16,7 @@ button {
   width: max-content;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 }
 input,
 select {
