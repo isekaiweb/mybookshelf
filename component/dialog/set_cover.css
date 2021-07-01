@@ -45,7 +45,7 @@
   background-color: var(--fill);
   padding: 0.5em;
   color: var(--active-dark);
-  border-radius: 5px;
+  border-radius: 3px;
   transition: var(--transition-200ms);
 }
 
