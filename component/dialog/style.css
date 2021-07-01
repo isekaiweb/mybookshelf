@@ -38,6 +38,7 @@ body > div > form {
   background-color: var(--card-dark);
   column-gap: 1em;
   align-items: center;
+  asa
   row-gap: 1em;
   grid-template-columns: 1fr minmax(35%, 300px);
   grid-template-rows: max-content 10em max-content 1fr;
