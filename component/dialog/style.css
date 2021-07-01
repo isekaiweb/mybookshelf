@@ -294,11 +294,9 @@ body > div > form {
     grid-template-columns: none;
     column-gap: 0;
     grid-template-rows: minmax(30%, 100px) max-content max-content 10em max-content 1fr;
-  
   }
 
   #cover_book {
-   
     grid-area: 1/1/1/1;
   }
   #date_book {
@@ -337,10 +335,11 @@ body > div > form {
     column-gap: 0;
   }
 
-  #action_book > button{
-     width: 85%;
+  #action_book > button {
+    width: 85%;
   }
 
   #action_book > button > span {
     font-size: 1.3em;
+  }
 }
