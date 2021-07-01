@@ -60,6 +60,7 @@
 @media (max-height: 500px) and (max-width: 360px) {
   #dialog_set_cover {
     grid-template-rows: repeat(3, max-content);
+    row-gap: 0.5em;
   }
 
   #url {
