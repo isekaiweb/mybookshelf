@@ -43,4 +43,5 @@ const inputYearBook = new NumberInput(),
     document.querySelector('#status_book > input:first-of-type')
   );
 
+
 export { inputYearBook, currentPage };
