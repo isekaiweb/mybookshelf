@@ -2,7 +2,7 @@
 
 @import './reset.css';
 @import '../component/header/style.css';
-@import '../component/dialog/style.css';
+@import '../component/dialog/main.css';
 
 :root {
   /* color for dark theme */
