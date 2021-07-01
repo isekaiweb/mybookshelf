@@ -24,7 +24,6 @@ body > div > form span {
 body > div > form input::placeholder,
 body > div > form label {
   color: var(--enable-input);
-  text-transform: capitalize;
 }
 
 body > div > form {
@@ -38,23 +37,44 @@ body > div > form {
   border-radius: calc(1em - 0.2vmax);
   background-color: var(--card-dark);
   column-gap: 1em;
-  grid-template-columns: 1fr 30%;
-  grid-template-rows: calc(6em + 4em + 1.6em) calc(4em + 1.5em * 2);
+  align-items: center;
+  row-gap: 1em;
+  grid-template-columns: 1fr minmax(35%, 300px);
+  grid-template-rows: max-content 10em max-content 1fr;
 }
 
 #cover_book {
   grid-area: 1/2/3/2;
   width: 100%;
   height: 100%;
-  background-image: url(../../assets/ic_cover_placeholder.svg);
+  background-image: url('../../assets/ic_cover_placeholder.svg');
   background-size: cover;
+  background-position: center;
   align-self: start;
   border-radius: calc(1vw - 0.2em);
   box-sizing: border-box;
+  position: relative;
+  display: grid;
+  cursor: pointer;
 }
 
-body > div > form > p {
-  grid-area: 4/2/4/2;
+#cover_book:hover::after {
+  content: 'set cover';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--active-dark);
+  font-size: 2em;
+  background-color: var(--dialog-dark);
+}
+
+#date_book {
+  grid-area: 3/2/3/2;
   line-height: 1.2;
   color: var(--passive-dark);
   font-size: 1em;
@@ -80,7 +100,6 @@ body > div > form > p {
   grid-area: 2/1/2/1;
   font-size: 3em;
   width: 100%;
-  text-indent: 0.05em;
   height: fit-content;
   font-family: var(--font-secondary);
 }
@@ -88,7 +107,7 @@ body > div > form > p {
 #info_book > input:last-of-type {
   text-transform: capitalize;
   font-size: 1.5em;
-  text-indent: 0.2em;
+
   height: fit-content;
   font-family: var(--font-secondary);
 }
@@ -96,7 +115,8 @@ body > div > form > p {
 #status_book {
   grid-area: 2/1/2/1;
   display: grid;
-  grid-template-columns: repeat(2, max-content);
+  grid-template-columns: repeat(3, max-content);
+  grid-template-rows: 4em 2em 2em;
 }
 
 #status_book > span {
@@ -104,7 +124,6 @@ body > div > form > p {
   width: fit-content;
   font-size: 3em;
   font-weight: 600;
-  text-indent: 0.2em;
 }
 
 #status_book > label {
@@ -112,7 +131,6 @@ body > div > form > p {
   font-size: 1.2em;
   cursor: pointer;
   align-self: center;
-  text-indent: 0.55em;
 }
 
 #status_book > input {
@@ -136,21 +154,56 @@ body > div > form > p {
   grid-area: 3/2/3/2;
 }
 
-form > div > input::placeholder {
+#progress {
+  position: relative;
+  grid-area: 1/3/3/3;
+  width: 8em;
+  height: 8em;
+  border-radius: 100%;
+  overflow: hidden;
+  transform: rotate(180deg);
+  background-color: var(--background-progress);
+}
+
+#progress > span {
+  display: block;
+  transform: perspective();
+  background-color: var(--fill);
+  height: 10%;
+  width: 100%;
+}
+
+#progress::after {
+  content: attr(data-progress);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+  font-size: 2em;
+  color: var(--active-dark);
+  font-weight: 600;
+}
+
+#hashtag::placeholder {
   text-transform: lowercase;
 }
 
-form > input {
+#hashtag {
   grid-area: 3/1/3/1;
   font-size: 1.5em;
-  text-indent: 0.5em;
+
   text-transform: lowercase;
 }
 
 #action_book {
   grid-area: 4/1/4/1;
   display: grid;
-  align-content: center;
+  align-self: end;
   column-gap: 2em;
   grid-template-columns: repeat(2, minmax(180px, 20%));
 }
@@ -162,11 +215,12 @@ form > input {
   align-items: center;
   grid-template-columns: 2em 1fr;
   border-radius: calc(0.5em - 0.2vmax);
+  transition: var(--transition-200ms);
 }
 
 #action_book > button:hover,
 #action_book > button.clicked {
-  transform: scale(0.99);
+  transform: scale(0.98);
 }
 
 #action_book > button > span {
@@ -189,13 +243,13 @@ form > input {
   background-color: var(--cancel);
 }
 
-/* @media (max-width: 1200px) {
+@media (max-width: 1200px) and (max-height: 790px) {
   body > div > form {
-    grid-template-columns: minmax(30%, 400px) 1fr;
+    grid-template-rows: max-content 15em max-content 1fr;
   }
 
-  body > div > form > img {
-    width: 90%;
+  #date_book {
+    align-self: start;
   }
 
   #info_book > input:first-of-type {
@@ -204,97 +258,89 @@ form > input {
 
   #info_book > input:nth-of-type(2) {
     font-size: 2.5em;
-    text-indent: 0.05em;
   }
 
   #info_book > input:last-of-type {
-    text-indent: 0.3em;
+    font-size: 1.3em;
   }
 
   #status_book {
-    height: 14em;
+    align-self: start;
+  }
+
+  #hashtag {
+    grid-area: 2/1/3/1;
+    align-self: end;
   }
 
   #action_book {
-    height: 10em;
-    align-self: center;
+    column-gap: 0;
   }
 
   #action_book > button {
-    padding: 0.8em 1em;
+    width: 85%;
+  }
+  #action_book > button > span {
+    font-size: 1.2em;
+  }
+
+  #action_book > button > img {
+    height: 1.4em;
   }
 }
 
-@media (max-width: 790px) {
+@media (max-width: 790px) and (max-height: 1200px) {
   body > div > form {
     grid-template-columns: none;
-    grid-template-rows: minmax(30%, 280px) 1fr;
-    row-gap: 2em;
+    column-gap: 0;
+    grid-template-rows: minmax(30%, 100px) max-content max-content 10em max-content 1fr;
+  
   }
 
-  body > div > form > img {
+  #cover_book {
+   
     grid-area: 1/1/1/1;
-    width: 100%;
-    background-color: var(--passive-dark);
-    height: 100%;
   }
-
-  body > div > form > div {
+  #date_book {
     grid-area: 2/1/2/1;
-    grid-template-rows: repeat(3, max-content);
-  }
-
-  #status_book {
-    height: 10em;
-    align-content: center;
-    display: grid;
-    grid-template-columns: repeat(2, max-content);
-    margin-bottom: 1em;
-  }
-}
-
-@media (max-width: 576px) {
-  body > div > form {
-    row-gap: 0.5em;
-  }
-
-  body > div > form > div {
-    grid-template-columns: repeat(2, fit-content);
-    grid-template-rows: repeat(3, max-content);
   }
 
   #info_book {
-    width: 60%;
+    grid-area: 3/1/3/1;
   }
 
   #info_book > input:first-of-type {
-    font-size: 3.4em;
-    width: 90%;
+    font-size: 3.5em;
   }
 
   #info_book > input:nth-of-type(2) {
-    font-size: 2.4em;
-    width: 90%;
-  }
-
-  #info_book > input:last-of-type {
-    width: 90%;
+    font-size: 2em;
   }
 
   #status_book {
-    height: fit-content;
-    grid-area: 1/2/1/2;
-    width: fit-content;
+    grid-area: 4/1/4/1;
+    grid-template-columns: repeat(2, max-content) minmax(10em, 20%);
   }
 
-  form > div > input {
-    grid-area: 2/1/2/2;
+  #progress {
+    justify-self: center;
+  }
+
+  #hashtag {
+    grid-area: 5/1/5/1;
   }
 
   #action_book {
-    grid-area: 3/1/3/2;
-    grid-template-columns: repeat(2, max-content);
+    width: fit-content;
+    grid-area: 6/1/6/1;
+    align-self: center;
+    column-gap: 0;
   }
+
+  #action_book > button{
+     width: 85%;
+  }
+
+  #action_book > button > span {
+    font-size: 1.3em;
 }
-@media (max-width: 360px) {
-} */
