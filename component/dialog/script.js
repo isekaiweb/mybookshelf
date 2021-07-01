@@ -38,10 +38,16 @@ class NumberInput {
   }
 }
 
+const setCover = `<div id="dialog_set_cover">
+<input id="url" type="url" placeholder="paste url cover here" />
+<span>||</span>
+<span id="local">choose from your local data</span>
+<button class="empty">cancel</button>
+</div>`;
+
 const inputYearBook = new NumberInput(),
   currentPage = new NumberInput(
     document.querySelector('#status_book > input:first-of-type')
   );
-
 
 export { inputYearBook, currentPage };
