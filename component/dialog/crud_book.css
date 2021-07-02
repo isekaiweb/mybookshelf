@@ -13,6 +13,7 @@ body > div > form {
   padding: 3em;
   width: 80vw;
   height: 80vh;
+  max-height: 500px;
   box-sizing: border-box;
   max-width: var(--breakpoint-xxl);
   display: grid;
