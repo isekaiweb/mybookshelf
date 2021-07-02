@@ -1,5 +1,5 @@
 import { setHeader, setOverflowChip } from '../component/header/script.js';
-import { inputYearBook, currentPage } from '../component/dialog/script.js';
+// import { inputYearBook, currentPage } from '../component/dialog/script.js';
 
 const addBtn = document.querySelector('main > img'),
   createBook = `<div>
@@ -14,8 +14,6 @@ const addBtn = document.querySelector('main > img'),
 setHeader();
 setOverflowChip();
 
-inputYearBook.mustBeNumber();
-currentPage.mustBeNumber();
 
 addBtn.addEventListener('click', () => {
   const main = document.querySelector('main');

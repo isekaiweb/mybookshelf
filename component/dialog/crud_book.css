@@ -31,12 +31,17 @@ body > div > form {
   background-image: url('../../assets/ic_cover_placeholder.svg');
   background-size: cover;
   background-position: center;
-  align-self: start;
+  align-self: stretch;
   border-radius: calc(1vw - 0.2em);
   box-sizing: border-box;
   position: relative;
   display: grid;
   cursor: pointer;
+}
+
+#cover_book.stretch {
+  height: 80%;
+  grid-area: 1/2/5/2;
 }
 
 #cover_book:hover::after {
@@ -290,9 +295,13 @@ body > div > form {
   }
 
   #cover_book {
-    height: 100%;
     grid-area: 1/1/1/1;
   }
+  #cover_book.stretch {
+    height: 90%;
+    grid-area: 1/1/2/1;
+  }
+
   #date_book {
     margin-bottom: calc(1em - 0.1vh);
     grid-area: 2/1/2/1;
@@ -365,6 +374,11 @@ body > div > form {
 
   #cover_book {
     grid-area: 1/2/1/2;
+  }
+
+  #cover_book.stretch {
+    height: 65%;
+    grid-area: 1/2/3/2;
   }
 
   #date_book {
@@ -456,6 +470,11 @@ body > div > form {
   #cover_book {
     grid-area: 1/1/1/1;
     border-radius: 5px;
+  }
+
+  #cover_book.stretch {
+    height: 100%;
+    grid-area: 1/1/2/1;
   }
 
   #date_book {
