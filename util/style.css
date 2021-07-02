@@ -3,6 +3,7 @@
 @import './reset.css';
 @import '../component/header/style.css';
 @import '../component/dialog/main.css';
+@import '../component/main/style.css';
 
 :root {
   /* color for dark theme */
@@ -41,8 +42,9 @@ body {
   width: 100vw;
   background-color: var(--background-dark);
   display: flex;
+  overflow-x: hidden;
   flex-direction: column;
-
+  row-gap: calc(20px + 1vmax);
   align-items: center;
   font-family: var(--font-primary);
 }

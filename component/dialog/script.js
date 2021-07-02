@@ -52,74 +52,79 @@ const setCover = `<div id="dialog_set_cover">
 </p>
 <button>alright</button>
 </div>`,
-  crudBook = `<form>
-<div id="cover_book"></div>
-<p id="date_book">
-  Start Date 9 january 2021 <br />
-  Last Updated 30 January 2021
-</p>
-<div id="info_book">
-  <input
-    type="text"
-    autocomplete="off"
-    required
-    placeholder="title book"
-  />
-  <input
-    type="text"
-    autocomplete="off"
-    required
-    placeholder="writer name"
-  />
-  <input
-    type="text"
-    autocomplete="off"
-    required
-    placeholder="year book"
-  />
-</div>
-
-<div id="status_book">
-  <span>Status</span>
-
-  <label for="current_page">current page :</label>
-  <input
-    type="text"
-    autocomplete="off"
-    required
-    placeholder="0"
-    id="current_page"
-  />
-
-  <label for="total_page">total page :</label>
-  <input
-    type="text"
-    autocomplete="off"
-    required
-    placeholder="0"
-    id="total_page"
-  />
-  <div id="progress" data-progress="100%" title="reading progress (%)">
-    <span></span>
+  crudBook = `    <form>
+  <div id="cover_book" class="stretch"></div>
+  <p id="date_book" class="hide">
+    Start Date 9 january 2021 <br />
+    Last Updated 30 January 2021
+  </p>
+  <div id="info_book">
+    <input
+      type="text"
+      autocomplete="off"
+      required
+      placeholder="title book"
+    />
+    <input
+      type="text"
+      autocomplete="off"
+      required
+      placeholder="writer name"
+    />
+    <input
+      type="text"
+      autocomplete="off"
+      required
+      placeholder="year book"
+    />
   </div>
-</div>
-<input
-  id="hashtag"
-  type="text"
-  placeholder="#hashtag1 #hashtag2 #hashtag3"
-  autocomplete="off"
-  title="separate with spacing without (#)"
-/>
-<div id="action_book">
-  <button type="submit">
-    <img src="../../assets/ic_save.svg" alt="save" />
-    <span>save book</span>
-  </button>
-  <button type="button">
-    <img src="../../assets/ic_cancel.svg" alt="cancel" />
-    <span>cancel</span>
-  </button>
-</div>
+
+  <div id="status_book">
+    <span>Status</span>
+
+    <label for="current_page">current page :</label>
+    <input
+      type="text"
+      autocomplete="off"
+      required
+      placeholder="0"
+      id="current_page"
+    />
+
+    <label for="total_page">total page :</label>
+    <input
+      type="text"
+      autocomplete="off"
+      required
+      placeholder="0"
+      id="total_page"
+    />
+    <div
+      id="progress"
+      class="hide"
+      data-progress="100%"
+      title="reading progress (%)"
+    >
+      <span></span>
+    </div>
+  </div>
+  <input
+    id="hashtag"
+    type="text"
+    placeholder="#hashtag1 #hashtag2 #hashtag3"
+    autocomplete="off"
+    title="separate with spacing without (#)"
+  />
+  <div id="action_book">
+    <button type="submit">
+      <img src="../../assets/ic_save.svg" alt="save" />
+      <span>save book</span>
+    </button>
+    <button type="button">
+      <img src="../../assets/ic_cancel.svg" alt="cancel" />
+      <span>cancel</span>
+    </button>
+  </div>
 </form>`;
 
 const inputYearBook = new NumberInput(),

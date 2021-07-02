@@ -1,0 +1,272 @@
+main > section {
+  background-color: var(--card-dark);
+  border-radius: calc(20px - 0.5vmax);
+  height: fit-content;
+  display: grid;
+  column-gap: 2em;
+  align-items: center;
+  padding: calc(10px + 1vmax);
+  grid-template-columns: max-content 1fr calc(1em + 15vw);
+}
+
+main > section > #cover_book {
+  grid-area: 1/1/1/1;
+  align-self: start;
+  background-image: url(../../assets/ic_cover_placeholder.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
+  width: 30vh;
+  border-radius: calc(20px - 0.5vmax);
+  border: calc(6px - 0.2vmax) solid var(--card-dark);
+}
+
+main > section > #info_book {
+  grid-area: 1/2/1/2;
+}
+
+main > section > #info_book > h2 {
+  font-size: calc(1em + 5vh);
+  color: var(--active-dark);
+
+  text-transform: capitalize;
+}
+
+main > section > #info_book > h3 {
+  font-size: calc(1em + 3vh);
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  column-gap: calc(5px + 0.1vw);
+  font-weight: 400;
+  font-family: var(--font-secondary);
+  color: var(--passive-dark);
+}
+
+main > section > #info_book > h3 > span {
+  font-size: 0.5em;
+}
+
+main > section > #info_book > span:first-of-type {
+  margin-top: calc(0.5em + 2vh);
+  display: block;
+  font-size: calc(1em + 1.6vh);
+  color: var(--fill);
+}
+
+main > section > #info_book > span:last-of-type {
+  display: block;
+  font-size: calc(1em + 2vh);
+  color: var(--active-dark);
+}
+
+main > section > #progress_book {
+  grid-area: 1/3/1/3;
+  justify-self: center;
+  position: relative;
+  width: calc(1em + 10vw);
+  height: calc(1em + 10vw);
+  border-radius: 100%;
+  overflow: hidden;
+  transform: rotate(180deg);
+  background-color: var(--background-progress);
+}
+
+main > section > #progress_book > span {
+  display: block;
+  transform: perspective();
+  background-color: var(--fill);
+  height: 10%;
+  width: 100%;
+}
+
+main > section > #progress_book::after {
+  content: attr(data-progress);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+  font-size: calc(2em + 0.6vw);
+  color: var(--active-dark);
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  main > section {
+    display: grid;
+    column-gap: 1.5em;
+  }
+
+  main > section > #cover_book {
+    height: 25vh;
+    width: 25vh;
+  }
+
+  main > section > #info_book > h2 {
+    font-size: calc(1em + 4vh);
+  }
+
+  main > section > #info_book > h3 {
+    font-size: calc(1em + 2vh);
+  }
+
+  main > section > #info_book > span:first-of-type {
+    margin-top: calc(0.5em + 1.5vh);
+    display: block;
+    font-size: calc(1em + 1vh);
+  }
+
+  main > section > #info_book > span:last-of-type {
+    font-size: calc(1em + 1.5vh);
+  }
+
+  main > section > #progress_book::after {
+    font-size: calc(1em + 1.5vw);
+  }
+}
+
+@media (max-width: 992px) {
+  main > section {
+    display: grid;
+    column-gap: 1.2em;
+  }
+
+  main > section > #cover_book {
+    height: 25vh;
+    width: 25vh;
+  }
+
+  main > section > #info_book > h2 {
+    font-size: calc(1em + 3.6vh);
+  }
+
+  main > section > #info_book > h3 {
+    font-size: calc(1em + 1.6vh);
+  }
+
+  main > section > #info_book > span:first-of-type {
+    margin-top: calc(0.5em + 0.5vh);
+    display: block;
+    font-size: calc(1em + 0.9vh);
+  }
+
+  main > section > #info_book > span:last-of-type {
+    font-size: calc(1em + 1.2vh);
+  }
+
+  main > section > #progress_book::after {
+    font-size: calc(1em + 1.4vw);
+  }
+}
+
+@media (max-width: 800px) {
+  main > section {
+    column-gap: 1em;
+    grid-template-columns: max-content 1fr;
+  }
+
+  main > section > #cover_book {
+    height: 15vh;
+    width: 15vh;
+    border-radius: calc(1px + 1vmax);
+  }
+
+  main > section > #info_book > h2 {
+    font-size: calc(1em + 2.5vh);
+  }
+
+  main > section > #info_book > h3 {
+    font-size: calc(1em + 1.4vh);
+  }
+
+  main > section > #info_book > span:first-of-type {
+    margin-top: calc(0.5em + 0.8vh);
+    font-size: calc(1em + 0.8vh);
+  }
+
+  main > section > #info_book > span:last-of-type {
+    font-size: calc(1em + 1vh);
+  }
+
+  main > section > #progress_book {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  main > section {
+    border-radius: calc(5px + 1vw);
+  }
+  main > section > #info_book > h2 {
+    font-size: calc(1em + 2vh);
+  }
+
+  main > section > #info_book > h3 {
+    font-size: calc(1em + 1vh);
+  }
+
+  main > section > #info_book > span:first-of-type {
+    margin-top: calc(0.5em + 0.5vh);
+    font-size: calc(1em + 0.6vh);
+  }
+
+  main > section > #info_book > span:last-of-type {
+    font-size: calc(1em + 0.8vh);
+  }
+
+  main > section > #progress_book {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  main > section {
+    padding: 10px;
+  }
+
+  main > section > #cover_book {
+    height: 25vh;
+    width: 25vh;
+    border: 1px solid var(--active-dark);
+  }
+
+  main > section > #info_book > h2 {
+    font-size: calc(1em + 1.6vh);
+  }
+
+  main > section > #info_book > h3 {
+    font-size: calc(1em + 0.8vh);
+  }
+
+  main > section > #info_book > span:first-of-type {
+    margin-top: calc(0.5em + 0.5vh);
+    font-size: calc(1em + 0.2vh);
+  }
+
+  main > section > #info_book > span:last-of-type {
+    font-size: calc(1em + 0.4vh);
+  }
+  main > section > #progress_book {
+    display: block;
+  }
+}
+
+@media (max-width: 360px) {
+    main > section {
+      padding: 10px;
+    }
+  
+    main > section > #cover_book {
+      height: 20vh;
+      width: 20vh;
+    }
+    main > section > #progress_book {
+      display: none;
+    }
+  }
