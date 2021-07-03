@@ -29,8 +29,6 @@ form > #cover_book {
   grid-area: 1/2/3/2;
   width: 100%;
   height: 100%;
-  border: calc(6px - 0.2vmax) solid var(--card-dark);
-  background-image: url('../../assets/ic_cover_placeholder.svg');
   background-size: cover;
   background-position: center;
   align-self: stretch;
@@ -160,7 +158,7 @@ form > #status_book > input:last-of-type {
   background-color: var(--background-progress);
 }
 
-#progress.hide{
+#progress.hide {
   display: none;
 }
 

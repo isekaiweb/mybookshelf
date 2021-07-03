@@ -1,5 +1,6 @@
 import { setHeader, setOverflowChip } from '../component/header/script.js';
-// import { inputYearBook, currentPage } from '../component/dialog/script.js';
+import { setupDialog } from '../component/main/script.js';
 
 setHeader();
 setOverflowChip();
+setupDialog();

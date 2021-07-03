@@ -1,3 +1,22 @@
+main {
+  display: grid;
+  row-gap: calc(20px + 1vh);
+}
+
+main > #add_book {
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+  width: calc(40px + 2.5%);
+  cursor: pointer;
+  z-index: 1;
+  transition: var(--transition-200ms);
+}
+
+main > #add_book:hover {
+  transform: scale(1.05);
+}
+
 main > section {
   background-color: var(--card-dark);
   border-radius: calc(20px - 0.5vmax);
@@ -7,12 +26,16 @@ main > section {
   align-items: center;
   padding: calc(10px + 1vmax);
   grid-template-columns: max-content 1fr calc(1em + 15vw);
+  cursor: pointer;
+}
+
+main > section:hover {
+  box-shadow: 1px 1px 10px #56606e;
 }
 
 main > section > #cover_book {
   grid-area: 1/1/1/1;
   align-self: start;
-  background-image: url(../../assets/ic_cover_placeholder.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -258,15 +281,15 @@ main > section > #progress_book::after {
 }
 
 @media (max-width: 360px) {
-    main > section {
-      padding: 10px;
-    }
-  
-    main > section > #cover_book {
-      height: 20vh;
-      width: 20vh;
-    }
-    main > section > #progress_book {
-      display: none;
-    }
+  main > section {
+    padding: 10px;
   }
+
+  main > section > #cover_book {
+    height: 20vh;
+    width: 20vh;
+  }
+  main > section > #progress_book {
+    display: none;
+  }
+}

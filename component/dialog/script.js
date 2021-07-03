@@ -22,6 +22,15 @@ class NumberInput {
     } else return;
   }
 
+  getValue() {
+    return this.#value;
+  }
+
+  setValue(newValue) {
+    this.#value = newValue;
+    this.value = this.#value;
+  }
+
   mustBeNumber() {
     this.element.addEventListener('keydown', (e) => {
       if (e.key < '0' || (e.key > '9' && e.key != 'Backspace'))
@@ -52,20 +61,20 @@ const setCover = `<div id="dialog_set_cover">
 </p>
 <button>alright</button>
 </div>`,
-  crudBook = `    <form>
-  <div id="cover_book" class="stretch"></div>
+  crudBook = `<form>
+  <div id="cover_book" class="stretch" style="background-image: url('../../assets/ic_cover_placeholder.svg')"></div>
   <p id="date_book" class="hide">
-    Start Date 9 january 2021 <br />
-    Last Updated 30 January 2021
   </p>
   <div id="info_book">
     <input
       type="text"
+      name="title-book"
       autocomplete="off"
       required
       placeholder="title book"
     />
     <input
+    name="writer-name"
       type="text"
       autocomplete="off"
       required
@@ -73,6 +82,7 @@ const setCover = `<div id="dialog_set_cover">
     />
     <input
       type="text"
+      name='year-book'
       autocomplete="off"
       required
       placeholder="year book"
@@ -84,6 +94,7 @@ const setCover = `<div id="dialog_set_cover">
 
     <label for="current_page">current page :</label>
     <input
+    name="current-page"
       type="text"
       autocomplete="off"
       required
@@ -94,6 +105,7 @@ const setCover = `<div id="dialog_set_cover">
     <label for="total_page">total page :</label>
     <input
       type="text"
+      name="total-page"
       autocomplete="off"
       required
       placeholder="0"
@@ -102,14 +114,15 @@ const setCover = `<div id="dialog_set_cover">
     <div
       id="progress"
       class="hide"
-      data-progress="100%"
-      title="reading progress (%)"
+      data-progress=""
+      title="reading progress"
     >
       <span></span>
     </div>
   </div>
   <input
     id="hashtag"
+    name="hashtag-book"
     type="text"
     placeholder="#hashtag1 #hashtag2 #hashtag3"
     autocomplete="off"
@@ -127,7 +140,4 @@ const setCover = `<div id="dialog_set_cover">
   </div>
 </form>`;
 
-const inputYearBook = new NumberInput(),
-  currentPage = new NumberInput(
-    document.querySelector('#status_book > input:first-of-type')
-  );
+export { NumberInput, setCover, alert, crudBook };
