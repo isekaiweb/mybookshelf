@@ -27,6 +27,8 @@
 }
 
 #local {
+    text-overflow: ellipsis;
+  white-space: nowrap;
   height: fit-content;
   padding: 0.8em;
   font-size: 1em;

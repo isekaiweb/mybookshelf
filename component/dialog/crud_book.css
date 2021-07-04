@@ -290,7 +290,7 @@ form > #action_book > button:last-of-type {
   }
 }
 
-@media (max-width: 790px) and (max-height: 1200px) {
+@media (max-width: 790px) and (max-height: 1290px) {
   body > div > form {
     grid-template-columns: none;
     column-gap: 0;
