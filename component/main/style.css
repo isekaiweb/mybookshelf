@@ -1,6 +1,6 @@
 main {
   display: grid;
-  row-gap: calc(20px + 1vh);
+  row-gap: calc(1em);
 }
 
 main > #add_book {
@@ -42,7 +42,7 @@ main > section > #cover_book {
   height: 30vh;
   width: 30vh;
   border-radius: calc(20px - 0.5vmax);
-  border: calc(6px - 0.2vmax) solid var(--card-dark);
+  border: calc(1px + 0.1vmax) solid var(--enable-input);
 }
 
 main > section > #info_book {
@@ -100,7 +100,6 @@ main > section > #progress_book > span {
   display: block;
   transform: perspective();
   background-color: var(--fill);
-  height: 10%;
   width: 100%;
 }
 

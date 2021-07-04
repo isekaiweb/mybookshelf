@@ -1,4 +1,9 @@
-import { KEY_SESSION_CRUD, KEY_TYPE_CRUD } from './key_storage.js';
+import {
+  KEY_SESSION_CRUD,
+  KEY_TYPE_CRUD,
+  KEY_DATA_BOOKS,
+} from './key_storage.js';
+import { create } from './constants.js';
 
 class NumberInput {
   #value = '';
@@ -131,7 +136,9 @@ const setCover = `<div id="dialog_set_cover">
     </button>
   </div>
 </form>`,
-  containerDialogHTML = `<div>${crudBook}</div>`;
+  containerDialogHTML = `<div>${crudBook}</div>`,
+  typeCrud = sessionStorage.getItem(KEY_TYPE_CRUD),
+  dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [];
 
 const setObjectCoverBook = (
     object,
@@ -168,13 +175,28 @@ const setObjectCoverBook = (
 
     setObjectCoverBook(currentForm, coverBook);
 
-    if (currentForm['total-page'] < currentForm['current-page']) {
+    if (currentForm['total-page'] * 1 < currentForm['current-page'] * 1) {
       createAlert(containerDialogElement);
     } else {
+      const date = new Date(),
+        currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
       currentForm['status'] =
-        currentForm['current-page'] === currentForm['total-page']
-          ? 'Ongoing'
-          : 'Completed';
+        currentForm['current-page'] * 1 === currentForm['total-page'] * 1
+          ? 'Completed'
+          : 'Ongoing';
+
+      if (typeCrud === create) {
+        currentForm['id'] = date.getTime();
+        currentForm['created'] = currentTime;
+        currentForm['update'] = currentTime;
+        dataBooks.push(currentForm);
+      } else {
+        currentForm['update'] = currentTime;
+      }
+
+      localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
+      containerDialogElement.remove();
+      sessionStorage.removeItem(KEY_SESSION_CRUD);
     }
   },
   setupCoverBook = (inputs, coverBook) => {
@@ -309,4 +331,4 @@ function setupDialog() {
   totalPage.mustBeNumber();
 }
 
-export { setupDialog };
+export { setupDialog, dataBooks };

@@ -39,10 +39,9 @@
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   background-color: var(--background-dark);
   display: flex;
-  overflow-x: hidden;
   flex-direction: column;
   row-gap: calc(20px + 1vmax);
   align-items: center;
