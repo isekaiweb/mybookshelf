@@ -32,11 +32,13 @@ form > #cover_book {
   background-size: cover;
   background-position: center;
   align-self: stretch;
-  border-radius: calc(1vw - 0.2em);
+
+  border-radius: calc(1em + 0.2vw);
   box-sizing: border-box;
   position: relative;
   display: grid;
   cursor: pointer;
+  box-shadow: 1px 1px 10px var(--background-dark);
 }
 
 form > #cover_book.stretch {
@@ -49,6 +51,8 @@ form > #cover_book:hover::after {
   position: absolute;
   top: 0;
   right: 0;
+
+  border-radius: calc(1rem + 0.2vw);
   bottom: 0;
   left: 0;
   display: flex;

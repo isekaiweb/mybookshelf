@@ -2,8 +2,10 @@ import {
   KEY_SESSION_CRUD,
   KEY_TYPE_CRUD,
   KEY_DATA_BOOKS,
+  KEY_INDEX_BOOKS,
 } from './key_storage.js';
 import { create } from './constants.js';
+import { setupItemBook } from '../main/script.js';
 
 class NumberInput {
   #value = '';
@@ -138,9 +140,15 @@ const setCover = `<div id="dialog_set_cover">
 </form>`,
   containerDialogHTML = `<div>${crudBook}</div>`,
   typeCrud = sessionStorage.getItem(KEY_TYPE_CRUD),
-  dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [];
+  dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
+  body = document.querySelector('body');
 
-const setObjectCoverBook = (
+const clearSessionStorage = () => {
+    sessionStorage.removeItem(KEY_INDEX_BOOKS);
+    sessionStorage.removeItem(KEY_SESSION_CRUD);
+    sessionStorage.removeItem(KEY_TYPE_CRUD);
+  },
+  setObjectCoverBook = (
     object,
     coverBook,
     img = coverBook.style.backgroundImage
@@ -184,19 +192,23 @@ const setObjectCoverBook = (
         currentForm['current-page'] * 1 === currentForm['total-page'] * 1
           ? 'Completed'
           : 'Ongoing';
+      currentForm['update'] = currentTime;
 
       if (typeCrud === create) {
         currentForm['id'] = date.getTime();
         currentForm['created'] = currentTime;
-        currentForm['update'] = currentTime;
+
         dataBooks.push(currentForm);
       } else {
-        currentForm['update'] = currentTime;
       }
 
+      setupItemBook();
       localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
+
+      body.removeAttribute('style');
       containerDialogElement.remove();
-      sessionStorage.removeItem(KEY_SESSION_CRUD);
+
+      clearSessionStorage();
     }
   },
   setupCoverBook = (inputs, coverBook) => {
@@ -280,6 +292,7 @@ const setObjectCoverBook = (
   };
 
 function setupDialog() {
+  body.style.overflow = 'hidden';
   document
     .querySelector('body > main')
     .insertAdjacentHTML('afterend', containerDialogHTML);
@@ -320,7 +333,10 @@ function setupDialog() {
   document
     .querySelector('#action_book > button:last-of-type')
     .addEventListener('click', function () {
+      body.removeAttribute('style');
       this.parentElement.parentElement.parentElement.remove();
+
+      clearSessionStorage();
     });
 
   setupCoverBook(inputs, coverBook);

@@ -42,7 +42,7 @@ main > section > #cover_book {
   height: 30vh;
   width: 30vh;
   border-radius: calc(20px - 0.5vmax);
-  border: calc(1px + 0.1vmax) solid var(--enable-input);
+  border: calc(1px + 0.2vw) solid var(--background-dark);
 }
 
 main > section > #info_book {
