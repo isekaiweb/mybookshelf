@@ -53,7 +53,8 @@ const setCover = `<div id="dialog_set_cover">
 <span id="local">choose from your local data</span>
 <button class="empty">cancel</button>
 </div>`,
-  alert = `<div id="alert">
+  alert = {
+    failSave: `<div id="alert">
 <img src="../../assets/ic_sad_emot.svg" alt="sad" />
 <p>Can't Saved<br /><span
     >Total page can't be less than current page</span
@@ -61,6 +62,12 @@ const setCover = `<div id="dialog_set_cover">
 </p>
 <button>alright</button>
 </div>`,
+    removeAttention: `<div id="alert">
+ <img src="../../assets/ic_tentative.svg" alt="?" />
+ <p>Attention!<br /><span>are you sure to remove this book?</span></p>
+ <div><button>yes</button> <button>no</button></div>
+</div>`,
+  },
   crudBook = `<form>
   <div id="cover_book" class="stretch" style="background-image: url('../../assets/ic_cover_placeholder.svg')"></div>
   <p id="date_book" class="hide">
@@ -71,17 +78,20 @@ const setCover = `<div id="dialog_set_cover">
       name="title-book"
       autocomplete="off"
       required
+      title="title book"
       placeholder="title book"
     />
     <input
     name="writer-name"
       type="text"
+      title="writer name"
       autocomplete="off"
       required
       placeholder="writer name"
     />
     <input
       type="text"
+      title="year book"
       name='year-book'
       autocomplete="off"
       required
@@ -154,16 +164,20 @@ const clearSessionStorage = () => {
     object['cover-book'] = img;
     sessionStorage.setItem(KEY_SESSION_CRUD, JSON.stringify(object));
   },
-  createAlert = (containerDialogElement) => {
-    containerDialogElement.innerHTML = alert;
+  createAlert = (containerDialogElement, typeAlert) => {
+    containerDialogElement.innerHTML = typeAlert;
 
     document
-      .querySelector('#alert > button')
+      .querySelector('#alert button')
       .addEventListener('click', function () {
         const text = this.textContent.toLocaleLowerCase();
-        if (text === 'alright' || text === 'yes') {
-          this.parentElement.parentElement.remove();
+        this.parentElement.parentElement.remove();
+
+        if (text === 'alright' || text === 'no') {
           setupDialog();
+        } else {
+          const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS));
+          dataBooks.splice(sessionStorage.getItem(KEY_INDEX_BOOKS), 1);
         }
       });
   },
@@ -183,7 +197,7 @@ const clearSessionStorage = () => {
     setObjectCoverBook(currentForm, coverBook);
 
     if (currentForm['total-page'] * 1 < currentForm['current-page'] * 1) {
-      createAlert(containerDialogElement);
+      createAlert(containerDialogElement, alert.failSave);
     } else {
       const date = new Date(),
         currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`,
@@ -308,15 +322,27 @@ function setupDialog() {
     form = document.querySelector('body > div > form'),
     inputs = form.querySelectorAll('input'),
     coverBook = document.querySelector('form > #cover_book'),
-    dataTemporary = JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD));
+    dateBook = document.querySelector('form > #date_book'),
+    progressBook = document.querySelector('form  > #status_book > #progress'),
+    dataTemporary = JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD)),
+    foreachInputs = (innerFunction, disabled = true) => {
+      inputs.forEach((input) => {
+        innerFunction(input, disabled);
+      });
+    },
+    fillAllInput = (input) => {
+      input.value = dataTemporary[`${input.name}`];
+    },
+    makeDisableAllInput = (input, boolean) => {
+      input.disabled = boolean;
+    };
 
   if (dataTemporary) {
-    inputs.forEach((input) => {
-      input.value = dataTemporary[`${input.name}`];
-
-      if (sessionStorage.getItem(KEY_TYPE_CRUD) === update)
-        input.disabled = true;
-    });
+    foreachInputs(fillAllInput);
+    if (sessionStorage.getItem(KEY_TYPE_CRUD) === update) {
+      foreachInputs(makeDisableAllInput);
+      coverBook.removeAttribute('class');
+    }
     const imgDummy = document.createElement('img');
     imgDummy.src = dataTemporary['cover-book']
       .match(/\(([^)]+)\)/)[1]
@@ -343,7 +369,9 @@ function setupDialog() {
       clearSessionStorage();
     });
 
-  setupCoverBook(inputs, coverBook);
+  if (coverBook.classList.contains('stretch')) {
+    setupCoverBook(inputs, coverBook);
+  }
 
   form.addEventListener('submit', handleFormSubmit);
   yearBook.mustBeNumber();
@@ -351,4 +379,4 @@ function setupDialog() {
   totalPage.mustBeNumber();
 }
 
-export { setupDialog};
+export { setupDialog };

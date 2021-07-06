@@ -37,16 +37,17 @@ form > #cover_book {
   box-sizing: border-box;
   position: relative;
   display: grid;
-  cursor: pointer;
+
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
 form > #cover_book.stretch {
   height: 80%;
   grid-area: 1/2/5/2;
+  cursor: pointer;
 }
 
-form > #cover_book:hover::after {
+form > #cover_book:hover.stretch::after {
   content: 'set cover';
   position: absolute;
   top: 0;

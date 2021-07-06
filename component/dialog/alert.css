@@ -39,10 +39,34 @@
   color: var(--background-dark);
   width: 100%;
   font-weight: 600;
-  border-radius: 0.3vmax;
+  border-radius: calc(1px + 0.2vmax);
   font-size: calc(1.5em - 0.3vmax);
   padding: 0.5em;
   transition: var(--transition-200ms);
+}
+
+#alert > div {
+  grid-area: 2/1/2/3;
+  width: 100%;
+  display: flex;
+  column-gap: 0.8em;
+}
+
+#alert > div > button {
+  flex-grow: 1;
+  flex-basis: 0;
+  text-transform: uppercase;
+  background-color: var(--status);
+  color: var(--active-dark);
+  font-weight: 600;
+  border-radius: calc(1px + 0.2vmax);
+  font-size: calc(1.5em - 0.3vmax);
+  padding: 0.5em;
+  transition: var(--transition-200ms);
+}
+
+#alert > div > button:last-of-type{
+  background-color: var(--cancel);
 }
 
 #alert > button:hover {
