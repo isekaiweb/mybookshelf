@@ -4,7 +4,7 @@ import {
   KEY_DATA_BOOKS,
   KEY_INDEX_BOOKS,
 } from './key_storage.js';
-import { create } from './constants.js';
+import { create, update } from './constants.js';
 import { setupItemBook } from '../main/script.js';
 
 class NumberInput {
@@ -312,6 +312,8 @@ function setupDialog() {
   if (dataTemporary) {
     inputs.forEach((input) => {
       input.value = dataTemporary[`${input.name}`];
+
+      if (typeCrud === update) input.disabled = true;
     });
     const imgDummy = document.createElement('img');
     imgDummy.src = dataTemporary['cover-book']
