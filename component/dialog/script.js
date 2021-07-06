@@ -139,14 +139,12 @@ const setCover = `<div id="dialog_set_cover">
   </div>
 </form>`,
   containerDialogHTML = `<div>${crudBook}</div>`,
-  typeCrud = sessionStorage.getItem(KEY_TYPE_CRUD),
-  dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
   body = document.querySelector('body');
 
 const clearSessionStorage = () => {
     sessionStorage.removeItem(KEY_INDEX_BOOKS);
-    sessionStorage.removeItem(KEY_SESSION_CRUD);
     sessionStorage.removeItem(KEY_TYPE_CRUD);
+    sessionStorage.removeItem(KEY_SESSION_CRUD);
   },
   setObjectCoverBook = (
     object,
@@ -173,6 +171,7 @@ const clearSessionStorage = () => {
     e.preventDefault();
     const data = new FormData(e.target),
       coverBook = document.querySelector('form > #cover_book'),
+      dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
       currentForm = Object.fromEntries(data.entries()),
       //this button for edit/update/save books depends on the situation
       btnPrimaryForm = document.querySelector(
@@ -187,27 +186,29 @@ const clearSessionStorage = () => {
       createAlert(containerDialogElement);
     } else {
       const date = new Date(),
-        currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`;
+        currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`,
+        currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
+        startIndexChange = currentIndex || dataBooks.length,
+        countChange = currentIndex != undefined ? 1 : 0;
+
       currentForm['status'] =
         currentForm['current-page'] * 1 === currentForm['total-page'] * 1
           ? 'Completed'
           : 'Ongoing';
       currentForm['update'] = currentTime;
 
-      if (typeCrud === create) {
+      if (sessionStorage.getItem(KEY_TYPE_CRUD) === create) {
         currentForm['id'] = date.getTime();
         currentForm['created'] = currentTime;
-
-        dataBooks.push(currentForm);
-      } else {
       }
-
-      setupItemBook();
-      localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
 
       body.removeAttribute('style');
       containerDialogElement.remove();
 
+      dataBooks.splice(startIndexChange, countChange, currentForm);
+      localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
+
+      setupItemBook();
       clearSessionStorage();
     }
   },
@@ -313,7 +314,8 @@ function setupDialog() {
     inputs.forEach((input) => {
       input.value = dataTemporary[`${input.name}`];
 
-      if (typeCrud === update) input.disabled = true;
+      if (sessionStorage.getItem(KEY_TYPE_CRUD) === update)
+        input.disabled = true;
     });
     const imgDummy = document.createElement('img');
     imgDummy.src = dataTemporary['cover-book']
@@ -349,4 +351,4 @@ function setupDialog() {
   totalPage.mustBeNumber();
 }
 
-export { setupDialog, dataBooks };
+export { setupDialog};

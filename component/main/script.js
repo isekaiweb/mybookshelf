@@ -1,24 +1,27 @@
-import { dataBooks } from '../dialog/script.js';
 import { setupDialog } from '../dialog/script.js';
 import {
   KEY_TYPE_CRUD,
   KEY_SESSION_CRUD,
   KEY_INDEX_BOOKS,
+  KEY_DATA_BOOKS,
 } from '../dialog/key_storage.js';
 import { create, update } from '../dialog/constants.js';
 
-const btnAddNewBook = document.getElementById('add_book');
+const main = document.querySelector('main');
 
-btnAddNewBook.addEventListener('click', () => {
-  sessionStorage.setItem(KEY_TYPE_CRUD, create);
-  setupDialog();
+main.addEventListener('click', (e) => {
+  if (e.target.id == 'add_book') {
+    sessionStorage.setItem(KEY_TYPE_CRUD, create);
+    setupDialog();
+  }
 });
 
 function setupItemBook() {
   let itemBook = '';
+  const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [];
 
   dataBooks.forEach((book) => {
-    const progress = book['current-page'] / book['total-page'],
+    const progress = (book['current-page'] / book['total-page']).toFixed(2),
       total =
         progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
@@ -40,9 +43,14 @@ function setupItemBook() {
      </section>`;
   });
 
-  btnAddNewBook.insertAdjacentHTML('beforebegin', itemBook);
-  const itemBookElement = document.querySelectorAll('main > section');
+  main.innerHTML = `${itemBook} <img
+  src="/assets/ic_add.svg"
+  alt="add_book"
+  title="add new book"
+  id="add_book"
+/>`;
 
+  const itemBookElement = main.querySelectorAll('section');
   if (itemBookElement) {
     itemBookElement.forEach((el) => {
       el.addEventListener('click', function () {
@@ -52,7 +60,11 @@ function setupItemBook() {
 
         sessionStorage.setItem(KEY_TYPE_CRUD, update);
         sessionStorage.setItem(KEY_INDEX_BOOKS, indexBook);
-        sessionStorage.setItem(KEY_SESSION_CRUD, dataBooks[indexBook]);
+        sessionStorage.setItem(
+          KEY_SESSION_CRUD,
+          JSON.stringify(dataBooks[indexBook])
+        );
+        setupDialog();
       });
     });
   }
