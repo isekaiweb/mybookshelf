@@ -203,17 +203,23 @@ const clearSessionStorage = () => {
         currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`,
         currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
         startIndexChange = currentIndex || dataBooks.length,
-        countChange = currentIndex != undefined ? 1 : 0;
+        countChange = currentIndex != undefined ? 1 : 0,
+        progress = (
+          currentForm['current-page'] / currentForm['total-page']
+        ).toFixed(2);
 
       currentForm['status'] =
         currentForm['current-page'] * 1 === currentForm['total-page'] * 1
           ? 'Completed'
           : 'Ongoing';
-      currentForm['update'] = currentTime;
+
+      currentForm['read-progress'] =
+        progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
+      currentForm['updated'] = `Updated on ${currentTime}`;
 
       if (sessionStorage.getItem(KEY_TYPE_CRUD) === create) {
         currentForm['id'] = date.getTime();
-        currentForm['created'] = currentTime;
+        currentForm['created'] = `Created on ${currentTime}`;
       }
 
       body.removeAttribute('style');
@@ -322,6 +328,7 @@ function setupDialog() {
     form = document.querySelector('body > div > form'),
     inputs = form.querySelectorAll('input'),
     coverBook = document.querySelector('form > #cover_book'),
+    statusBook = document.querySelector('form >#status_book > span'),
     dateBook = document.querySelector('form > #date_book'),
     progressBook = document.querySelector('form  > #status_book > #progress'),
     dataTemporary = JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD)),
@@ -342,6 +349,16 @@ function setupDialog() {
     if (sessionStorage.getItem(KEY_TYPE_CRUD) === update) {
       foreachInputs(makeDisableAllInput);
       coverBook.removeAttribute('class');
+      dateBook.removeAttribute('class');
+      dateBook.innerHTML = `${dataTemporary['created']}<br/>${dataTemporary['updated']}`;
+   
+      progressBook.removeAttribute('class');
+      progressBook.setAttribute(
+        'data-progress',
+        dataTemporary['read-progress']
+      );
+      progressBook.firstElementChild.style.height =
+        dataTemporary['read-progress'];
     }
     const imgDummy = document.createElement('img');
     imgDummy.src = dataTemporary['cover-book']

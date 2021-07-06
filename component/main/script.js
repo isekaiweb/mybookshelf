@@ -21,9 +21,6 @@ function setupItemBook() {
   const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [];
 
   dataBooks.forEach((book) => {
-    const progress = (book['current-page'] / book['total-page']).toFixed(2),
-      total =
-        progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
      <div id="cover_book" style="background-image:url(${book['cover-book']
        .match(/\(([^)]+)\)/)[1]
@@ -31,14 +28,14 @@ function setupItemBook() {
      <div id="info_book">
        <h2>${book['title-book']}</h2>
        <h3>${book['writer-name']}<span>${book['year-book']}</span></h3>
-       <span>${book['update']}</span>
+       <span>${book['updated']}</span>
        <span>${book['hashtag-book']}</span>
      </div>
      <div
        id="progress_book"
-       data-progress ="${total}"
+       data-progress ="${book['read-progress']}"
      >
-       <span style="height:${total}"></span>
+       <span style="height:${book['read-progress']}"></span>
      </div>
      </section>`;
   });

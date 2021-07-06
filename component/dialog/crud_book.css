@@ -88,6 +88,8 @@ form > #info_book > input:first-of-type {
   grid-area: 1/1/1/1;
   font-size: calc(5em - 1vmax);
   width: 100%;
+  overflow-y: auto;
+  overflow-wrap: break-word;
   height: fit-content;
   font-weight: 700;
 }
@@ -316,6 +318,7 @@ form > #action_book > button:last-of-type {
   #date_book {
     margin-bottom: calc(1em - 0.1vh);
     grid-area: 2/1/2/1;
+    align-self: center;
   }
 
   form > #info_book {
@@ -332,7 +335,7 @@ form > #action_book > button:last-of-type {
 
   form > #status_book {
     grid-area: 4/1/4/1;
-    grid-template-columns: repeat(2, max-content) minmax(calcl(10em-1vmax), 20%);
+    grid-template-columns: repeat(2, max-content) 1fr;
   }
 
   #progress {
@@ -379,22 +382,27 @@ form > #action_book > button:last-of-type {
 
 @media (max-width: 500px) and (max-height: 360px) {
   body > div > form {
+    height: 90%;
+    max-height: 85%;
+    padding: 2em;
+    width: 90%;
+    column-gap: 1em;
     grid-template-columns: 60%;
-    grid-template-rows: repeat(4, max-content);
+    grid-template-rows: repeat(3, max-content) 1fr;
   }
 
   form > #cover_book {
-    grid-area: 1/2/1/2;
-  }
-
-  form > #cover_book.stretch {
-    height: 65%;
     grid-area: 1/2/3/2;
   }
 
+  form > #cover_book.stretch {
+    height: 90%;
+    grid-area: 1/2/4/2;
+  }
+
   #date_book {
-    font-size: calc(0.9em - 0.1vmax);
-    grid-area: 2/2/2/2;
+    font-size: 1em;
+    grid-area: 3/2/4/2;
   }
 
   form > #info_book {
@@ -402,63 +410,70 @@ form > #action_book > button:last-of-type {
   }
 
   form > #info_book > input:first-of-type {
-    font-size: calc(2.5em - 0.1vmax);
+    font-size: calc(1em + 2.5vw);
   }
   form > #info_book > input:nth-of-type(2) {
-    font-size: calc(1.7em - 0.1vmax);
+    font-size: calc(1em + 1.4vw);
   }
   form > #info_book > input:last-of-type {
-    font-size: calc(1.2em - 0.1vmax);
+    font-size: calc(1em + 0.8vw);
   }
 
   form > #status_book {
     grid-template-rows: repeat(3, max-content);
-    grid-template-columns: repeat(3, max-content);
+    grid-template-columns: repeat(2, max-content) 1fr;
     grid-area: 2/1/2/1;
+    column-gap: 8px;
   }
 
   form > #status_book > span {
-    font-size: calc(2em - 0.1vmax);
+    font-size: calc(1em + 2vw);
+    align-self: end;
   }
 
+  form > #status_book > label {
+    align-self: start;
+  }
   form > #status_book > input {
+    font-size: 1em;
+    align-self: start;
     width: 40px;
   }
 
   #progress {
     grid-area: 1/3/4/3;
-    width: calc(5em - 0.2vmax);
-    height: calc(5em - 0.2vmax);
-    align-self: end;
+    height: 6.5em;
+    align-self: center;
+    width: 6.5em;
   }
 
   #progress:after {
-    font-size: calc(1.2em - 0.1vmax);
+    font-size: calc(1em + 1.2vw);
   }
 
   #hashtag {
-    font-size: calc(1em - 0.1vmax);
-    grid-area: 3/1/4/1;
+    font-size: 1em;
+    grid-area: 3/1/3/1;
+    align-self: start;
   }
 
   form > #action_book {
-    margin-top: calc(1em - 0.1vmax);
-    grid-area: 2/2/4/2;
+    grid-area: 3/1/5/1;
     width: 100%;
+    column-gap: 1em;
+    display: flex;
     height: 100%;
-    grid-template-columns: none;
-    column-gap: 0;
-    align-content: end;
-    align-items: center;
-    row-gap: 0.5em;
-    grid-template-rows: repeat(2, max-content);
+    align-self: end;
   }
 
   form > #action_book > button {
-    width: 100%;
+    width: 80%;
+    margin-top: 2em;
+    display: block;
+    height: fit-content;
     border-radius: 3px;
-    height: calc(2.3em - 0.1vmax);
-    padding: 0.5em;
+    align-self: center;
+    padding: 0.6em 0.8em;
   }
 
   form > #action_book > button > span {
@@ -466,16 +481,19 @@ form > #action_book > button:last-of-type {
   }
 
   form > #action_book > button > img {
-    height: calc(1em - 0.1vmax);
+    display: none;
   }
 }
 
-@media (max-height: 500px) and (max-width: 360px) {
+@media (max-width: 360px) and (max-height: 500px) {
   body > div > form {
     padding: 2em;
-    height: 80vh;
+    height: 90%;
+    max-height: 90%;
+    width: 90%;
+    row-gap: 6px;
     grid-template-columns: none;
-    grid-template-rows: 20% repeat(5, max-content);
+    grid-template-rows: 25% repeat(5, max-content);
   }
 
   form > #cover_book {
@@ -491,51 +509,48 @@ form > #action_book > button:last-of-type {
   #date_book {
     margin-bottom: 0;
     grid-area: 2/1/2/1;
-    font-size: calc(0.9em - 0.1vmax);
+    font-size: 1em;
   }
 
   form > #info_book {
-    margin-top: 0.8em;
     grid-area: 3/1/3/1;
   }
 
   form > #info_book > input:first-of-type {
-    font-size: calc(2.5em - 0.1vmax);
+    font-size: calc(1em + 2.5vh);
   }
   form > #info_book > input:nth-of-type(2) {
-    font-size: calc(1.7em - 0.1vmax);
+    font-size: calc(1em + 1.5vh);
   }
   form > #info_book > input:last-of-type {
-    font-size: calc(1.2em - 0.1vmax);
+    font-size: calc(1em + 0.8vh);
   }
 
-  form > form > #status_book {
+  form > #status_book {
     grid-area: 4/1/4/1;
-    grid-template-rows: repeat(3, max-content);
-    grid-template-columns: repeat(3, max-content);
+    margin: 0;
+    width: 100%;
+    column-gap: 5px;
+    grid-template-columns: repeat(2, max-content) 1fr;
   }
 
   form > #status_book > span {
-    font-size: calc(2em - 0.1vmax);
+    font-size: calc(1em + 2vh);
+    align-self: end;
   }
 
   form > #status_book > input {
+    font-size: 1em;
     width: 40px;
   }
 
   #progress {
-    grid-area: 1/3/4/3;
-    width: calc(5em - 0.2vmax);
-    height: calc(5em - 0.2vmax);
-    align-self: end;
-  }
-
-  #progress:after {
-    font-size: calc(1.2em - 0.1vmax);
+    grid-area: 1/3/3/4;
+    justify-self: end;
   }
 
   #hashtag {
-    font-size: calc(1em - 0.1vmax);
+    font-size: 1em;
     grid-area: 5/1/5/1;
   }
 
@@ -548,13 +563,16 @@ form > #action_book > button:last-of-type {
     column-gap: 0;
     align-content: end;
     align-items: center;
+    margin: 0;
     row-gap: 0.5em;
     grid-template-rows: repeat(2, max-content);
   }
 
   form > #action_book > button {
     width: 100%;
+
     border-radius: 3px;
+    display: block;
     height: calc(2.3em - 0.1vmax);
     padding: 0.5em;
   }
@@ -564,6 +582,6 @@ form > #action_book > button:last-of-type {
   }
 
   form > #action_book > button > img {
-    height: calc(1em - 0.1vmax);
+    display: none;
   }
 }
