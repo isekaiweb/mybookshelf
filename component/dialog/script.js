@@ -204,10 +204,11 @@ const clearSessionStorage = () => {
         currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
         startIndexChange = currentIndex || dataBooks.length,
         countChange = currentIndex != undefined ? 1 : 0,
-        progress = (
-          currentForm['current-page'] / currentForm['total-page']
-        ).toFixed(2);
-
+        progress = parseFloat(
+          ((currentForm['current-page'] / currentForm['total-page']) * 100)
+            .toFixed(2)
+            .replace('.00', '')
+        );
       currentForm['status'] =
         currentForm['current-page'] * 1 === currentForm['total-page'] * 1
           ? 'Completed'
@@ -351,7 +352,7 @@ function setupDialog() {
       coverBook.removeAttribute('class');
       dateBook.removeAttribute('class');
       dateBook.innerHTML = `${dataTemporary['created']}<br/>${dataTemporary['updated']}`;
-   
+
       progressBook.removeAttribute('class');
       progressBook.setAttribute(
         'data-progress',
