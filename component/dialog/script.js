@@ -350,6 +350,7 @@ function setupDialog() {
     if (sessionStorage.getItem(KEY_TYPE_CRUD) === update) {
       foreachInputs(makeDisableAllInput);
       coverBook.removeAttribute('class');
+
       dateBook.removeAttribute('class');
       dateBook.innerHTML = `${dataTemporary['created']}<br/>${dataTemporary['updated']}`;
 
@@ -360,6 +361,8 @@ function setupDialog() {
       );
       progressBook.firstElementChild.style.height =
         dataTemporary['read-progress'];
+
+      statusBook.textContent = `Status ${dataTemporary['status']}`;
     }
     const imgDummy = document.createElement('img');
     imgDummy.src = dataTemporary['cover-book']
