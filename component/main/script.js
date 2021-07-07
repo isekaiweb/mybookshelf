@@ -5,7 +5,7 @@ import {
   KEY_INDEX_BOOKS,
   KEY_DATA_BOOKS,
 } from '../dialog/key_storage.js';
-import { create, update } from '../dialog/constants.js';
+import { create, detail } from '../dialog/constants.js';
 
 const main = document.querySelector('main');
 
@@ -55,7 +55,7 @@ function setupItemBook() {
           (book) => book.id == this.dataset.id
         );
 
-        sessionStorage.setItem(KEY_TYPE_CRUD, update);
+        sessionStorage.setItem(KEY_TYPE_CRUD, detail);
         sessionStorage.setItem(KEY_INDEX_BOOKS, indexBook);
         sessionStorage.setItem(
           KEY_SESSION_CRUD,

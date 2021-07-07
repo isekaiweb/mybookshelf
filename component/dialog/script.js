@@ -4,7 +4,7 @@ import {
   KEY_DATA_BOOKS,
   KEY_INDEX_BOOKS,
 } from './key_storage.js';
-import { create, update } from './constants.js';
+import { create, update, detail } from './constants.js';
 import { setupItemBook } from '../main/script.js';
 
 class NumberInput {
@@ -62,9 +62,9 @@ const setCover = `<div id="dialog_set_cover">
 </p>
 <button>alright</button>
 </div>`,
-    removeAttention: `<div id="alert">
+    removeWarning: `<div id="alert">
  <img src="../../assets/ic_tentative.svg" alt="?" />
- <p>Attention!<br /><span>are you sure to remove this book?</span></p>
+ <p>Warning!<br /><span>are you sure to remove this book?</span></p>
  <div><button>yes</button> <button>no</button></div>
 </div>`,
   },
@@ -147,8 +147,11 @@ const setCover = `<div id="dialog_set_cover">
 </form>`,
   containerDialogHTML = `<div>${crudBook}</div>`,
   body = document.querySelector('body');
-
-const clearSessionStorage = () => {
+const removeStyleBody = (containerDialogElement) => {
+    body.removeAttribute('style');
+    containerDialogElement.remove();
+  },
+  clearSessionStorage = () => {
     sessionStorage.removeItem(KEY_INDEX_BOOKS);
     sessionStorage.removeItem(KEY_TYPE_CRUD);
     sessionStorage.removeItem(KEY_SESSION_CRUD);
@@ -164,19 +167,25 @@ const clearSessionStorage = () => {
   createAlert = (containerDialogElement, typeAlert) => {
     containerDialogElement.innerHTML = typeAlert;
 
-    document
-      .querySelector('#alert button')
-      .addEventListener('click', function () {
+    document.querySelectorAll('#alert button').forEach((btn) => {
+      btn.addEventListener('click', function () {
         const text = this.textContent.toLocaleLowerCase();
-        this.parentElement.parentElement.remove();
 
         if (text === 'alright' || text === 'no') {
           setupDialog();
         } else {
-          const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS));
-          dataBooks.splice(sessionStorage.getItem(KEY_INDEX_BOOKS), 1);
+          const currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
+            newDataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS));
+          newDataBooks.splice(currentIndex, 1);
+
+          localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(newDataBooks));
+          setupItemBook();
+          clearSessionStorage();
         }
+
+        removeStyleBody(containerDialogElement);
       });
+    });
   },
   handleFormSubmit = (e) => {
     e.preventDefault();
@@ -220,19 +229,16 @@ const clearSessionStorage = () => {
         currentForm['created'] = `Created on ${currentTime}`;
       }
 
-      body.removeAttribute('style');
-      containerDialogElement.remove();
-
       dataBooks.splice(startIndexChange, countChange, currentForm);
       localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
 
       setupItemBook();
       clearSessionStorage();
+      removeStyleBody(containerDialogElement);
     }
   },
-  setupCoverBook = (inputs, coverBook) => {
-    const containerDialogElement = coverBook.parentElement.parentElement,
-      dataTemporary = {};
+  setupCoverBook = (inputs, coverBook, containerDialogElement) => {
+    const dataTemporary = {};
 
     coverBook.addEventListener('click', function () {
       inputs.forEach((input) => {
@@ -328,6 +334,7 @@ function setupDialog() {
     coverBook = document.querySelector('form > #cover_book'),
     statusBook = document.querySelector('form >#status_book > span'),
     dateBook = document.querySelector('form > #date_book'),
+    containerDialogElement = document.querySelector('body > div'),
     progressBook = document.querySelector('form  > #status_book > #progress'),
     btnPrimaryForm = document.querySelector(
       'form > #action_book > button:first-of-type'
@@ -336,6 +343,7 @@ function setupDialog() {
       'form > #action_book > button:last-of-type'
     ),
     dataTemporary = JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD)),
+    typeCrud = sessionStorage.getItem(KEY_TYPE_CRUD),
     foreachInputs = (innerFunction, disabled = true) => {
       inputs.forEach((input) => {
         innerFunction(input, disabled);
@@ -346,11 +354,28 @@ function setupDialog() {
     },
     makeDisableAllInput = (input, boolean) => {
       input.disabled = boolean;
+      if (input.value === '') input.remove();
+    },
+    fillImage = () => {
+      const imgDummy = document.createElement('img');
+      imgDummy.src = dataTemporary['cover-book']
+        .match(/\(([^)]+)\)/)[1]
+        .replace(/['"]+/g, '');
+      imgDummy.onload = () => {
+        coverBook.style.backgroundImage = dataTemporary['cover-book'];
+      };
+
+      imgDummy.onerror = function () {
+        this.remove();
+        coverBook.style.backgroundImage =
+          "url('../../assets/ic_cover_placeholder.svg')";
+      };
     };
 
   if (dataTemporary) {
     foreachInputs(fillAllInput);
-    if (sessionStorage.getItem(KEY_TYPE_CRUD) === update) {
+    fillImage();
+    if (typeCrud === detail) {
       foreachInputs(makeDisableAllInput);
       coverBook.removeAttribute('class');
 
@@ -375,34 +400,23 @@ function setupDialog() {
 
       btnSecondaryForm.lastElementChild.textContent = 'remove';
       btnSecondaryForm.firstElementChild.src = '../assets/ic_trash.svg';
+    } else {
+      sessionStorage.removeItem(KEY_SESSION_CRUD);
     }
-
-    const imgDummy = document.createElement('img');
-    imgDummy.src = dataTemporary['cover-book']
-      .match(/\(([^)]+)\)/)[1]
-      .replace(/['"]+/g, '');
-    imgDummy.onload = () => {
-      coverBook.style.backgroundImage = dataTemporary['cover-book'];
-    };
-
-    imgDummy.onerror = function () {
-      this.remove();
-      coverBook.style.backgroundImage =
-        "url('../../assets/ic_cover_placeholder.svg')";
-    };
-
-    sessionStorage.removeItem(KEY_SESSION_CRUD);
   }
 
-  btnSecondaryForm.addEventListener('click', function () {
-    body.removeAttribute('style');
-    this.parentElement.parentElement.parentElement.remove();
-
-    clearSessionStorage();
+  btnSecondaryForm.addEventListener('click', () => {
+    if (typeCrud === detail) {
+      createAlert(containerDialogElement, alert.removeWarning);
+      return;
+    } else {
+      removeStyleBody(containerDialogElement);
+      clearSessionStorage();
+    }
   });
 
   if (coverBook.classList.contains('stretch')) {
-    setupCoverBook(inputs, coverBook);
+    setupCoverBook(inputs, coverBook, containerDialogElement);
   }
 
   form.addEventListener('submit', handleFormSubmit);

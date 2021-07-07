@@ -1,4 +1,5 @@
 const update = 'UPDATE',
-  create = 'CREATE';
+  create = 'CREATE',
+  detail = 'DETAIL';
 
-export { create, update };
+export { create, update, detail };
