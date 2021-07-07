@@ -297,7 +297,7 @@ form > #action_book > button:last-of-type {
     grid-area: 1/1/1/1;
   }
   form > #cover_book.stretch {
-    height: 90%;
+    height: 100%;
     grid-area: 1/1/2/1;
   }
 
@@ -360,6 +360,7 @@ form > #action_book > button:last-of-type {
 
 @media (max-width: 820px) and (max-height: 640px) {
   body > div > form {
+    width: 85vw;
     grid-template-rows: repeat(4, max-content);
   }
 
@@ -401,7 +402,6 @@ form > #action_book > button:last-of-type {
   }
 
   form > #cover_book.stretch {
-    height: 90%;
     grid-area: 1/2/4/2;
   }
 
