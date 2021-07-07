@@ -329,6 +329,12 @@ function setupDialog() {
     statusBook = document.querySelector('form >#status_book > span'),
     dateBook = document.querySelector('form > #date_book'),
     progressBook = document.querySelector('form  > #status_book > #progress'),
+    btnPrimaryForm = document.querySelector(
+      'form > #action_book > button:first-of-type'
+    ),
+    btnSecondaryForm = document.querySelector(
+      'form > #action_book > button:last-of-type'
+    ),
     dataTemporary = JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD)),
     foreachInputs = (innerFunction, disabled = true) => {
       inputs.forEach((input) => {
@@ -360,7 +366,17 @@ function setupDialog() {
         dataTemporary['read-progress'];
 
       statusBook.textContent = `Status ${dataTemporary['status']}`;
+
+      btnPrimaryForm.lastElementChild.textContent = 'edit';
+      btnPrimaryForm.lastElementChild.style.color = 'var(--background-dark)';
+      btnPrimaryForm.firstElementChild.src = '../assets/ic_edit.svg';
+      btnPrimaryForm.style.backgroundColor = 'var(--active-dark)';
+      btnPrimaryForm.type = 'button';
+
+      btnSecondaryForm.lastElementChild.textContent = 'remove';
+      btnSecondaryForm.firstElementChild.src = '../assets/ic_trash.svg';
     }
+
     const imgDummy = document.createElement('img');
     imgDummy.src = dataTemporary['cover-book']
       .match(/\(([^)]+)\)/)[1]
@@ -378,14 +394,12 @@ function setupDialog() {
     sessionStorage.removeItem(KEY_SESSION_CRUD);
   }
 
-  document
-    .querySelector('#action_book > button:last-of-type')
-    .addEventListener('click', function () {
-      body.removeAttribute('style');
-      this.parentElement.parentElement.parentElement.remove();
+  btnSecondaryForm.addEventListener('click', function () {
+    body.removeAttribute('style');
+    this.parentElement.parentElement.parentElement.remove();
 
-      clearSessionStorage();
-    });
+    clearSessionStorage();
+  });
 
   if (coverBook.classList.contains('stretch')) {
     setupCoverBook(inputs, coverBook);
