@@ -47,6 +47,7 @@ main > section > #cover_book {
 
 main > section > #info_book {
   grid-area: 1/2/1/2;
+  align-self: start;
 }
 
 main > section > #info_book > h2 {
@@ -125,31 +126,32 @@ main > section > #progress_book::after {
     column-gap: 1.5em;
   }
 
+
   main > section > #cover_book {
     height: 25vh;
     width: 25vh;
   }
 
   main > section > #info_book > h2 {
-    font-size: calc(1em + 4vh);
+    font-size: calc(1em + 2.5vw);
   }
 
   main > section > #info_book > h3 {
-    font-size: calc(1em + 2vh);
+    font-size: calc(1em + 1.1vw);
   }
 
   main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 1.5vh);
+    margin-top: calc(0.5em + 1vw);
     display: block;
-    font-size: calc(1em + 1vh);
+    font-size: calc(1em + 0.6vw);
   }
 
   main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 1.5vh);
+    font-size: calc(1em + 0.8vw);
   }
 
   main > section > #progress_book::after {
-    font-size: calc(1em + 1.5vw);
+    font-size: calc(1em + 1.4vw);
   }
 }
 
@@ -165,25 +167,25 @@ main > section > #progress_book::after {
   }
 
   main > section > #info_book > h2 {
-    font-size: calc(1em + 3.6vh);
+    font-size: calc(1em + 2vw);
   }
 
   main > section > #info_book > h3 {
-    font-size: calc(1em + 1.6vh);
+    font-size: calc(1em + 1vw);
   }
 
   main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.5vh);
+    margin-top: calc(0.5em + 0.5vw);
     display: block;
-    font-size: calc(1em + 0.9vh);
+    font-size: calc(1em + 0.2vw);
   }
 
   main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 1.2vh);
+    font-size: calc(1em + 0.4vw);
   }
 
   main > section > #progress_book::after {
-    font-size: calc(1em + 1.4vw);
+    font-size: calc(1em + 1vw);
   }
 }
 
@@ -193,6 +195,7 @@ main > section > #progress_book::after {
     grid-template-columns: max-content 1fr;
   }
 
+
   main > section > #cover_book {
     height: 15vh;
     width: 15vh;
@@ -200,24 +203,20 @@ main > section > #progress_book::after {
   }
 
   main > section > #info_book > h2 {
-    font-size: calc(1em + 2.5vh);
+    font-size: calc(1em + 2.5vw);
   }
 
   main > section > #info_book > h3 {
-    font-size: calc(1em + 1.4vh);
+    font-size: calc(1em + 1.4vw);
   }
 
   main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.8vh);
-    font-size: calc(1em + 0.8vh);
+    margin-top: calc(0.5em + 0.8vw);
+    font-size: calc(1em + 0.2vw);
   }
 
   main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 1vh);
-  }
-
-  main > section > #progress_book {
-    display: none;
+    font-size: calc(1em + 1vw);
   }
 }
 
@@ -225,25 +224,22 @@ main > section > #progress_book::after {
   main > section {
     border-radius: calc(5px + 1vw);
   }
+
   main > section > #info_book > h2 {
-    font-size: calc(1em + 2vh);
+    font-size: calc(1em + 2vw);
   }
 
   main > section > #info_book > h3 {
-    font-size: calc(1em + 1vh);
+    font-size: calc(1em + 1vw);
   }
 
   main > section > #info_book > span:first-of-type {
     margin-top: calc(0.5em + 0.5vh);
-    font-size: calc(1em + 0.6vh);
+    font-size: 1em;
   }
 
   main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 0.8vh);
-  }
-
-  main > section > #progress_book {
-    display: none;
+    font-size: 1em;
   }
 }
 
@@ -259,23 +255,31 @@ main > section > #progress_book::after {
   }
 
   main > section > #info_book > h2 {
-    font-size: calc(1em + 1.6vh);
+    font-size: calc(1em + 1.6vw);
   }
 
   main > section > #info_book > h3 {
-    font-size: calc(1em + 0.8vh);
+    font-size: calc(1em + 0.5vw);
+  }
+
+  main > section > #info_book > h3 > span {
+    font-size: 0.7em;
   }
 
   main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.5vh);
-    font-size: calc(1em + 0.2vh);
+    margin-top: calc(0.5em + 0.5vw);
+    font-size: 0.8em;
   }
 
   main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 0.4vh);
+    font-size: 0.9em;
   }
   main > section > #progress_book {
     display: block;
+  }
+
+  main > section > #progress_book::after {
+    font-size: calc(1em + 0.2vw);
   }
 }
 
@@ -285,10 +289,7 @@ main > section > #progress_book::after {
   }
 
   main > section > #cover_book {
-    height: 20vh;
-    width: 20vh;
-  }
-  main > section > #progress_book {
-    display: none;
+    height: 13vh;
+    width: 13vh;
   }
 }

@@ -98,10 +98,8 @@ const setCover = `<div id="dialog_set_cover">
       placeholder="year book"
     />
   </div>
-
   <div id="status_book">
     <span>Status</span>
-
     <label for="current_page">current page :</label>
     <input
     name="current-page"
@@ -111,7 +109,6 @@ const setCover = `<div id="dialog_set_cover">
       placeholder="0"
       id="current_page"
     />
-
     <label for="total_page">total page :</label>
     <input
       type="text"
