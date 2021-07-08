@@ -120,12 +120,39 @@ main > section > #progress_book::after {
   font-weight: 600;
 }
 
+main > div {
+  height: 2em;
+  display: flex;
+  column-gap: 0.3em;
+
+  margin-bottom: 1em;
+  justify-content: center;
+}
+
+main > div > span {
+ 
+  line-height: 0.2;
+  background-color: var(--card-dark);
+  color: var(--passive-dark);
+  font-weight: 600;
+  border-radius: calc(1px + 0.1vw);
+  font-size: calc(1em + 0.3vw);
+  padding: 1vw;
+  text-align: center;
+  cursor: pointer;
+}
+
+main > div > span.active,
+main > div > span:hover {
+  background-color: var(--fill);
+  color: var(--active-dark);
+}
+
 @media (max-width: 1200px) {
   main > section {
     display: grid;
     column-gap: 1.5em;
   }
-
 
   main > section > #cover_book {
     height: 25vh;
@@ -194,7 +221,6 @@ main > section > #progress_book::after {
     column-gap: 1em;
     grid-template-columns: max-content 1fr;
   }
-
 
   main > section > #cover_book {
     height: 15vh;

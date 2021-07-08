@@ -40,7 +40,15 @@ function setupItemBook() {
      </section>`;
   });
 
-  main.innerHTML = `${itemBook} <img
+  main.innerHTML = `${itemBook}
+  <div>
+    <span class="active">1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+  </div>
+  <img
   src="/assets/ic_add.svg"
   alt="add_book"
   title="add new book"
