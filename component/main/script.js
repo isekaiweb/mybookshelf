@@ -48,12 +48,11 @@ function setupItemBook() {
 
   main.innerHTML = `${itemBook}
   <div>
-    <span class="active">1</span>
-    <span>2</span>
-    <span>3</span>
-    <span>4</span>
-    <span>5</span>
-    <span class="more">...</span>
+    <span class="active">«</span>
+    <span>‹</span>
+    <span>1</span>
+    <span>›</span>
+    <span title="go to last page">»</span>
   </div>
   <img
   src="/assets/ic_add.svg"
