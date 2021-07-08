@@ -20,17 +20,13 @@ function setupItemBook() {
   let itemBook = '';
   const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
     sumOfPage = Math.ceil(dataBooks.length / 3),
-    SliceDataBooks = (start, end) => {
-      dataBooks.slice(start, end);
-    };
+    SliceDataBooks = (start, end) => dataBooks.slice(start, end);
 
-  console.log(dataBooks);
+  // .sort(
+  //   (a, b) => new Date(b.updatedTime) - new Date(a.updatedTime)
+  // );
 
-  dataBooks.sort((a, b) => new Date(b.updatedTime) - new Date(a.updatedTime));
-
-  console.log(dataBooks);
-
-  dataBooks.forEach((book) => {
+  SliceDataBooks(0, 3).forEach((book) => {
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
      <div id="cover_book" style="background-image:url(${book['cover-book']
        .match(/\(([^)]+)\)/)[1]
@@ -52,10 +48,10 @@ function setupItemBook() {
 
   main.innerHTML = `${itemBook}
   <div>
-    <span class="active">«</span>
-    <span>‹</span>
+    <span class="disable" title="go to first page">«</span>
+    <span class="disable" title="previous page">‹</span>
     <span>1</span>
-    <span>›</span>
+    <span title="next page">›</span>
     <span title="go to last page">»</span>
   </div>
   <img

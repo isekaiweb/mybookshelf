@@ -123,28 +123,32 @@ main > section > #progress_book::after {
 main > div {
   height: 2em;
   display: flex;
-  column-gap: 0.3em;
+  column-gap: 0.2em;
 
-  margin-bottom: 1em;
+  margin: 2vmax 0;
   justify-content: center;
 }
 
 main > div > span {
-  line-height: 0.2;
+  line-height: 0;
   background-color: var(--card-dark);
   color: var(--passive-dark);
   font-weight: 600;
   border-radius: calc(1px + 0.1vw);
-  font-size: calc(1em + 0.3vw);
-  padding: 1vw;
+  font-size: calc(1.5em + 0.3vw);
+  padding: 1.5vmax;
   text-align: center;
   cursor: pointer;
 }
 
-main > div > span.active,
-main > div > span:hover {
+main > div > span:nth-of-type(3) {
   background-color: var(--fill);
-  color: var(--active-dark);
+  cursor: unset;
+}
+
+main > div > span.disable {
+  opacity: 0.6;
+  cursor: unset;
 }
 
 @media (max-width: 1200px) {
@@ -306,11 +310,20 @@ main > div > span:hover {
   main > section > #progress_book::after {
     font-size: calc(1em + 0.2vw);
   }
+
+  main > div > span {
+    line-height: 0.6;
+    font-size: calc(1.2em + 0.3vw);
+  }
 }
 
 @media (max-width: 360px) {
   main > section {
     padding: 10px;
+  }
+
+  main > div > span {
+    line-height: 0.3;
   }
 
   main > section > #cover_book {

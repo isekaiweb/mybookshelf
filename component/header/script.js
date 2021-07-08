@@ -1,8 +1,52 @@
+import {
+  KEY_FILTER,
+  KEY_SEARCH_VALUE,
+  KEY_TYPE_SEARCH,
+} from '../dialog/key_storage.js';
+
 const select = document.querySelector('#select'),
   typeSearch = document.querySelectorAll('#type_search > input[type="radio"]'),
   inputSearch = document.querySelector('header > div:first-of-type > input'),
   btnSearch = document.querySelector('header > div:first-of-type > button'),
-  chips = document.querySelectorAll('header > div:last-of-type > span');
+  chips = document.querySelectorAll('header > div:last-of-type > span'),
+  typeIndex = JSON.parse(sessionStorage.getItem(KEY_TYPE_SEARCH))['index'] || 0;
+
+const forEachChips = (innerFunction, target = null) => {
+    chips.forEach((chip, i) => {
+      innerFunction(chip, i, target);
+    });
+  },
+  toggleClassChips = (chip, i) => {
+    if (i === JSON.parse(sessionStorage.getItem(KEY_FILTER))['index'])
+      chip.classList.add('active');
+    else {
+      chip.removeAttribute('class');
+    }
+  },
+  eventClickChips = (chip, i, target) => {
+    if (target === chip) {
+      sessionStorage.setItem(
+        KEY_FILTER,
+        JSON.stringify({ index: i, text: chip.textContent })
+      );
+      chip.classList.add('active');
+      btnSearch.click();
+    } else {
+      chip.removeAttribute('class');
+    }
+  },
+  setupTypeSearch = (type, i) => {
+    sessionStorage.setItem(
+      KEY_TYPE_SEARCH,
+      JSON.stringify({ index: i, value: type.value })
+    );
+    type.checked = true;
+    select.children[0].innerText = type.value;
+    inputSearch.placeholder = `enter ${type.value} here ...`;
+    typeSearch[0].parentElement.removeAttribute('class');
+    select.children[1].removeAttribute('class');
+    btnSearch.click();
+  };
 
 function setHeader() {
   select.addEventListener('click', () => {
@@ -10,7 +54,9 @@ function setHeader() {
     select.children[1].classList.toggle('set');
   });
 
-  btnSearch.addEventListener('click', () => {});
+  btnSearch.addEventListener('click', () => {
+    sessionStorage.setItem(KEY_SEARCH_VALUE, inputSearch.value);
+  });
 
   btnSearch.addEventListener('mouseup', function () {
     this.removeAttribute('class');
@@ -20,29 +66,23 @@ function setHeader() {
     this.classList.add('pressed');
   });
 
-  typeSearch.forEach((type) => {
-    type.addEventListener('change', function () {
-      select.children[0].innerText = this.value;
-      inputSearch.placeholder = `enter ${this.value} here ...`;
-      typeSearch[0].parentElement.removeAttribute('class');
-      select.children[1].removeAttribute('class');
+  typeSearch.forEach((type, i) => {
+    if (typeIndex === i) {
+      setupTypeSearch(type, i);
+    }
 
-      btnSearch.click();
+    type.addEventListener('change', () => {
+      setupTypeSearch(type, i);
     });
   });
+
+  forEachChips(toggleClassChips);
 
   document.querySelector('header').addEventListener('click', (e) => {
     const target = e.target;
 
     if (target === chips[0] || target === chips[1] || target === chips[2]) {
-      chips.forEach((chip) => {
-        if (target === chip) {
-          chip.classList.add('active');
-          btnSearch.click();
-        } else {
-          chip.removeAttribute('class');
-        }
-      });
+      forEachChips(eventClickChips, target);
     }
   });
 }
