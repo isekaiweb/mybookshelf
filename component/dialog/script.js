@@ -83,6 +83,7 @@ const removeStyleBody = (containerDialogElement) => {
       containerDialogElement =
         btnPrimaryForm.parentElement.parentElement.parentElement;
 
+    currentForm['updatedTime'] = date;
     currentForm['hashtag-book'] =
       hash.length > 0 && hash != '' ? hash.map((i) => `#${i}`).join(' ') : '';
     currentForm['status'] =

@@ -48,6 +48,26 @@ body {
   font-family: var(--font-primary);
 }
 
+/* width */
+body::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: var(--active-dark);
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: var(--card-dark);
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--dialog-dark);
+}
+
 header,
 main,
 footer {

@@ -130,7 +130,6 @@ main > div {
 }
 
 main > div > span {
- 
   line-height: 0.2;
   background-color: var(--card-dark);
   color: var(--passive-dark);

@@ -24,7 +24,11 @@ function setupItemBook() {
       dataBooks.slice(start, end);
     };
 
-  console.log(SliceDataBooks);
+  console.log(dataBooks);
+
+  dataBooks.sort((a, b) => new Date(b.updatedTime) - new Date(a.updatedTime));
+
+  console.log(dataBooks);
 
   dataBooks.forEach((book) => {
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
