@@ -69,45 +69,41 @@ const removeStyleBody = (containerDialogElement) => {
       btnPrimaryForm = document.querySelector(
         '#action_book > button:first-of-type'
       ),
+      date = new Date(),
+      currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`,
+      currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
+      startIndexChange = currentIndex || dataBooks.length,
+      countChange = currentIndex != undefined ? 1 : 0,
+      progress = parseFloat(
+        ((currentForm['current-page'] / currentForm['total-page']) * 100)
+          .toFixed(2)
+          .replace('.00', '')
+      ),
+      hash = currentForm['hashtag-book'].replaceAll('#', '').trim().split(' '),
       containerDialogElement =
         btnPrimaryForm.parentElement.parentElement.parentElement;
+
+    currentForm['hashtag-book'] =
+      hash.length > 0 && hash != '' ? hash.map((i) => `#${i}`).join(' ') : '';
+    currentForm['status'] =
+      currentForm['current-page'] * 1 === currentForm['total-page'] * 1
+        ? 'Completed'
+        : 'Ongoing';
+
+    currentForm['read-progress'] =
+      progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
+    currentForm['updated'] = `Updated on ${currentTime}`;
+    currentForm['id'] =
+      currentIndex != undefined ? dataBooks[currentIndex].id : date.getTime();
+    currentForm['created'] =
+      currentIndex != undefined
+        ? dataBooks[currentIndex].created
+        : `Created on ${currentTime}`;
     setObjectCoverBook(currentForm, coverBook);
 
     if (currentForm['total-page'] * 1 < currentForm['current-page'] * 1) {
       createAlert(containerDialogElement, alert.failSave);
     } else {
-      const date = new Date(),
-        currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`,
-        currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
-        startIndexChange = currentIndex || dataBooks.length,
-        countChange = currentIndex != undefined ? 1 : 0,
-        progress = parseFloat(
-          ((currentForm['current-page'] / currentForm['total-page']) * 100)
-            .toFixed(2)
-            .replace('.00', '')
-        ),
-        hash = currentForm['hashtag-book']
-          .replaceAll('#', '')
-          .trim()
-          .split(' ');
-
-      currentForm['hashtag-book'] =
-        hash.length > 0 && hash != '' ? hash.map((i) => `#${i}`).join(' ') : '';
-      currentForm['status'] =
-        currentForm['current-page'] * 1 === currentForm['total-page'] * 1
-          ? 'Completed'
-          : 'Ongoing';
-
-      currentForm['read-progress'] =
-        progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
-      currentForm['updated'] = `Updated on ${currentTime}`;
-      currentForm['id'] =
-        currentIndex != undefined ? dataBooks[currentIndex].id : date.getTime();
-      currentForm['created'] =
-        currentIndex != undefined
-          ? dataBooks[currentIndex].created
-          : `Created on ${currentTime}`;
-
       dataBooks.splice(startIndexChange, countChange, currentForm);
       localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
 
@@ -161,7 +157,8 @@ const removeStyleBody = (containerDialogElement) => {
       urlField.addEventListener('paste', cekUrlValue);
 
       localField.addEventListener('click', function () {
-        const inputImage = document.createElement('input');
+        const inputImage = document.createElement('input'),
+          fileReader = new FileReader();
         inputImage.setAttribute('type', 'file');
         inputImage.setAttribute('accept', 'image/png, image/gif, image/jpeg');
 
@@ -169,8 +166,12 @@ const removeStyleBody = (containerDialogElement) => {
         inputImage.addEventListener('change', (e) => {
           this.textContent = e.target.files[0].name;
           localNewText = this.textContent;
-          imgAddress = URL.createObjectURL(e.target.files[0]);
-          this.setAttribute('data-local-img', imgAddress);
+          fileReader.readAsDataURL(e.target.files[0]);
+          fileReader.addEventListener('load', (e) => {
+            imgAddress = e.target.result;
+            this.setAttribute('data-local-img', imgAddress);
+            console.log(imgAddress);
+          });
 
           btnSetCover.style.backgroundColor = 'var(--fill)';
           btnSetCover.textContent = 'set';

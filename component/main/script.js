@@ -18,7 +18,13 @@ main.addEventListener('click', (e) => {
 
 function setupItemBook() {
   let itemBook = '';
-  const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [];
+  const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
+    sumOfPage = Math.ceil(dataBooks.length / 3),
+    SliceDataBooks = (start, end) => {
+      dataBooks.slice(start, end);
+    };
+
+  console.log(SliceDataBooks);
 
   dataBooks.forEach((book) => {
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
@@ -47,6 +53,7 @@ function setupItemBook() {
     <span>3</span>
     <span>4</span>
     <span>5</span>
+    <span class="more">...</span>
   </div>
   <img
   src="/assets/ic_add.svg"
