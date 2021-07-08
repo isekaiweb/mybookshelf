@@ -48,7 +48,12 @@ form > #cover_book.stretch {
   cursor: pointer;
 }
 
-form > #cover_book:hover.stretch::after {
+form > #cover_book:hover.editable {
+  cursor: pointer;
+}
+
+form > #cover_book:hover.stretch::after,
+form > #cover_book:hover.editable::after {
   content: 'set cover';
   position: absolute;
   top: 0;

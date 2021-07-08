@@ -17,7 +17,7 @@ header > div:first-of-type {
 
   grid-template-areas: 'select input btn' 'type-search type-search type-search';
   grid-template-rows: repeat(2, auto);
-  grid-template-columns: minmax(130px, 12%) 1fr minmax(60px, 6%);
+  grid-template-columns: minmax(140px, 12%) 1fr minmax(60px, 6%);
 }
 
 header > div:first-of-type > button {
@@ -44,7 +44,7 @@ header > div:first-of-type > button.pressed > img {
 
 header > div:first-of-type > input {
   grid: 'input';
-  width: 98%;
+  width: 97%;
   justify-self: end;
   background-color: var(--passive-dark);
   caret-color: var(--background-dark);

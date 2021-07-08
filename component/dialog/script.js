@@ -4,7 +4,17 @@ import {
   KEY_DATA_BOOKS,
   KEY_INDEX_BOOKS,
 } from './key_storage.js';
-import { create, update, detail } from './constants.js';
+
+import {
+  create,
+  update,
+  detail,
+  containerDialogHTML,
+  setCover,
+  alert,
+  body,
+} from './constants.js';
+
 import { setupItemBook } from '../main/script.js';
 
 class NumberInput {
@@ -47,106 +57,6 @@ class NumberInput {
   }
 }
 
-const setCover = `<div id="dialog_set_cover">
-<input id="url" type="url" placeholder="paste url cover here" />
-<span>||</span>
-<span id="local">choose from your local data</span>
-<button class="empty">cancel</button>
-</div>`,
-  alert = {
-    failSave: `<div id="alert">
-<img src="../../assets/ic_sad_emot.svg" alt="sad" />
-<p>Can't Saved<br /><span
-    >Total page can't be less than current page</span
-  >
-</p>
-<button>alright</button>
-</div>`,
-    removeWarning: `<div id="alert">
- <img src="../../assets/ic_tentative.svg" alt="?" />
- <p>Warning!<br /><span>are you sure to remove this book?</span></p>
- <div><button>yes</button> <button>no</button></div>
-</div>`,
-  },
-  crudBook = `<form>
-  <div id="cover_book" class="stretch" style="background-image: url('../../assets/ic_cover_placeholder.svg')"></div>
-  <p id="date_book" class="hide">
-  </p>
-  <div id="info_book">
-    <input
-      type="text"
-      name="title-book"
-      autocomplete="off"
-      required
-      title="title book"
-      placeholder="title book"
-    />
-    <input
-    name="writer-name"
-      type="text"
-      title="writer name"
-      autocomplete="off"
-      required
-      placeholder="writer name"
-    />
-    <input
-      type="text"
-      title="year book"
-      name='year-book'
-      autocomplete="off"
-      required
-      placeholder="year book"
-    />
-  </div>
-  <div id="status_book">
-    <span>Status</span>
-    <label for="current_page">current page :</label>
-    <input
-    name="current-page"
-      type="text"
-      autocomplete="off"
-      required
-      placeholder="0"
-      id="current_page"
-    />
-    <label for="total_page">total page :</label>
-    <input
-      type="text"
-      name="total-page"
-      autocomplete="off"
-      required
-      placeholder="0"
-      id="total_page"
-    />
-    <div
-      id="progress"
-      class="hide"
-      title="reading progress"
-    >
-      <span></span>
-    </div>
-  </div>
-  <input
-    id="hashtag"
-    name="hashtag-book"
-    type="text"
-    placeholder="#hashtag1 #hashtag2 #hashtag3"
-    autocomplete="off"
-    title="separate with spacing without (#)"
-  />
-  <div id="action_book">
-    <button type="submit">
-      <img src="../../assets/ic_save.svg" alt="save" />
-      <span>save book</span>
-    </button>
-    <button type="button">
-      <img src="../../assets/ic_cancel.svg" alt="cancel" />
-      <span>cancel</span>
-    </button>
-  </div>
-</form>`,
-  containerDialogHTML = `<div>${crudBook}</div>`,
-  body = document.querySelector('body');
 const removeStyleBody = (containerDialogElement) => {
     body.removeAttribute('style');
     containerDialogElement.remove();
@@ -199,7 +109,6 @@ const removeStyleBody = (containerDialogElement) => {
       ),
       containerDialogElement =
         btnPrimaryForm.parentElement.parentElement.parentElement;
-
     setObjectCoverBook(currentForm, coverBook);
 
     if (currentForm['total-page'] * 1 < currentForm['current-page'] * 1) {
@@ -214,7 +123,14 @@ const removeStyleBody = (containerDialogElement) => {
           ((currentForm['current-page'] / currentForm['total-page']) * 100)
             .toFixed(2)
             .replace('.00', '')
-        );
+        ),
+        hash = currentForm['hashtag-book']
+          .replaceAll('#', '')
+          .trim()
+          .split(' ');
+
+      currentForm['hashtag-book'] =
+        hash.length > 0 && hash != '' ? hash.map((i) => `#${i}`).join(' ') : '';
       currentForm['status'] =
         currentForm['current-page'] * 1 === currentForm['total-page'] * 1
           ? 'Completed'
@@ -223,11 +139,12 @@ const removeStyleBody = (containerDialogElement) => {
       currentForm['read-progress'] =
         progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
       currentForm['updated'] = `Updated on ${currentTime}`;
-
-      if (sessionStorage.getItem(KEY_TYPE_CRUD) === create) {
-        currentForm['id'] = date.getTime();
-        currentForm['created'] = `Created on ${currentTime}`;
-      }
+      currentForm['id'] =
+        currentIndex != undefined ? dataBooks[currentIndex].id : date.getTime();
+      currentForm['created'] =
+        currentIndex != undefined
+          ? dataBooks[currentIndex].created
+          : `Created on ${currentTime}`;
 
       dataBooks.splice(startIndexChange, countChange, currentForm);
       localStorage.setItem(KEY_DATA_BOOKS, JSON.stringify(dataBooks));
@@ -244,7 +161,10 @@ const removeStyleBody = (containerDialogElement) => {
       inputs.forEach((input) => {
         dataTemporary[`${input.name}`] = input.value;
       });
-      setObjectCoverBook(dataTemporary, coverBook);
+      setObjectCoverBook(
+        JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD)) || dataTemporary,
+        coverBook
+      );
 
       containerDialogElement.innerHTML = setCover;
       const urlField = document.querySelector('#dialog_set_cover > #url'),
@@ -349,12 +269,50 @@ function setupDialog() {
         innerFunction(input, disabled);
       });
     },
+    eventChangeInput = (input) => {
+      if (input.id === 'current_page' || input.id === 'total_page') {
+        input.addEventListener('keyup', () => {
+          const currentPage = document.querySelector(
+              'form > #status_book > #current_page'
+            ).value,
+            totalPage = document.querySelector(
+              'form > #status_book > #total_page'
+            ).value,
+            progress = parseFloat(
+              ((currentPage / totalPage) * 100).toFixed(2).replace('.00', '')
+            );
+          progressBook.dataset.progress =
+            progress > 100
+              ? '100%'
+              : progress < 0.01
+              ? '0.01%'
+              : progress + '%';
+          progressBook.firstElementChild.style.height =
+            progressBook.dataset.progress;
+        });
+      }
+    },
     fillAllInput = (input) => {
       input.value = dataTemporary[`${input.name}`];
     },
     makeDisableAllInput = (input, boolean) => {
       input.disabled = boolean;
       if (input.value === '') input.remove();
+    },
+    removeClassForm = () => {
+      coverBook.removeAttribute('class');
+      dateBook.removeAttribute('class');
+      dateBook.innerHTML = `${dataTemporary['created']}<br/>${dataTemporary['updated']}`;
+
+      progressBook.removeAttribute('class');
+      progressBook.setAttribute(
+        'data-progress',
+        dataTemporary['read-progress']
+      );
+      progressBook.firstElementChild.style.height =
+        dataTemporary['read-progress'];
+
+      statusBook.textContent = `Status ${dataTemporary['status']}`;
     },
     fillImage = () => {
       const imgDummy = document.createElement('img');
@@ -377,45 +335,54 @@ function setupDialog() {
     fillImage();
     if (typeCrud === detail) {
       foreachInputs(makeDisableAllInput);
-      coverBook.removeAttribute('class');
-
-      dateBook.removeAttribute('class');
-      dateBook.innerHTML = `${dataTemporary['created']}<br/>${dataTemporary['updated']}`;
-
-      progressBook.removeAttribute('class');
-      progressBook.setAttribute(
-        'data-progress',
-        dataTemporary['read-progress']
-      );
-      progressBook.firstElementChild.style.height =
-        dataTemporary['read-progress'];
-
-      statusBook.textContent = `Status ${dataTemporary['status']}`;
+      removeClassForm();
 
       btnPrimaryForm.lastElementChild.textContent = 'edit';
       btnPrimaryForm.lastElementChild.style.color = 'var(--background-dark)';
-      btnPrimaryForm.firstElementChild.src = '../assets/ic_edit.svg';
-      btnPrimaryForm.style.backgroundColor = 'var(--active-dark)';
+      btnPrimaryForm.firstElementChild.src = '/assets/ic_edit.svg';
+      btnPrimaryForm.style.backgroundColor = 'var(--passive-dark)';
       btnPrimaryForm.type = 'button';
 
       btnSecondaryForm.lastElementChild.textContent = 'remove';
-      btnSecondaryForm.firstElementChild.src = '../assets/ic_trash.svg';
+      btnSecondaryForm.firstElementChild.src = '/assets/ic_trash.svg';
+
+      btnPrimaryForm.addEventListener('click', function () {
+        sessionStorage.setItem(KEY_TYPE_CRUD, update);
+        removeStyleBody(containerDialogElement);
+        containerDialogElement.remove();
+        setupDialog();
+      });
+    } else if (typeCrud === update) {
+      removeClassForm();
+      foreachInputs(eventChangeInput);
+      coverBook.classList.add('editable');
+      btnPrimaryForm.firstElementChild.src = '/assets/ic_update.svg';
+      btnPrimaryForm.lastElementChild.textContent = 'update book';
     } else {
       sessionStorage.removeItem(KEY_SESSION_CRUD);
     }
   }
 
+  body.addEventListener('click', (e) => {
+    if (e.target === containerDialogElement && typeCrud === detail) {
+      removeStyleBody(containerDialogElement);
+      clearSessionStorage();
+    }
+  });
+
   btnSecondaryForm.addEventListener('click', () => {
     if (typeCrud === detail) {
       createAlert(containerDialogElement, alert.removeWarning);
-      return;
     } else {
       removeStyleBody(containerDialogElement);
       clearSessionStorage();
     }
   });
 
-  if (coverBook.classList.contains('stretch')) {
+  if (
+    coverBook.classList.contains('stretch') ||
+    coverBook.classList.contains('editable')
+  ) {
     setupCoverBook(inputs, coverBook, containerDialogElement);
   }
 
