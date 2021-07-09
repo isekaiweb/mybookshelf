@@ -4,13 +4,16 @@ import {
   KEY_SESSION_CRUD,
   KEY_INDEX_BOOKS,
   KEY_DATA_BOOKS,
+  KEY_PAGE_LIST,
+  KEY_LAST_PAGE,
 } from '../dialog/key_storage.js';
 import { create, detail } from '../dialog/constants.js';
 
 const main = document.querySelector('main');
 
 main.addEventListener('click', (e) => {
-  if (e.target.id == 'add_book') {
+  const target = e.target;
+  if (target.id === 'add_book') {
     sessionStorage.setItem(KEY_TYPE_CRUD, create);
     setupDialog();
   }
@@ -18,15 +21,19 @@ main.addEventListener('click', (e) => {
 
 function setupItemBook() {
   let itemBook = '';
+
   const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
+    currentPageList = sessionStorage.getItem(KEY_PAGE_LIST) * 1 || 1,
     sumOfPage = Math.ceil(dataBooks.length / 3),
-    SliceDataBooks = (start, end) => dataBooks.slice(start, end);
+    cekFirstPage = currentPageList === 1,
+    cekLastPage = currentPageList === sumOfPage;
+  const SliceDataBooks = (start, end) => dataBooks.slice(start, end);
 
   // .sort(
   //   (a, b) => new Date(b.updatedTime) - new Date(a.updatedTime)
   // );
 
-  SliceDataBooks(0, 3).forEach((book) => {
+  SliceDataBooks(currentPageList * 3 - 3, currentPageList * 3).forEach((book) => {
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
      <div id="cover_book" style="background-image:url(${book['cover-book']
        .match(/\(([^)]+)\)/)[1]
@@ -48,11 +55,19 @@ function setupItemBook() {
 
   main.innerHTML = `${itemBook}
   <div>
-    <span class="disable" title="go to first page">«</span>
-    <span class="disable" title="previous page">‹</span>
-    <span>1</span>
-    <span title="next page">›</span>
-    <span title="go to last page">»</span>
+  <span id="max_prev" ${cekFirstPage ? 'class="disable"' : ''} title="${
+    cekFirstPage ? "you're already reach first page" : 'go to first page'
+  }">«</span>
+  <span id="prev" ${cekFirstPage ? 'class="disable"' : ''}  title="${
+    cekFirstPage ? 'already reach first page' : 'previous page'
+  }">‹</span>
+  <span>${currentPageList}</span>
+  <span ${cekLastPage ? 'class="disable"' : ''} id="next" title="${
+    cekLastPage ? 'already reach last page' : 'next page'
+  }">›</span>
+    <span ${cekLastPage ? 'class="disable"' : ''} id="max_next" title="${
+    cekLastPage ? "you're already reach last page" : 'go to last page'
+  }">»</span>
   </div>
   <img
   src="/assets/ic_add.svg"
@@ -60,6 +75,42 @@ function setupItemBook() {
   title="add new book"
   id="add_book"
 />`;
+
+  const containerPageList = document.querySelector('main > div'),
+    prevMax = containerPageList.firstElementChild,
+    prev = containerPageList.children[1],
+    next = containerPageList.children[3],
+    nextMax = containerPageList.lastElementChild;
+
+  prevMax.addEventListener('click', function () {
+    if (!this.classList.contains('disable')) {
+      sessionStorage.setItem(KEY_PAGE_LIST, 1);
+      setupItemBook();
+    }
+  });
+
+  prev.addEventListener('click', function () {
+    if (!this.classList.contains('disable')) {
+      sessionStorage.setItem(KEY_PAGE_LIST, currentPageList - 1);
+      setupItemBook();
+    }
+  });
+
+  next.addEventListener('click', function () {
+    if (!this.classList.contains('disable')) {
+      sessionStorage.setItem(KEY_PAGE_LIST, currentPageList + 1);
+      setupItemBook();
+    }
+
+    console.log(this);
+  });
+
+  nextMax.addEventListener('click', function () {
+    if (!this.classList.contains('disable')) {
+      sessionStorage.setItem(KEY_PAGE_LIST, sumOfPage);
+      setupItemBook();
+    }
+  });
 
   const itemBookElement = main.querySelectorAll('section');
   if (itemBookElement) {

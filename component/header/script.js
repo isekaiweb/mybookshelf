@@ -9,7 +9,10 @@ const select = document.querySelector('#select'),
   inputSearch = document.querySelector('header > div:first-of-type > input'),
   btnSearch = document.querySelector('header > div:first-of-type > button'),
   chips = document.querySelectorAll('header > div:last-of-type > span'),
-  typeIndex = JSON.parse(sessionStorage.getItem(KEY_TYPE_SEARCH))['index'] || 0;
+  typeSearchStorage = JSON.parse(sessionStorage.getItem(KEY_TYPE_SEARCH)),
+  filterStorage = JSON.parse(sessionStorage.getItem(KEY_FILTER)),
+  typeSearchIndex = typeSearchStorage != null ? typeSearchStorage.index : 0,
+  filterIndex = filterStorage != null ? filterStorage.index : 0;
 
 const forEachChips = (innerFunction, target = null) => {
     chips.forEach((chip, i) => {
@@ -17,8 +20,7 @@ const forEachChips = (innerFunction, target = null) => {
     });
   },
   toggleClassChips = (chip, i) => {
-    if (i === JSON.parse(sessionStorage.getItem(KEY_FILTER))['index'])
-      chip.classList.add('active');
+    if (i === filterIndex) chip.classList.add('active');
     else {
       chip.removeAttribute('class');
     }
@@ -67,7 +69,7 @@ function setHeader() {
   });
 
   typeSearch.forEach((type, i) => {
-    if (typeIndex === i) {
+    if (typeSearchIndex === i) {
       setupTypeSearch(type, i);
     }
 
