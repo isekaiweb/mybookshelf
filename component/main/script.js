@@ -29,7 +29,10 @@ function setupItemBook() {
     filterType = JSON.parse(sessionStorage.getItem(KEY_FILTER)) || 0,
     searchType = JSON.parse(sessionStorage.getItem(KEY_TYPE_SEARCH)) || 0,
     searchKeyword =
-      sessionStorage.getItem(KEY_SEARCH_VALUE).toLocaleLowerCase() || '';
+      sessionStorage.getItem(KEY_SEARCH_VALUE).toLocaleLowerCase() || '',
+    itemBookPerPage = 3,
+    endItemBookPerPage = currentPageList * itemBookPerPage,
+    startItemBookPerPage = endItemBookPerPage - itemBookPerPage;
 
   const filterDataBooks = () => {
       if (filterType === 0 || filterType.index === 0) {
@@ -40,7 +43,7 @@ function setupItemBook() {
       return dataBooks.filter((book) => book.status === filterType.text);
     },
     searchDataBooks = () => {
-      if (searchType === 0) {
+      if (searchType === 0 || searchType.index === 0) {
         return filterDataBooks().filter((book) =>
           book['title-book'].toLowerCase().includes(searchKeyword)
         );
@@ -55,15 +58,14 @@ function setupItemBook() {
       }
     };
 
-  const sumOfPage = Math.ceil(filterDataBooks().length / 3),
+  const sumOfPage = Math.ceil(searchDataBooks().length / itemBookPerPage),
     cekFirstPage = currentPageList === 1,
     cekLastPage = currentPageList === sumOfPage;
 
-  const SliceDataBooks = (start, end) => filterDataBooks().slice(start, end);
+  const SliceDataBooks = (start, end) => searchDataBooks().slice(start, end);
 
-  SliceDataBooks(currentPageList * 3 - 3, currentPageList * 3).forEach(
-    (book) => {
-      itemBook += `<section title="see detail book" data-id='${book['id']}'>
+  SliceDataBooks(startItemBookPerPage, endItemBookPerPage).forEach((book) => {
+    itemBook += `<section title="see detail book" data-id='${book['id']}'>
      <div id="cover_book" style="background-image:url(${book['cover-book']
        .match(/\(([^)]+)\)/)[1]
        .replace(/['"]+/g, '')})"></div>
@@ -80,25 +82,28 @@ function setupItemBook() {
        <span style="height:${book['read-progress']}"></span>
      </div>
      </section>`;
-    }
-  );
+  });
 
   main.innerHTML = `${itemBook}
-  <div>
-  <span id="max_prev" ${cekFirstPage ? 'class="disable"' : ''} title="${
-    cekFirstPage ? "you're already reach first page" : 'go to first page'
-  }">«</span>
-  <span id="prev" ${cekFirstPage ? 'class="disable"' : ''}  title="${
-    cekFirstPage ? 'already reach first page' : 'previous page'
-  }">‹</span>
-  <span>${currentPageList}</span>
-  <span ${cekLastPage ? 'class="disable"' : ''} id="next" title="${
-    cekLastPage ? 'already reach last page' : 'next page'
-  }">›</span>
-    <span ${cekLastPage ? 'class="disable"' : ''} id="max_next" title="${
-    cekLastPage ? "you're already reach last page" : 'go to last page'
-  }">»</span>
-  </div>
+ ${
+   itemBook === ''
+     ? ''
+     : ` <div>
+ <span id="max_prev" ${cekFirstPage ? 'class="disable"' : ''} title="${
+         cekFirstPage ? "you're already reach first page" : 'go to first page'
+       }">«</span>
+ <span id="prev" ${cekFirstPage ? 'class="disable"' : ''}  title="${
+         cekFirstPage ? 'already reach first page' : 'previous page'
+       }">‹</span>
+ <span>${currentPageList}</span>
+ <span ${cekLastPage ? 'class="disable"' : ''} id="next" title="${
+         cekLastPage ? 'already reach last page' : 'next page'
+       }">›</span>
+   <span ${cekLastPage ? 'class="disable"' : ''} id="max_next" title="${
+         cekLastPage ? "you're already reach last page" : 'go to last page'
+       }">»</span>
+ </div>`
+ }
   <img
   src="/assets/ic_add.svg"
   alt="add_book"
@@ -106,39 +111,41 @@ function setupItemBook() {
   id="add_book"
 />`;
 
-  const containerPageList = document.querySelector('main > div'),
-    prevMax = containerPageList.firstElementChild,
-    prev = containerPageList.children[1],
-    next = containerPageList.children[3],
-    nextMax = containerPageList.lastElementChild;
+  const containerPageList = document.querySelector('main > div');
+  if (containerPageList != null) {
+    const prevMax = containerPageList.firstElementChild,
+      prev = containerPageList.children[1],
+      next = containerPageList.children[3],
+      nextMax = containerPageList.lastElementChild;
 
-  prevMax.addEventListener('click', function () {
-    if (!this.classList.contains('disable')) {
-      sessionStorage.setItem(KEY_PAGE_LIST, 1);
-      setupItemBook();
-    }
-  });
+    prevMax.addEventListener('click', function () {
+      if (!this.classList.contains('disable')) {
+        sessionStorage.setItem(KEY_PAGE_LIST, 1);
+        setupItemBook();
+      }
+    });
 
-  prev.addEventListener('click', function () {
-    if (!this.classList.contains('disable')) {
-      sessionStorage.setItem(KEY_PAGE_LIST, currentPageList - 1);
-      setupItemBook();
-    }
-  });
+    prev.addEventListener('click', function () {
+      if (!this.classList.contains('disable')) {
+        sessionStorage.setItem(KEY_PAGE_LIST, currentPageList - 1);
+        setupItemBook();
+      }
+    });
 
-  next.addEventListener('click', function () {
-    if (!this.classList.contains('disable')) {
-      sessionStorage.setItem(KEY_PAGE_LIST, currentPageList + 1);
-      setupItemBook();
-    }
-  });
+    next.addEventListener('click', function () {
+      if (!this.classList.contains('disable')) {
+        sessionStorage.setItem(KEY_PAGE_LIST, currentPageList + 1);
+        setupItemBook();
+      }
+    });
 
-  nextMax.addEventListener('click', function () {
-    if (!this.classList.contains('disable')) {
-      sessionStorage.setItem(KEY_PAGE_LIST, sumOfPage);
-      setupItemBook();
-    }
-  });
+    nextMax.addEventListener('click', function () {
+      if (!this.classList.contains('disable')) {
+        sessionStorage.setItem(KEY_PAGE_LIST, sumOfPage);
+        setupItemBook();
+      }
+    });
+  }
 
   const itemBookElement = main.querySelectorAll('section');
   if (itemBookElement) {

@@ -72,6 +72,8 @@ function setHeader() {
     this.classList.add('pressed');
   });
 
+  inputSearch.addEventListener('keyup', () => btnSearch.click());
+  
   typeSearch.forEach((type, i) => {
     if (typeSearchIndex === i) {
       setupTypeSearch(type, i);
