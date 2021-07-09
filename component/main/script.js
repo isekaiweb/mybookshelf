@@ -36,11 +36,11 @@ function setupItemBook() {
 
   const filterDataBooks = () => {
       if (filterType === 0 || filterType.index === 0) {
-        return dataBooks.sort(
+        return [...dataBooks].sort(
           (a, b) => new Date(b.updatedTime) - new Date(a.updatedTime)
         );
       }
-      return dataBooks.filter((book) => book.status === filterType.text);
+      return [...dataBooks].filter((book) => book.status === filterType.text);
     },
     searchDataBooks = () => {
       if (searchType === 0 || searchType.index === 0) {
@@ -151,15 +151,20 @@ function setupItemBook() {
   if (itemBookElement) {
     itemBookElement.forEach((el) => {
       el.addEventListener('click', function () {
-        const indexBook = dataBooks.findIndex(
+        const indexBook = searchDataBooks().findIndex(
           (book) => book.id == this.dataset.id
         );
 
         sessionStorage.setItem(KEY_TYPE_CRUD, detail);
-        sessionStorage.setItem(KEY_INDEX_BOOKS, indexBook);
+        sessionStorage.setItem(
+          KEY_INDEX_BOOKS,
+          dataBooks.findIndex(
+            (book) => book.id == searchDataBooks()[indexBook].id
+          )
+        );
         sessionStorage.setItem(
           KEY_SESSION_CRUD,
-          JSON.stringify(dataBooks[indexBook])
+          JSON.stringify(searchDataBooks()[indexBook])
         );
         setupDialog();
       });
