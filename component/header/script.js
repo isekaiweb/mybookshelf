@@ -1,8 +1,10 @@
 import {
   KEY_FILTER,
+  KEY_PAGE_LIST,
   KEY_SEARCH_VALUE,
   KEY_TYPE_SEARCH,
 } from '../dialog/key_storage.js';
+import { setupItemBook } from '../main/script.js';
 
 const select = document.querySelector('#select'),
   typeSearch = document.querySelectorAll('#type_search > input[type="radio"]'),
@@ -58,6 +60,8 @@ function setHeader() {
 
   btnSearch.addEventListener('click', () => {
     sessionStorage.setItem(KEY_SEARCH_VALUE, inputSearch.value);
+    sessionStorage.removeItem(KEY_PAGE_LIST);
+    setupItemBook();
   });
 
   btnSearch.addEventListener('mouseup', function () {

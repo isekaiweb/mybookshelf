@@ -5,7 +5,9 @@ import {
   KEY_INDEX_BOOKS,
   KEY_DATA_BOOKS,
   KEY_PAGE_LIST,
-  KEY_LAST_PAGE,
+  KEY_FILTER,
+  KEY_TYPE_SEARCH,
+  KEY_SEARCH_VALUE,
 } from '../dialog/key_storage.js';
 import { create, detail } from '../dialog/constants.js';
 
@@ -24,17 +26,44 @@ function setupItemBook() {
 
   const dataBooks = JSON.parse(localStorage.getItem(KEY_DATA_BOOKS)) || [],
     currentPageList = sessionStorage.getItem(KEY_PAGE_LIST) * 1 || 1,
-    sumOfPage = Math.ceil(dataBooks.length / 3),
+    filterType = JSON.parse(sessionStorage.getItem(KEY_FILTER)) || 0,
+    searchType = JSON.parse(sessionStorage.getItem(KEY_TYPE_SEARCH)) || 0,
+    searchKeyword =
+      sessionStorage.getItem(KEY_SEARCH_VALUE).toLocaleLowerCase() || '';
+
+  const filterDataBooks = () => {
+      if (filterType === 0 || filterType.index === 0) {
+        return dataBooks.sort(
+          (a, b) => new Date(b.updatedTime) - new Date(a.updatedTime)
+        );
+      }
+      return dataBooks.filter((book) => book.status === filterType.text);
+    },
+    searchDataBooks = () => {
+      if (searchType === 0) {
+        return filterDataBooks().filter((book) =>
+          book['title-book'].toLowerCase().includes(searchKeyword)
+        );
+      } else if (searchType.index === 1) {
+        return filterDataBooks().filter((book) =>
+          book['writer-name'].toLowerCase().includes(searchKeyword)
+        );
+      } else {
+        return filterDataBooks().filter((book) =>
+          book['hashtag-book'].toLowerCase().includes(searchKeyword)
+        );
+      }
+    };
+
+  const sumOfPage = Math.ceil(filterDataBooks().length / 3),
     cekFirstPage = currentPageList === 1,
     cekLastPage = currentPageList === sumOfPage;
-  const SliceDataBooks = (start, end) => dataBooks.slice(start, end);
 
-  // .sort(
-  //   (a, b) => new Date(b.updatedTime) - new Date(a.updatedTime)
-  // );
+  const SliceDataBooks = (start, end) => filterDataBooks().slice(start, end);
 
-  SliceDataBooks(currentPageList * 3 - 3, currentPageList * 3).forEach((book) => {
-    itemBook += `<section title="see detail book" data-id='${book['id']}'>
+  SliceDataBooks(currentPageList * 3 - 3, currentPageList * 3).forEach(
+    (book) => {
+      itemBook += `<section title="see detail book" data-id='${book['id']}'>
      <div id="cover_book" style="background-image:url(${book['cover-book']
        .match(/\(([^)]+)\)/)[1]
        .replace(/['"]+/g, '')})"></div>
@@ -51,7 +80,8 @@ function setupItemBook() {
        <span style="height:${book['read-progress']}"></span>
      </div>
      </section>`;
-  });
+    }
+  );
 
   main.innerHTML = `${itemBook}
   <div>
@@ -101,8 +131,6 @@ function setupItemBook() {
       sessionStorage.setItem(KEY_PAGE_LIST, currentPageList + 1);
       setupItemBook();
     }
-
-    console.log(this);
   });
 
   nextMax.addEventListener('click', function () {

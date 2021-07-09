@@ -5,8 +5,7 @@ const KEY_SESSION_CRUD = 'crud',
   KEY_TYPE_SEARCH = 'search-type',
   KEY_FILTER = 'filter',
   KEY_SEARCH_VALUE = 'search-value',
-  KEY_PAGE_LIST = 'page-list',
-  KEY_LAST_PAGE = 'last-page';
+  KEY_PAGE_LIST = 'page-list';
 
 export {
   KEY_SESSION_CRUD,
@@ -17,5 +16,4 @@ export {
   KEY_FILTER,
   KEY_SEARCH_VALUE,
   KEY_PAGE_LIST,
-  KEY_LAST_PAGE,
 };
