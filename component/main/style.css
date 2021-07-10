@@ -41,7 +41,9 @@ main > section > #cover_book {
   background-position: center;
   height: 30vh;
   width: 30vh;
-  border-radius: calc(20px - 0.5vmax);
+  min-height: 80px;
+  min-width: 40px;
+  border-radius: calc(1px + 1vmax);
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
@@ -53,7 +55,7 @@ main > section > #info_book {
 main > section > #info_book > h2 {
   font-size: calc(1em + 5vh);
   color: var(--active-dark);
-
+  line-height: 1;
   text-transform: capitalize;
 }
 
@@ -62,6 +64,7 @@ main > section > #info_book > h3 {
   text-transform: capitalize;
   display: flex;
   align-items: center;
+  line-height: 1;
   column-gap: calc(5px + 0.1vw);
   font-weight: 400;
   font-family: var(--font-secondary);
@@ -296,6 +299,7 @@ main > div > span.disable {
 
   main > section > #info_book > h2 {
     font-size: calc(1em + 1.6vw);
+    font-weight: 600;
   }
 
   main > section > #info_book > h3 {
@@ -340,5 +344,12 @@ main > div > span.disable {
   main > section > #cover_book {
     height: 13vh;
     width: 13vh;
+  }
+
+  main > section > #info_book > h3 {
+    flex-direction: column;
+    align-items:start;
+    column-gap:0;
+    row-gap: 5px;
   }
 }
