@@ -29,24 +29,24 @@ const update = 'UPDATE',
     <div id="info_book">
       <input
         type="text"
-        name="title-book"
+        name="title"
         autocomplete="off"
         required
         title="title book"
         placeholder="title book"
       />
       <input
-      name="writer-name"
+      name="author"
         type="text"
-        title="writer name"
+        title="author name"
         autocomplete="off"
         required
-        placeholder="writer name"
+        placeholder="author name"
       />
       <input
         type="text"
         title="year book"
-        name='year-book'
+        name='year'
         autocomplete="off"
         required
         placeholder="year book"
@@ -82,7 +82,7 @@ const update = 'UPDATE',
     </div>
     <input
       id="hashtag"
-      name="hashtag-book"
+      name="hashtag"
       type="text"
       placeholder="#hashtag1 #hashtag2 #hashtag3"
       autocomplete="off"

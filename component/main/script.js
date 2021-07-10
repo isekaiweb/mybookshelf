@@ -40,20 +40,22 @@ function setupItemBook() {
           (a, b) => new Date(b.updatedTime) - new Date(a.updatedTime)
         );
       }
-      return [...dataBooks].filter((book) => book.status === filterType.text);
+      return [...dataBooks].filter(
+        (book) => book.isComplete * 1 === filterType.index - 1
+      );
     },
     searchDataBooks = () => {
       if (searchType === 0 || searchType.index === 0) {
         return filterDataBooks().filter((book) =>
-          book['title-book'].toLowerCase().includes(searchKeyword)
+          book['title'].toLowerCase().includes(searchKeyword)
         );
       } else if (searchType.index === 1) {
         return filterDataBooks().filter((book) =>
-          book['writer-name'].toLowerCase().includes(searchKeyword)
+          book['author'].toLowerCase().includes(searchKeyword)
         );
       } else {
         return filterDataBooks().filter((book) =>
-          book['hashtag-book'].toLowerCase().includes(searchKeyword)
+          book['hashtag'].toLowerCase().includes(searchKeyword)
         );
       }
     };
@@ -66,14 +68,18 @@ function setupItemBook() {
 
   SliceDataBooks(startItemBookPerPage, endItemBookPerPage).forEach((book) => {
     itemBook += `<section title="see detail book" data-id='${book['id']}'>
-     <div id="cover_book" style="background-image:url(${book['cover-book']
+     <div id="cover_book" style="background-image:url(${book['cover']
        .match(/\(([^)]+)\)/)[1]
        .replace(/['"]+/g, '')})"></div>
      <div id="info_book">
-       <h2>${book['title-book']}</h2>
-       <h3>${book['writer-name']}<span>${book['year-book']}</span></h3>
-       <span>${filterType === 0 || filterType.index === 0 ? book['updated'] : book['created']}</span>
-       <span>${book['hashtag-book']}</span>
+       <h2>${book['title']}</h2>
+       <h3>${book['author']}<span>${book['year']}</span></h3>
+       <span>${
+         filterType === 0 || filterType.index === 0
+           ? book['updated']
+           : book['created']
+       }</span>
+       <span>${book['hashtag']}</span>
      </div>
      <div
        id="progress_book"

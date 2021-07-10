@@ -33,7 +33,7 @@ const removeStyleBody = (containerDialogElement) => {
     coverBook,
     img = coverBook.style.backgroundImage
   ) => {
-    object['cover-book'] = img;
+    object['cover'] = img;
     sessionStorage.setItem(KEY_SESSION_CRUD, JSON.stringify(object));
   },
   createAlert = (containerDialogElement, typeAlert) => {
@@ -79,17 +79,18 @@ const removeStyleBody = (containerDialogElement) => {
           .toFixed(2)
           .replace('.00', '')
       ),
-      hash = currentForm['hashtag-book'].replaceAll('#', '').trim().split(' '),
+      hash = currentForm['hashtag'].replaceAll('#', '').trim().split(' '),
       containerDialogElement =
         btnPrimaryForm.parentElement.parentElement.parentElement;
 
+    currentForm['year'] = currentForm['year'] * 1;
     currentForm['updatedTime'] = date;
-    currentForm['hashtag-book'] =
+    currentForm['hashtag'] =
       hash.length > 0 && hash != '' ? hash.map((i) => `#${i}`).join(' ') : '';
-    currentForm['status'] =
+    currentForm['isComplete'] =
       currentForm['current-page'] * 1 === currentForm['total-page'] * 1
-        ? 'Completed'
-        : 'Ongoing';
+        ? true
+        : false;
 
     currentForm['read-progress'] =
       progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
@@ -276,15 +277,17 @@ function setupDialog() {
       progressBook.firstElementChild.style.height =
         dataTemporary['read-progress'];
 
-      statusBook.textContent = `Status ${dataTemporary['status']}`;
+      statusBook.textContent = `Status ${
+        dataTemporary['isComplete'] ? 'Complete' : 'Ongoing'
+      }`;
     },
     fillImage = () => {
       const imgDummy = document.createElement('img');
-      imgDummy.src = dataTemporary['cover-book']
+      imgDummy.src = dataTemporary['cover']
         .match(/\(([^)]+)\)/)[1]
         .replace(/['"]+/g, '');
       imgDummy.onload = () => {
-        coverBook.style.backgroundImage = dataTemporary['cover-book'];
+        coverBook.style.backgroundImage = dataTemporary['cover'];
       };
 
       imgDummy.onerror = function () {
