@@ -1,6 +1,6 @@
 main {
   display: grid;
-  row-gap: calc(1em);
+  row-gap: 0.9em;
 }
 
 main > #add_book {
@@ -152,6 +152,10 @@ main > div > span.disable {
 }
 
 @media (max-width: 1200px) {
+  main {
+    row-gap: 0.8em;
+  }
+
   main > section {
     display: grid;
     column-gap: 1.5em;
@@ -186,6 +190,10 @@ main > div > span.disable {
 }
 
 @media (max-width: 992px) {
+  main {
+    row-gap: 0.7em;
+  }
+
   main > section {
     display: grid;
     column-gap: 1.2em;
@@ -273,6 +281,10 @@ main > div > span.disable {
 }
 
 @media (max-width: 576px) {
+  main {
+    row-gap: 0.5em;
+  }
+
   main > section {
     padding: 10px;
   }
