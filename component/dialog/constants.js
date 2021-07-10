@@ -99,7 +99,36 @@ const update = 'UPDATE',
       </button>
     </div>
   </form>`,
+  headerChildElement = `<h1>MyBookShelf</h1>
+  <div>
+    <div id="select">
+      <span>title book</span>
+      <img src="/assets/ic_caret.svg" alt="caret" />
+    </div>
+    <input type="search" placeholder="enter title book here ..." />
+    <button><img src="/assets/ic_search.svg" alt="search" /></button>
+    <div id="type_search">
+      <input
+        type="radio"
+        name="type-search"
+        id="0"
+        value="title book"
+        checked
+      />
+      <label for="0">title book</label>
+      <input type="radio" name="type-search" id="1" value="writer name" />
+      <label for="1">writer name</label>
+      <input type="radio" name="type-search" id="2" value="hashtag" />
+      <label for="2">hashtag</label>
+    </div>
+  </div>
+
+  <div>
+    <span class="active">latest update</span>
+    <span>Ongoing</span>
+    <span>Completed</span>
+  </div>`,
   containerDialogHTML = `<div>${crudBook}</div>`,
   body = document.querySelector('body');
 
-export { create, update, detail, setCover, body, containerDialogHTML, alert };
+export { create, update, detail, setCover, body, containerDialogHTML, alert,headerChildElement };

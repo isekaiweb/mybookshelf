@@ -1,0 +1,49 @@
+#loading_container {
+  background-color: var(--background-dark);
+  backdrop-filter: unset;
+  flex-direction: column;
+  row-gap: 1em;
+  transition: var(--transition-200ms);
+}
+
+#loading_container.hide {
+  opacity: 0;
+}
+
+#loading_container > img {
+  height: 15vmax;
+  animation: loading 800ms ease-in-out infinite;
+}
+
+#loading_container > p {
+  color: var(--active-dark);
+  font-weight: 700;
+  font-size: 5vmax;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  14.5% {
+    transform: rotate(-10deg);
+  }
+  29% {
+    transform: rotate(-5deg);
+  }
+  43.5% {
+    transform: rotate(0);
+  }
+  58% {
+    transform: rotate(5deg);
+  }
+  72.5% {
+    transform: rotate(10deg);
+  }
+  87% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

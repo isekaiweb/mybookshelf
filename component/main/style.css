@@ -42,7 +42,7 @@ main > section > #cover_book {
   height: 30vh;
   width: 30vh;
   border-radius: calc(20px - 0.5vmax);
-  border: calc(1px + 0.1vw) solid var(--background-dark);
+  box-shadow: 1px 1px 10px var(--background-dark);
 }
 
 main > section > #info_book {
@@ -280,7 +280,6 @@ main > div > span.disable {
   main > section > #cover_book {
     height: 25vh;
     width: 25vh;
-    border: 1px solid var(--active-dark);
   }
 
   main > section > #info_book > h2 {

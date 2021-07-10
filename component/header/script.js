@@ -1,3 +1,4 @@
+import { headerChildElement } from '../dialog/constants.js';
 import {
   KEY_FILTER,
   KEY_PAGE_LIST,
@@ -5,6 +6,10 @@ import {
   KEY_TYPE_SEARCH,
 } from '../dialog/key_storage.js';
 import { setupItemBook } from '../main/script.js';
+
+document
+  .querySelector('body > header')
+  .insertAdjacentHTML('afterbegin', headerChildElement);
 
 const select = document.querySelector('#select'),
   typeSearch = document.querySelectorAll('#type_search > input[type="radio"]'),
@@ -73,7 +78,7 @@ function setHeader() {
   });
 
   inputSearch.addEventListener('keyup', () => btnSearch.click());
-  
+
   typeSearch.forEach((type, i) => {
     if (typeSearchIndex === i) {
       setupTypeSearch(type, i);

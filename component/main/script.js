@@ -72,7 +72,7 @@ function setupItemBook() {
      <div id="info_book">
        <h2>${book['title-book']}</h2>
        <h3>${book['writer-name']}<span>${book['year-book']}</span></h3>
-       <span>${book['updated']}</span>
+       <span>${filterType === 0 || filterType.index === 0 ? book['updated'] : book['created']}</span>
        <span>${book['hashtag-book']}</span>
      </div>
      <div
