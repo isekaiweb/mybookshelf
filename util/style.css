@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Source+Sans+Pro:wght@400;600;700&display=swap');
 
 @import './reset.css';
+@import '../component/loading/style.css';
 @import '../component/header/style.css';
 @import '../component/dialog/main.css';
 @import '../component/main/style.css';
-@import '../component/loading/style.css';
 
 :root {
   /* color for dark theme */
