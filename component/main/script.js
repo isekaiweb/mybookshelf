@@ -34,6 +34,13 @@ function setupItemBook() {
     endItemBookPerPage = currentPageList * itemBookPerPage,
     startItemBookPerPage = endItemBookPerPage - itemBookPerPage;
 
+
+  /******************************
+   * @filterDataBooks this is a function to filter dataBooks from localStorage by filter types (chips element)
+   * @SearchDataBooks this is a function to filter data from filterDataBooks by the search type (radio element)
+   * @sliceDataBooks this is a function to slice data from searchDataBooks per page base on itemBookPerPage
+   */ 
+
   const filterDataBooks = () => {
       if (filterType === 0 || filterType.index === 0) {
         return [...dataBooks].sort(

@@ -1,5 +1,11 @@
 import { body } from '../dialog/constants.js';
 
+
+/********************************
+ * @removeLoading this is a function to remove loading after window loaded
+ * @setupLoading this is a function to setup loading
+ */
+
 const removeLoading = () => {
   const loadingContainer = body.querySelector('#loading_container');
   body.removeAttribute('style');

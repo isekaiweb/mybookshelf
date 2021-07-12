@@ -19,6 +19,16 @@ import { setupItemBook } from '../main/script.js';
 
 import NumberInput from './numberInput.js';
 
+/****************************************************************
+ * @removeStyleBody this is a function get back to normal body overflow after set hidden
+ * @clearSessionStorage this is a function to remove session storage for get a detail book
+ * @setObjectCoverBook this is a function to set image for properties cover-book in localStorage item book
+ * @createAlert this is a function to create an alert like if user set wrong input or delete the book and setup event button too
+ * @handleFormSubmit this is a function to set book to local storage
+ * @setupCoverBook this is a function to set image for cover book whether is from local or import link
+ * @setupDialog this is a function to show a dialog for user to create or edit the book
+ */
+
 const removeStyleBody = (containerDialogElement) => {
     body.removeAttribute('style');
     containerDialogElement.remove();
@@ -228,8 +238,18 @@ function setupDialog() {
       'form > #action_book > button:last-of-type'
     ),
     dataTemporary = JSON.parse(sessionStorage.getItem(KEY_SESSION_CRUD)),
-    typeCrud = sessionStorage.getItem(KEY_TYPE_CRUD),
-    foreachInputs = (innerFunction, disabled = true) => {
+    typeCrud = sessionStorage.getItem(KEY_TYPE_CRUD);
+
+  /********************************
+   * @foreEachInputs this is a function callback to make easy foreach all input and get the item
+   * @eventChangeInput this is a function to change status of progress reading book
+   * @fillAllInput this is a function to fill all input value with data from current sessionStorage item book
+   * @makeDisableAllInput this a function to make disable input when typeCrud is detail
+   * @removeClassForm this is a function to remove all class in form dialog when typeCrud is detail
+   * @fillImage this is a function to preview an image to cover book but if src image error it'd show default cover
+   */  
+
+  const foreachInputs = (innerFunction, disabled = true) => {
       inputs.forEach((input) => {
         innerFunction(input, disabled);
       });

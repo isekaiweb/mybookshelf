@@ -21,6 +21,15 @@ const select = document.querySelector('#select'),
   typeSearchIndex = typeSearchStorage != null ? typeSearchStorage.index : 0,
   filterIndex = filterStorage != null ? filterStorage.index : 0;
 
+/******************************** 
+ * @forEachChips this is a function callback to foreach all chip elements and get the item inside them
+ * @toggleClassChips this is a function to differentiate whether is active or not from sessionStorage filterIndex
+ * @eventClickChips this is a function to set sessionStorage filterIndex and make chips change the style if active or not when chip clicked
+ * @setupTypeSearch this is a function to handle if filter type search changing is
+ * @setHeader this is a function to setup event for all element in header and
+ * @setOverFlowChip this is a function to make chips can scroll when it overflow and only active if screen < 360px
+ */  
+
 const forEachChips = (innerFunction, target = null) => {
     chips.forEach((chip, i) => {
       innerFunction(chip, i, target);
