@@ -11,7 +11,7 @@ i created this app for accomplish my task from [Dicoding](https://www.dicoding.c
 BTW This app got 5 star of 5 from Dicoding Reviewers and you can find my certificate [here](https://www.dicoding.com/certificates/0LZ03DRJ3Z65)
 
 ## What tools i used for this app ?
-This app just using **Vanilla JavaScript** without any library/framework cause i wouldn't allowed to use it since this is course a for a beginner and the *reviewers* just want to see whether the student know how to manipulate the **DOM**, and like so for the style just pure **CSS3**
+This app just using **Vanilla JavaScript** without any library/framework cause i wouldn't allowed to use it since this is course for a beginner and the *reviewers* just want to see whether the student know how to manipulate the **DOM**, and like so for the style just pure **CSS3**
 
 ## Features
 - CRUD Item Book
