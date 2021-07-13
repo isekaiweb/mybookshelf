@@ -4,7 +4,7 @@ This is an simple web application to save all your progress from reading a book 
 ## why i'm creating this app? what for? (purpose)
 i created this app for accomplish my task from [Dicoding](https://www.dicoding.com/academies/315)
 
-## what i'm doing in that task ?
+### what i'm doing in that task ?
 - creating an app for book shelf with system CRUD from localStorage web
 - the app must have to shelves, one for a book for completed read and the other for book not complete reading yet
 
