@@ -1,4 +1,4 @@
-import { body } from '../dialog/constants.js';
+import { body } from '../../util/constants.js';
 
 
 /********************************

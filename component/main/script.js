@@ -8,8 +8,8 @@ import {
   KEY_FILTER,
   KEY_TYPE_SEARCH,
   KEY_SEARCH_VALUE,
-} from '../dialog/key_storage.js';
-import { create, detail } from '../dialog/constants.js';
+} from '../../util/key_storage.js';
+import { create, detail } from '../../util/constants.js';
 
 const main = document.querySelector('main');
 

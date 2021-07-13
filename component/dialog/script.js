@@ -3,7 +3,7 @@ import {
   KEY_TYPE_CRUD,
   KEY_DATA_BOOKS,
   KEY_INDEX_BOOKS,
-} from './key_storage.js';
+} from '../../util/key_storage.js';
 
 import {
   create,
@@ -13,7 +13,7 @@ import {
   setCover,
   alert,
   body,
-} from './constants.js';
+} from '../../util/constants.js';
 
 import { setupItemBook } from '../main/script.js';
 

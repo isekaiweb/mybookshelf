@@ -1,7 +1,7 @@
 # About
 This is a simple web application to save all your progress from reading a book and keep you on track, so you can easily capture your progress
 
-## why i'm creating this app? what for? (purpose)
+## why i'm creating this app? what for?
 i created this app for accomplish my task from [Dicoding](https://www.dicoding.com/academies/315)
 
 ### what i'm doing at that task ?

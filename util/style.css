@@ -96,6 +96,12 @@ footer {
   }
 }
 @media (max-width: 576px) {
+  header,
+  main,
+  footer {
+    width: 90%;
+  }
+
   :root {
     font-size: 12px;
   }

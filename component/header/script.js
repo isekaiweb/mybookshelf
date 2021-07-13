@@ -1,10 +1,10 @@
-import { headerChildElement } from '../dialog/constants.js';
+import { headerChildElement } from '../../util/constants.js';
 import {
   KEY_FILTER,
   KEY_PAGE_LIST,
   KEY_SEARCH_VALUE,
   KEY_TYPE_SEARCH,
-} from '../dialog/key_storage.js';
+} from '../../util/key_storage.js';
 import { setupItemBook } from '../main/script.js';
 
 document
@@ -13,8 +13,8 @@ document
 
 const select = document.querySelector('#select'),
   typeSearch = document.querySelectorAll('#type_search > input[type="radio"]'),
-  inputSearch = document.querySelector('header > div:first-of-type > input'),
-  btnSearch = document.querySelector('header > div:first-of-type > button'),
+  inputSearch = document.querySelector('#container_input_search > input'),
+  btnSearch = document.querySelector('#container_input_search> button'),
   chips = document.querySelectorAll('header > div:last-of-type > span'),
   typeSearchStorage = JSON.parse(sessionStorage.getItem(KEY_TYPE_SEARCH)),
   filterStorage = JSON.parse(sessionStorage.getItem(KEY_FILTER)),
