@@ -185,4 +185,4 @@ function setupItemBook() {
   }
 }
 
-export { setupItemBook };
+export default setupItemBook;

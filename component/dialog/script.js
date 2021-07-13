@@ -15,7 +15,7 @@ import {
   body,
 } from '../../util/constants.js';
 
-import { setupItemBook } from '../main/script.js';
+import setupItemBook from '../main/script.js';
 
 import NumberInput from './numberInput.js';
 
@@ -247,7 +247,7 @@ function setupDialog() {
    * @makeDisableAllInput this a function to make disable input when typeCrud is detail
    * @removeClassForm this is a function to remove all class in form dialog when typeCrud is detail
    * @fillImage this is a function to preview an image to cover book but if src image error it'd show default cover
-   */  
+   */
 
   const foreachInputs = (innerFunction, disabled = true) => {
       inputs.forEach((input) => {

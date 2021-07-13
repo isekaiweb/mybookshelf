@@ -261,7 +261,7 @@ form > #action_book > button:last-of-type {
   background-color: var(--cancel);
 }
 
-@media (max-width: 1200px) and (max-height: 790px) {
+@media screen and (max-width: 1200px) and (max-height: 790px) and (orientation: landscape) {
   body > div > form {
     grid-template-rows: repeat(4, max-content);
     height: fit-content;
@@ -296,7 +296,7 @@ form > #action_book > button:last-of-type {
   }
 }
 
-@media (max-width: 840px) and (max-height: 800px) {
+/* @media (max-width: 840px) and (max-height: 800px) {
   body > div > form {
     width: 80vmax;
     grid-template-rows: repeat(4, max-content);
@@ -605,4 +605,4 @@ form > #action_book > button:last-of-type {
   form > #action_book > button > img {
     display: none;
   }
-}
+} */

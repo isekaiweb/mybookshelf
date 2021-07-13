@@ -5,7 +5,8 @@ import {
   KEY_SEARCH_VALUE,
   KEY_TYPE_SEARCH,
 } from '../../util/key_storage.js';
-import { setupItemBook } from '../main/script.js';
+import setupItemBook from '../main/script.js';
+import detectMob from '../../util/detectMob.js';
 
 document
   .querySelector('body > header')
@@ -21,19 +22,25 @@ const select = document.querySelector('#select'),
   typeSearchIndex = typeSearchStorage != null ? typeSearchStorage.index : 0,
   filterIndex = filterStorage != null ? filterStorage.index : 0;
 
-/******************************** 
+/********************************
  * @forEachChips this is a function callback to foreach all chip elements and get the item inside them
+ * @removeHoverChipsInMobile this is a function to remove hover in chips when opened in mobile devices
  * @toggleClassChips this is a function to differentiate whether is active or not from sessionStorage filterIndex
  * @eventClickChips this is a function to set sessionStorage filterIndex and make chips change the style if active or not when chip clicked
  * @setupTypeSearch this is a function to handle if filter type search changing is
  * @setHeader this is a function to setup event for all element in header and
  * @setOverFlowChip this is a function to make chips can scroll when it overflow and only active if screen < 500px
- */  
+ */
 
-const forEachChips = (innerFunction, target = null) => {
+const forEachChips = (innerFunction, target) => {
     chips.forEach((chip, i) => {
       innerFunction(chip, i, target);
     });
+  },
+  removeHoverChipsInMobile = (chip) => {
+    if (detectMob()) {
+      chip.classList.remove('hover');
+    }
   },
   toggleClassChips = (chip, i) => {
     if (i === filterIndex) chip.classList.add('active');
@@ -99,6 +106,7 @@ function setHeader() {
   });
 
   forEachChips(toggleClassChips);
+  forEachChips(removeHoverChipsInMobile);
 
   document.querySelector('header').addEventListener('click', (e) => {
     const target = e.target;
