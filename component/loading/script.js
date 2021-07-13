@@ -21,7 +21,7 @@ function setupLoading() {
   body.insertAdjacentHTML(
     'beforeend',
     `   <div id="loading_container">
-    <img src="/assets/ic_book_white.svg" alt="load-img" />
+    <img src="assets/ic_book_white.svg" alt="load-img" />
     <p>MyBookShelf</p>
   </div>`
   );
