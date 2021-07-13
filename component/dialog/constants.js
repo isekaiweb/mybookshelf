@@ -90,11 +90,11 @@ const update = 'UPDATE',
     />
     <div id="action_book">
       <button type="submit">
-        <img src="../../assets/ic_save.svg" alt="save" />
+        <img src="assets/ic_save.svg" alt="save" />
         <span>save book</span>
       </button>
       <button type="button">
-        <img src="../../assets/ic_cancel.svg" alt="cancel" />
+        <img src="assets/ic_cancel.svg" alt="cancel" />
         <span>cancel</span>
       </button>
     </div>

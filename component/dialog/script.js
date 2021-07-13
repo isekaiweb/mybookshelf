@@ -313,7 +313,7 @@ function setupDialog() {
       imgDummy.onerror = function () {
         this.remove();
         coverBook.style.backgroundImage =
-          "url('../../assets/ic_cover_placeholder.svg')";
+          "url('assets/ic_cover_placeholder.svg')";
       };
     };
 
@@ -326,12 +326,12 @@ function setupDialog() {
 
       btnPrimaryForm.lastElementChild.textContent = 'edit';
       btnPrimaryForm.lastElementChild.style.color = 'var(--background-dark)';
-      btnPrimaryForm.firstElementChild.src = '/assets/ic_edit.svg';
+      btnPrimaryForm.firstElementChild.src = 'assets/ic_edit.svg';
       btnPrimaryForm.style.backgroundColor = 'var(--passive-dark)';
       btnPrimaryForm.type = 'button';
 
       btnSecondaryForm.lastElementChild.textContent = 'remove';
-      btnSecondaryForm.firstElementChild.src = '/assets/ic_trash.svg';
+      btnSecondaryForm.firstElementChild.src = 'assets/ic_trash.svg';
 
       btnPrimaryForm.addEventListener('click', function () {
         sessionStorage.setItem(KEY_TYPE_CRUD, update);
@@ -343,7 +343,7 @@ function setupDialog() {
       removeClassForm();
       foreachInputs(eventChangeInput);
       coverBook.classList.add('editable');
-      btnPrimaryForm.firstElementChild.src = '/assets/ic_update.svg';
+      btnPrimaryForm.firstElementChild.src = 'assets/ic_update.svg';
       btnPrimaryForm.lastElementChild.textContent = 'update book';
     } else {
       sessionStorage.removeItem(KEY_SESSION_CRUD);
