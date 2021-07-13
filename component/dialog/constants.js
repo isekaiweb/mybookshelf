@@ -103,10 +103,10 @@ const update = 'UPDATE',
   <div>
     <div id="select">
       <span>title book</span>
-      <img src="/assets/ic_caret.svg" alt="caret" />
+      <img src="../../assets/ic_caret.svg" alt="caret" />
     </div>
     <input type="search" placeholder="enter title book here ..." />
-    <button><img src="/assets/ic_search.svg" alt="search" /></button>
+    <button><img src="../../assets/ic_search.svg" alt="search" /></button>
     <div id="type_search">
       <input
         type="radio"

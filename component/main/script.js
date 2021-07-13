@@ -118,7 +118,7 @@ function setupItemBook() {
  </div>`
  }
   <img
-  src="/assets/ic_add.svg"
+  src="../../assets/ic_add.svg"
   alt="add_book"
   title="add new book"
   id="add_book"
