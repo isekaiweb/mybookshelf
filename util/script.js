@@ -4,4 +4,3 @@ import setupLoading from '../component/loading/script.js';
 setupLoading();
 setHeader();
 setOverflowChip();
-
