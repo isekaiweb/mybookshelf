@@ -27,7 +27,7 @@ const select = document.querySelector('#select'),
  * @eventClickChips this is a function to set sessionStorage filterIndex and make chips change the style if active or not when chip clicked
  * @setupTypeSearch this is a function to handle if filter type search changing is
  * @setHeader this is a function to setup event for all element in header and
- * @setOverFlowChip this is a function to make chips can scroll when it overflow and only active if screen < 360px
+ * @setOverFlowChip this is a function to make chips can scroll when it overflow and only active if screen < 500px
  */  
 
 const forEachChips = (innerFunction, target = null) => {
@@ -111,7 +111,7 @@ function setHeader() {
 
 function setOverflowChip() {
   window.addEventListener('resize', () => {
-    if (window.innerWidth <= 360) {
+    if (window.innerWidth <= 500) {
       const containerTypeSearch = chips[0].parentElement,
         releaseGrabbing = () => {
           isDown = false;

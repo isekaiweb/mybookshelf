@@ -75,6 +75,7 @@ footer {
   width: 80%;
   max-width: var(--breakpoint-xxl);
   min-width: 290px;
+  overflow: hidden;
 }
 
 @media (max-width: 1200px) {

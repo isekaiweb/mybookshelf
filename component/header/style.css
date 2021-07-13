@@ -17,12 +17,12 @@ header > div:first-of-type {
 
   grid-template-areas: 'select input btn' 'type-search type-search type-search';
   grid-template-rows: repeat(2, auto);
-  grid-template-columns: minmax(140px, 12%) 1fr minmax(60px, 6%);
+  grid-template-columns: minmax(120px, 12%) 1fr minmax(60px, 6%);
 }
 
 header > div:first-of-type > button {
   grid: 'btn';
-  width: 100%;
+  justify-self: end;
   background-color: var(--card-dark);
   padding: 10px;
   cursor: pointer;
@@ -44,7 +44,7 @@ header > div:first-of-type > button.pressed > img {
 
 header > div:first-of-type > input {
   grid: 'input';
-  width: 97%;
+  width: 100%;
   justify-self: end;
   background-color: var(--passive-dark);
   caret-color: var(--background-dark);
@@ -167,19 +167,19 @@ header > div:last-of-type > span {
   }
 }
 
-@media (max-width:992px){
+@media (max-width: 992px) {
   header > h1 {
     font-size: 4.5em;
   }
 }
 
-@media (max-width:768px){
+@media (max-width: 768px) {
   header > h1 {
     font-size: 4.2em;
   }
 }
 
-@media (max-width:576px){
+@media (max-width: 576px) {
   header > h1 {
     font-size: 4em;
   }
