@@ -91,17 +91,16 @@ footer {
 }
 
 @media (max-width: 768px) {
-  :root {
-    font-size: 13px;
-  }
-}
-@media (max-width: 576px) {
   header,
   main,
   footer {
     width: 90%;
   }
-
+  :root {
+    font-size: 13px;
+  }
+}
+@media (max-width: 576px) {
   :root {
     font-size: 12px;
   }

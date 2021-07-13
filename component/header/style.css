@@ -152,6 +152,7 @@ header > div:last-of-type > span.active {
   font-weight: 600;
 }
 
+header > div:last-of-type > span.mobile:hover,
 header > div:last-of-type > span {
   background-color: var(--passive-dark);
   padding: 0.8em 1.5em;
@@ -195,7 +196,7 @@ header > div:last-of-type > span {
   #container_input_search {
     grid-area: 3/1/3/3;
   }
-  
+
   #select {
     grid-area: 1/1/1/3;
     height: 3em;

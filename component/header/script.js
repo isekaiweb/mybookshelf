@@ -39,7 +39,8 @@ const forEachChips = (innerFunction, target) => {
   },
   removeHoverChipsInMobile = (chip) => {
     if (detectMob()) {
-      chip.classList.remove('hover');
+      chip.classList.add('mobile');
+      alert(`${window.innerWidth}x${window.innerHeight}`);
     }
   },
   toggleClassChips = (chip, i) => {

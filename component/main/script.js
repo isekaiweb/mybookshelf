@@ -34,12 +34,11 @@ function setupItemBook() {
     endItemBookPerPage = currentPageList * itemBookPerPage,
     startItemBookPerPage = endItemBookPerPage - itemBookPerPage;
 
-
   /******************************
    * @filterDataBooks this is a function to filter dataBooks from localStorage by filter types (chips element)
    * @SearchDataBooks this is a function to filter data from filterDataBooks by the search type (radio element)
    * @sliceDataBooks this is a function to slice data from searchDataBooks per page base on itemBookPerPage
-   */ 
+   */
 
   const filterDataBooks = () => {
       if (filterType === 0 || filterType.index === 0) {
@@ -78,16 +77,14 @@ function setupItemBook() {
      <div id="cover_book" style="background-image:url(${book['cover']
        .match(/\(([^)]+)\)/)[1]
        .replace(/['"]+/g, '')})"></div>
-     <div id="info_book">
        <h2>${book['title']}</h2>
-       <h3>${book['author']}<span>${book['year']}</span></h3>
+       <h3><span>${book['author']}</span><span>${book['year']}</span></h3>
        <span>${
          filterType === 0 || filterType.index === 0
            ? book['updated']
            : book['created']
        }</span>
        <span>${book['hashtag']}</span>
-     </div>
      <div
        id="progress_book"
        data-progress ="${book['read-progress']}"

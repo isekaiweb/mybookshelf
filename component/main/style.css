@@ -22,10 +22,11 @@ main > section {
   border-radius: calc(20px - 0.5vmax);
   height: fit-content;
   display: grid;
-  column-gap: 2em;
+  column-gap: 2vw;
   align-items: center;
   padding: calc(10px + 1vmax);
-  grid-template-columns: max-content 1fr calc(1em + 15vw);
+  grid-template-rows: repeat(4, max-content);
+  grid-template-columns: max-content 1fr max-content;
   cursor: pointer;
 }
 
@@ -34,75 +35,92 @@ main > section:hover {
 }
 
 main > section > #cover_book {
-  grid-area: 1/1/1/1;
+  grid-area: 1/1/-1/1;
   align-self: start;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 30vh;
-  width: 30vh;
+  height: 15vmax;
+  width: 15vmax;
   min-height: 80px;
   min-width: 40px;
   border-radius: calc(1px + 1vmax);
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
-main > section > #info_book {
+main > section > h2 {
   grid-area: 1/2/1/2;
-  align-self: start;
-}
-
-main > section > #info_book > h2 {
-  font-size: calc(1em + 5vh);
+  font-size: calc(1em + 2.5vw);
   color: var(--active-dark);
-  line-height: 1;
+  white-space: nowrap;
+  align-self:end ;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-transform: capitalize;
 }
 
-main > section > #info_book > h3 {
-  font-size: calc(1em + 3vh);
+main > section > h3 {
+  grid-area: 2/2/2/2;
+  align-self: start;
+  font-size: calc(1em + 1.2vw);
   text-transform: capitalize;
-  display: flex;
-  align-items: center;
-  line-height: 1;
+  display: grid;
+  grid-template-columns: 1fr max-content;
   column-gap: calc(5px + 0.1vw);
   font-weight: 400;
   font-family: var(--font-secondary);
   color: var(--passive-dark);
 }
 
-main > section > #info_book > h3 > span {
-  font-size: 0.5em;
+main > section > h3 > span:first-of-type {
+  white-space: nowrap;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-main > section > #info_book > span:first-of-type {
-  margin-top: calc(0.5em + 2vh);
+main > section > h3 > span:last-of-type {
+  font-size: 0.5em;
+  align-self: center;
+}
+
+main > section > span:first-of-type {
+  grid-area: 3/2/3/2;
+  align-self: start;
   display: block;
-  font-size: calc(1em + 1.6vh);
+  font-size: calc(1em + 0.2vw);
   color: var(--fill);
 }
 
-main > section > #info_book > span:last-of-type {
+main > section > span:last-of-type {
+  grid-area: 4/2/4/2;
   display: block;
-  font-size: calc(1em + 2vh);
-  color: var(--active-dark);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+  align-self: end;
+  font-size: calc(1em + 0.4vw);
+  color: var(--enable-input);
 }
 
 main > section > #progress_book {
-  grid-area: 1/3/1/3;
-  justify-self: center;
+  grid-area: 1/3/5/3;
+  align-self: center;
   position: relative;
-  width: calc(1em + 10vw);
-  height: calc(1em + 10vw);
+  width: calc(1em + 9vmax);
+  height: calc(1em + 9vmax);
   border-radius: 100%;
   overflow: hidden;
+  justify-self: center;
   transform: rotate(180deg);
   background-color: var(--background-progress);
 }
 
 main > section > #progress_book > span {
   display: block;
-  transform: perspective();
   background-color: var(--fill);
   width: 100%;
 }
@@ -118,7 +136,7 @@ main > section > #progress_book::after {
   justify-content: center;
   align-items: center;
   transform: rotate(180deg);
-  font-size: calc(2em + 0.6vw);
+  font-size: calc(1em + 1.3vw);
   color: var(--active-dark);
   font-weight: 600;
 }
@@ -137,7 +155,7 @@ main > div > span {
   background-color: var(--card-dark);
   color: var(--passive-dark);
   font-weight: 600;
-  border-radius: calc(1px + 0.1vw);
+  border-radius: calc(1px + 0.1vmax);
   font-size: calc(1.5em + 0.3vw);
   padding: 1.5vmax;
   text-align: center;
@@ -154,202 +172,70 @@ main > div > span.disable {
   cursor: unset;
 }
 
-@media (max-width: 1200px) {
-  main {
-    row-gap: 0.8em;
-  }
-
+@media screen and (orientation: landscape) {
   main > section {
-    display: grid;
-    column-gap: 1.5em;
-  }
-
-  main > section > #cover_book {
-    height: 25vh;
-    width: 25vh;
-  }
-
-  main > section > #info_book > h2 {
-    font-size: calc(1em + 2.5vw);
-  }
-
-  main > section > #info_book > h3 {
-    font-size: calc(1em + 1.1vw);
-  }
-
-  main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 1vw);
-    display: block;
-    font-size: calc(1em + 0.6vw);
-  }
-
-  main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 0.8vw);
-  }
-
-  main > section > #progress_book::after {
-    font-size: calc(1em + 1.4vw);
+    grid-template-columns: max-content 0.9fr;
   }
 }
 
-@media (max-width: 992px) {
-  main {
-    row-gap: 0.7em;
-  }
-
-  main > section {
-    display: grid;
-    column-gap: 1.2em;
-  }
-
-  main > section > #cover_book {
-    height: 25vh;
-    width: 25vh;
-  }
-
-  main > section > #info_book > h2 {
-    font-size: calc(1em + 2vw);
-  }
-
-  main > section > #info_book > h3 {
-    font-size: calc(1em + 1vw);
-  }
-
-  main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.5vw);
-    display: block;
-    font-size: calc(1em + 0.2vw);
-  }
-
-  main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 0.4vw);
-  }
-
+@media screen and (orientation: landscape) and (max-width: 820px){
   main > section > #progress_book::after {
     font-size: calc(1em + 1vw);
   }
 }
 
-@media (max-width: 800px) {
+@media screen and (max-height: 520px) and (max-width: 360px) and (orientation: portrait) {
   main > section {
-    column-gap: 1em;
+    column-gap: 2vw;
     grid-template-columns: max-content 1fr;
   }
 
   main > section > #cover_book {
-    height: 15vh;
-    width: 15vh;
-    border-radius: calc(1px + 1vmax);
+    grid-area: 1/1/-1/1;
+    align-self: start;
   }
 
-  main > section > #info_book > h2 {
-    font-size: calc(1em + 2.5vw);
+  main > section > h2 {
+    grid-area: 1/2/1/3;
   }
 
-  main > section > #info_book > h3 {
-    font-size: calc(1em + 1.4vw);
+  main > section > h3 {
+    grid-area: 2/2/2/3;
   }
 
-  main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.8vw);
-    font-size: calc(1em + 0.2vw);
+  main > section > span:first-of-type {
+    grid-area: 3/2/3/3;
   }
 
-  main > section > #info_book > span:last-of-type {
-    font-size: calc(1em + 1vw);
-  }
-}
-
-@media (max-width: 768px) {
-  main > section {
-    border-radius: calc(5px + 1vw);
+  main > section > span:last-of-type {
+    align-self: start;
+    grid-area: 4/2/4/2;
   }
 
-  main > section > #info_book > h2 {
-    font-size: calc(1em + 2vw);
-  }
-
-  main > section > #info_book > h3 {
-    font-size: calc(1em + 1vw);
-  }
-
-  main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.5vh);
-    font-size: 1em;
-  }
-
-  main > section > #info_book > span:last-of-type {
-    font-size: 1em;
-  }
-}
-
-@media (max-width: 576px) {
-  main {
-    row-gap: 0.5em;
-  }
-
-  main > section {
-    padding: 10px;
-  }
-
-  main > section > #cover_book {
-    height: 25vh;
-    width: 25vh;
-  }
-
-  main > section > #info_book > h2 {
-    font-size: calc(1em + 1.6vw);
-    font-weight: 600;
-  }
-
-  main > section > #info_book > h3 {
-    font-size: calc(1em + 0.5vw);
-  }
-
-  main > section > #info_book > h3 > span {
-    font-size: 0.7em;
-  }
-
-  main > section > #info_book > span:first-of-type {
-    margin-top: calc(0.5em + 0.5vw);
-    font-size: 0.8em;
-  }
-
-  main > section > #info_book > span:last-of-type {
-    font-size: 0.9em;
-  }
   main > section > #progress_book {
-    display: block;
-  }
-
-  main > section > #progress_book::after {
-    font-size: calc(1em + 0.2vw);
+    display: none;
   }
 
   main > div > span {
-    line-height: 0.6;
-    font-size: calc(1.2em + 0.3vw);
+    line-height: 0.24;
   }
 }
 
-@media (max-width: 360px) {
+@media screen and (max-width: 520px) and (max-height: 360px) and (orientation: landscape) {
   main > section {
-    padding: 10px;
+    column-gap: 1.5vw;
+    grid-template-columns: max-content 1fr;
   }
-
-  main > div > span {
-    line-height: 0.3;
-  }
-
   main > section > #cover_book {
-    height: 13vh;
-    width: 13vh;
+    height: 20vmax;
+    width: 20vmax;
   }
 
-  main > section > #info_book > h3 {
-    flex-direction: column;
-    align-items:start;
-    column-gap:0;
-    row-gap: 5px;
+  main > section > #progress_book {
+    height: 15vmax;
+    width: 15vmax;
+  }
+  main > div > span {
+    line-height: 0.24;
   }
 }
