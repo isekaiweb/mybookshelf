@@ -77,8 +77,10 @@ function setupItemBook() {
      <div id="cover_book" style="background-image:url(${book['cover']
        .match(/\(([^)]+)\)/)[1]
        .replace(/['"]+/g, '')})"></div>
-       <h2>${book['title']}</h2>
-       <h3><span>${book['author']}</span><span>${book['year']}</span></h3>
+        <div id="info_book">
+        <h2>${book['title']}</h2>
+        <h3><span>${book['author']}</span><span>${book['year']}</span></h3>
+        </div>
        <span>${
          filterType === 0 || filterType.index === 0
            ? book['updated']

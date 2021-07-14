@@ -48,32 +48,37 @@ main > section > #cover_book {
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
-main > section > h2 {
+main > section > #info_book {
   grid-area: 1/2/1/2;
+  align-self: start;
+  display: grid;
+}
+
+main > section > #info_book > h2 {
   font-size: calc(1em + 2.5vw);
   color: var(--active-dark);
-  white-space: nowrap;
-  align-self: end;
-  width: 100%;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+  width: 100%;
+
   text-transform: capitalize;
 }
 
-main > section > h3 {
-  grid-area: 2/2/2/2;
-  align-self: start;
+main > section > #info_book > h3 {
   font-size: calc(1em + 1.2vw);
   text-transform: capitalize;
   display: grid;
   grid-template-columns: 1fr max-content;
-  column-gap: calc(5px + 0.1vw);
+  column-gap: calc(5px + 0.05vw);
   font-weight: 400;
+  align-items: center;
   font-family: var(--font-secondary);
   color: var(--passive-dark);
+  grid-template-columns: 80% 1fr;
 }
 
-main > section > h3 > span:first-of-type {
+main > section > #info_book > h3 > span:first-of-type {
   white-space: nowrap;
   width: 100%;
   display: block;
@@ -81,13 +86,12 @@ main > section > h3 > span:first-of-type {
   text-overflow: ellipsis;
 }
 
-main > section > h3 > span:last-of-type {
+main > section > #info_book > h3 > span:last-of-type {
   font-size: 0.5em;
-  align-self: center;
 }
 
 main > section > span:first-of-type {
-  grid-area: 3/2/3/2;
+  grid-area: 2/2/2/2;
   align-self: start;
   display: block;
   font-size: calc(1em + 0.2vw);
@@ -174,9 +178,9 @@ main > div > span.disable {
   cursor: unset;
 }
 
-@media screen and (min-width: 1440px){
+@media screen and (min-width: 1440px) {
   main > section > #cover_book {
-    border-radius: calc(1px + 0.4vw)
+    border-radius: calc(1px + 0.4vw);
   }
   main > div > span {
     padding: 1vmax;
@@ -203,23 +207,6 @@ main > div > span.disable {
   main > section > #cover_book {
     grid-area: 1/1/-1/1;
     align-self: start;
-  }
-
-  main > section > h2 {
-    grid-area: 1/2/1/3;
-  }
-
-  main > section > h3 {
-    grid-area: 2/2/2/3;
-  }
-
-  main > section > span:first-of-type {
-    grid-area: 3/2/3/3;
-  }
-
-  main > section > span:last-of-type {
-    align-self: start;
-    grid-area: 4/2/4/2;
   }
 
   main > section > #progress_book {
