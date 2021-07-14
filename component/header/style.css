@@ -152,7 +152,6 @@ header > div:last-of-type > span.active {
   font-weight: 600;
 }
 
-header > div:last-of-type > span.mobile:hover,
 header > div:last-of-type > span {
   background-color: var(--passive-dark);
   padding: 0.8em 1.5em;

@@ -24,7 +24,6 @@ const select = document.querySelector('#select'),
 
 /********************************
  * @forEachChips this is a function callback to foreach all chip elements and get the item inside them
- * @removeHoverChipsInMobile this is a function to remove hover in chips when opened in mobile devices
  * @toggleClassChips this is a function to differentiate whether is active or not from sessionStorage filterIndex
  * @eventClickChips this is a function to set sessionStorage filterIndex and make chips change the style if active or not when chip clicked
  * @setupTypeSearch this is a function to handle if filter type search changing is
@@ -36,12 +35,6 @@ const forEachChips = (innerFunction, target) => {
     chips.forEach((chip, i) => {
       innerFunction(chip, i, target);
     });
-  },
-  removeHoverChipsInMobile = (chip) => {
-    if (detectMob()) {
-      chip.classList.add('mobile');
-      alert(`${window.innerWidth}x${window.innerHeight}`);
-    }
   },
   toggleClassChips = (chip, i) => {
     if (i === filterIndex) chip.classList.add('active');
@@ -107,7 +100,6 @@ function setHeader() {
   });
 
   forEachChips(toggleClassChips);
-  forEachChips(removeHoverChipsInMobile);
 
   document.querySelector('header').addEventListener('click', (e) => {
     const target = e.target;
