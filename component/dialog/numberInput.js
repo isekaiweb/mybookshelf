@@ -25,7 +25,7 @@ class NumberInput {
     this.#value = this.element.value;
     this.element.addEventListener('keydown', (e) => {
       if (detectMob()) {
-        e.preventDefault();
+        this.element.value = '';
       } else {
         if (
           (e.key < '0' || e.key > '9') &&

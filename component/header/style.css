@@ -1,8 +1,19 @@
 header {
-  margin-top: 10vh;
   display: grid;
   color: var(--active-dark);
   row-gap: 1em;
+}
+
+@media screen and (orientation: landscape) {
+  header {
+    margin-top: 10vh;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  header {
+    margin-top: 5vh;
+  }
 }
 
 header > h1 {
