@@ -23,10 +23,16 @@ class NumberInput {
 
   mustBeNumber() {
     this.#value = this.element.value;
-    this.element.addEventListener('keydown', (e) => {
-      if (detectMob()) {
-        alert(e.code);
-      } else {
+
+    if (detectMob()) {
+      this.element.addEventListener('input', (e) => {
+        this.element.value = this.element.value.replace(/\D+/g, '');
+
+        alert(e);
+        alert(e.data);
+      });
+    } else {
+      this.element.addEventListener('keydown', (e) => {
         if (
           (e.key < '0' || e.key > '9') &&
           !['ArrowLeft', 'ArrowRight', 'Delete', 'Backspace'].includes(e.key)
@@ -44,8 +50,8 @@ class NumberInput {
             }
           }
         }
-      }
-    });
+      });
+    }
   }
 }
 

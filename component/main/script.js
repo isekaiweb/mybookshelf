@@ -80,12 +80,12 @@ function setupItemBook() {
         <div id="info_book">
         <h2>${book['title']}</h2>
         <h3><span>${book['author']}</span><span>${book['year']}</span></h3>
+        <span>${
+          filterType === 0 || filterType.index === 0
+            ? book['updated']
+            : book['created']
+        }</span>
         </div>
-       <span>${
-         filterType === 0 || filterType.index === 0
-           ? book['updated']
-           : book['created']
-       }</span>
        <span>${book['hashtag']}</span>
      <div
        id="progress_book"
@@ -124,6 +124,7 @@ function setupItemBook() {
 />`;
 
   const containerPageList = document.querySelector('main > div');
+
   if (containerPageList != null) {
     const prevMax = containerPageList.firstElementChild,
       prev = containerPageList.children[1],
@@ -158,6 +159,14 @@ function setupItemBook() {
       }
     });
   }
+
+  const coverBookMain = document.querySelector('main > section > #cover_book'),
+    setWidthCoverBook = () => {
+      coverBookMain.style.width = getComputedStyle(coverBookMain).height;
+    };
+
+  setWidthCoverBook();
+  window.addEventListener('resize', setWidthCoverBook);
 
   const itemBookElement = main.querySelectorAll('section');
   if (itemBookElement) {
