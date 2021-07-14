@@ -24,7 +24,7 @@ class NumberInput {
 
   mustBeNumber() {
     this.element.addEventListener('keydown', (e) => {
-      alert('yey' + `:${e}-${e.key}`);
+      alert(`${this.element.value}`);
       if ((e.key < '0' || e.key > '9') && e.key != 'Backspace')
         e.preventDefault();
       else {
