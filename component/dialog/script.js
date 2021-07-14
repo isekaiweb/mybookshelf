@@ -103,7 +103,11 @@ const removeStyleBody = (containerDialogElement) => {
         : false;
 
     currentForm['read-progress'] =
-      progress > 100 ? '100%' : progress < 0.01 ? '0.01%' : progress + '%';
+      progress > 100
+        ? '100%'
+        : progress > 0 && progress < 0.01
+        ? '0.01%'
+        : progress + '%';
     currentForm['updated'] = `Updated on ${currentTime}`;
     currentForm['id'] =
       currentIndex != undefined ? dataBooks[currentIndex].id : date.getTime();

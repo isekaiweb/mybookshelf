@@ -44,7 +44,7 @@ main > section > #cover_book {
   width: 15vmax;
   max-height: 200px;
   max-width: 200px;
-  border-radius: calc(1px + 0.3vw);
+  border-radius: calc(1px + 0.8vw);
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
@@ -159,7 +159,7 @@ main > div > span {
   font-weight: 600;
   border-radius: calc(1px + 0.1vmax);
   font-size: calc(1.5em + 0.3vw);
-  padding: 1.2vw;
+  padding: 1.5vmax;
   text-align: center;
   cursor: pointer;
 }
@@ -172,6 +172,15 @@ main > div > span:nth-of-type(3) {
 main > div > span.disable {
   opacity: 0.6;
   cursor: unset;
+}
+
+@media screen and (min-width: 1440px){
+  main > section > #cover_book {
+    border-radius: calc(1px + 0.4vw)
+  }
+  main > div > span {
+    padding: 1vmax;
+  }
 }
 
 @media screen and (orientation: landscape) {

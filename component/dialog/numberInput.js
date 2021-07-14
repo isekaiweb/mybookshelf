@@ -8,9 +8,7 @@ class NumberInput {
   }
 
   #popValue() {
-    this.#value = [...this.#value];
-    this.#value.pop();
-    this.#value = this.#value.join('');
+    this.#value = this.element.value;
   }
 
   #cekType(e) {
@@ -23,16 +21,27 @@ class NumberInput {
   }
 
   mustBeNumber() {
+    this.#value = this.element.value;
     this.element.addEventListener('keydown', (e) => {
-      alert(`${this.element.value}`);
-      if ((e.key < '0' || e.key > '9') && e.key != 'Backspace')
+      if (detectMob()) {
         e.preventDefault();
-      else {
-        if (e.key != 'Backspace') {
-          this.#value += e.key;
-          this.#cekType(e);
-        } else {
-          this.#popValue();
+      } else {
+        if (
+          (e.key < '0' || e.key > '9') &&
+          !['ArrowLeft', 'ArrowRight', 'Delete', 'Backspace'].includes(e.key)
+        )
+          e.preventDefault();
+        else {
+          if (
+            !['ArrowLeft', 'ArrowRight', 'Delete', 'Backspace'].includes(e.key)
+          ) {
+            this.#value += e.key;
+            this.#cekType(e);
+          } else {
+            if (['Delete', 'Backspace'].includes(e.key)) {
+              setTimeout(() => this.#popValue(), 10);
+            }
+          }
         }
       }
     });
