@@ -42,9 +42,9 @@ main > section > #cover_book {
   background-position: center;
   height: 15vmax;
   width: 15vmax;
-  min-height: 80px;
-  min-width: 40px;
-  border-radius: calc(1px + 1vmax);
+  max-height: 200px;
+  max-width: 200px;
+  border-radius: calc(1px + 0.3vw);
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
@@ -112,6 +112,8 @@ main > section > #progress_book {
   position: relative;
   width: calc(1em + 9vmax);
   height: calc(1em + 9vmax);
+  max-height: 140px;
+  max-width: 140px;
   border-radius: 100%;
   overflow: hidden;
   justify-self: center;
@@ -136,7 +138,7 @@ main > section > #progress_book::after {
   justify-content: center;
   align-items: center;
   transform: rotate(180deg);
-  font-size: calc(1em + 1.3vw);
+  font-size: calc(1em + 0.9vw);
   color: var(--active-dark);
   font-weight: 600;
 }
@@ -157,7 +159,7 @@ main > div > span {
   font-weight: 600;
   border-radius: calc(1px + 0.1vmax);
   font-size: calc(1.5em + 0.3vw);
-  padding: 1.5vmax;
+  padding: 1.2vw;
   text-align: center;
   cursor: pointer;
 }
