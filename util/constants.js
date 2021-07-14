@@ -9,7 +9,7 @@ const update = 'UPDATE',
   </div>`,
   alert = {
     failSave: `<div id="alert">
-  <img src="../../assets/ic_sad_emot.svg" alt="sad" />
+  <img src="assets/ic_sad_emot.svg" alt="sad" />
   <p>Can't Saved<br /><span
       >Total page can't be less than current page</span
     >
@@ -17,7 +17,7 @@ const update = 'UPDATE',
   <button>alright</button>
   </div>`,
     removeWarning: `<div id="alert">
-   <img src="../../assets/ic_tentative.svg" alt="?" />
+   <img src="assets/ic_tentative.svg" alt="?" />
    <p>Warning!<br /><span>are you sure to remove this book?</span></p>
    <div><button>yes</button> <button>no</button></div>
   </div>`,
