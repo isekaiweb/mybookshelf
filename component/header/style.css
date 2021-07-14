@@ -145,7 +145,7 @@ header > div:last-of-type {
   display: grid;
 }
 
-header > div:last-of-type > span:hover,
+header > div:last-of-type > span.desktop:hover,
 header > div:last-of-type > span.active {
   background-color: var(--fill);
   color: var(--active-dark);

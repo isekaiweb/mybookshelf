@@ -126,9 +126,9 @@ const update = 'UPDATE',
   </div>
 
   <div>
-    <span class="active">latest update</span>
-    <span>Ongoing</span>
-    <span>Completed</span>
+    <span class="active desktop">latest update</span>
+    <span class="desktop">Ongoing</span>
+    <span class="desktop" >Completed</span>
   </div>`,
   containerDialogHTML = `<div>${crudBook}</div>`,
   body = document.querySelector('body');

@@ -36,10 +36,15 @@ const forEachChips = (innerFunction, target) => {
       innerFunction(chip, i, target);
     });
   },
+  removeClassDesktopWhenOpenedInMobile = (chip) => {
+    if (detectMob()) {
+      chip.classList.remove('desktop');
+    }
+  },
   toggleClassChips = (chip, i) => {
     if (i === filterIndex) chip.classList.add('active');
     else {
-      chip.removeAttribute('class');
+      chip.classList.remove('active');
     }
   },
   eventClickChips = (chip, i, target) => {
@@ -51,7 +56,7 @@ const forEachChips = (innerFunction, target) => {
       chip.classList.add('active');
       btnSearch.click();
     } else {
-      chip.removeAttribute('class');
+      chip.classList.remove('active');
     }
   },
   setupTypeSearch = (type, i) => {
@@ -100,6 +105,7 @@ function setHeader() {
   });
 
   forEachChips(toggleClassChips);
+  forEachChips(removeClassDesktopWhenOpenedInMobile);
 
   document.querySelector('header').addEventListener('click', (e) => {
     const target = e.target;
