@@ -180,12 +180,12 @@ form > #action_book > button:last-of-type {
     width: 80vw;
     height: 60vh;
     max-width: 900px;
-    max-height: 500px;
+    max-height: 450px;
     border-radius: calc(1em + 0.2vmax);
     column-gap: 2vw;
     row-gap: 1.5vh;
     grid-template-columns: 60% 1fr;
-    grid-template-rows: repeat(2, max-content) 1fr;
+    grid-template-rows: repeat(2, max-content) minmax(2em, max-content) 10em;
   }
 
   form > #cover_book {
@@ -306,7 +306,7 @@ form > #action_book > button:last-of-type {
 
   form > #action_book {
     grid-area: 4/1/4/1;
-    align-self: end;
+    align-self: center;
     column-gap: 2vmax;
     grid-template-columns: repeat(2, minmax(180px, 20%));
   }
