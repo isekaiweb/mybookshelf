@@ -1,4 +1,3 @@
-import detectMob from '../../util/detectMob.js';
 class NumberInput {
   #value = '';
   #yearBook = document.querySelector('#info_book > input:last-of-type');
