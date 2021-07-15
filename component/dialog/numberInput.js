@@ -8,50 +8,19 @@ class NumberInput {
     this.element = element;
   }
 
-  #popValue() {
-    this.#value = this.element.value;
-  }
-
-  #cekType(e) {
-    if (this.element === this.#yearBook) {
-      if (this.#value * 1 > this.#currentYears) {
-        this.#popValue();
-        e.preventDefault();
-      }
-    } else return;
-  }
-
   mustBeNumber() {
-    this.#value = this.element.value;
-
-    if (detectMob()) {
-      this.element.addEventListener('input', (e) => {
-        this.element.value = this.element.value.replace(/\D+/g, '');
-
-        alert(e);
-        alert(e.data);
-      });
-    } else {
-      this.element.addEventListener('keydown', (e) => {
-        if (
-          (e.key < '0' || e.key > '9') &&
-          !['ArrowLeft', 'ArrowRight', 'Delete', 'Backspace'].includes(e.key)
-        )
-          e.preventDefault();
-        else {
-          if (
-            !['ArrowLeft', 'ArrowRight', 'Delete', 'Backspace'].includes(e.key)
-          ) {
-            this.#value += e.key;
-            this.#cekType(e);
-          } else {
-            if (['Delete', 'Backspace'].includes(e.key)) {
-              setTimeout(() => this.#popValue(), 10);
-            }
+    this.element.addEventListener('input', (e) => {
+      if (this.element === this.#yearBook) {
+        if (this.element.value * 1 > this.#currentYears) {
+          if (e.inputType === 'insertText') {
+            this.element.value = this.#value;
           }
+        } else {
+          this.#value = this.element.value;
         }
-      });
-    }
+      }
+      this.element.value = this.element.value.replace(/\D+/g, '');
+    });
   }
 }
 
