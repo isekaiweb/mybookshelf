@@ -97,12 +97,11 @@ form > #status_book > label {
   position: relative;
 }
 
-
 form > #status_book > label::after {
   content: ':';
   position: absolute;
   right: 0;
-  transform: translateX(8px)
+  transform: translateX(8px);
 }
 
 form > #status_book > input {
@@ -178,14 +177,14 @@ form > #action_book > button:last-of-type {
   body > div > form {
     padding: 3em;
     width: 80vw;
-    height: 60vh;
+    height: fit-content;
     max-width: 900px;
     max-height: 450px;
     border-radius: calc(1em + 0.2vmax);
     column-gap: 2vw;
-    row-gap: 1.5vh;
+    row-gap: 3vh;
     grid-template-columns: 60% 1fr;
-    grid-template-rows: repeat(2, max-content) minmax(2em, max-content) 10em;
+    grid-template-rows: repeat(2, max-content) minmax(2em, max-content) max-content;
   }
 
   form > #cover_book {
@@ -238,8 +237,9 @@ form > #action_book > button:last-of-type {
   form > #status_book {
     grid-area: 2/1/2/1;
     column-gap: 10px;
-    grid-template-columns: minmax(100px, 120px) max-content 1fr;
+    grid-template-columns: minmax(100px, 120px) repeat(2, max-content);
     grid-template-rows: repeat(3, max-content);
+    overflow: hidden;
   }
 
   form > #status_book > span {
@@ -253,7 +253,6 @@ form > #action_book > button:last-of-type {
     position: relative;
     font-size: calc(1em + 0.2vw);
   }
-
 
   form > #status_book > input {
     width: 50px;
@@ -306,25 +305,103 @@ form > #action_book > button:last-of-type {
 
   form > #action_book {
     grid-area: 4/1/4/1;
-    align-self: center;
+    align-self: end;
+    display: flex;
     column-gap: 2vmax;
     grid-template-columns: repeat(2, minmax(180px, 20%));
   }
 
   form > #action_book > button {
     padding: 1em;
-    width: 100%;
-    align-items: center;
-    grid-template-columns: 2em 1fr;
+    width: 40%;
+    max-width: 160px;
+    display: flex;
     border-radius: calc(1px + 0.2vmax);
   }
 
   form > #action_book > button > span {
-    font-size: calc(1em + 0.2vmax);
+    font-size: calc(1em + 0.2vw);
+    text-align: center;
+    width: 100%;
   }
 
   form > #action_book > button > img {
     justify-self: end;
-    height: calc(1em + 0.2vmax);
+    height: calc(1em + 0.2vw);
+  }
+}
+
+@media screen and (max-width: 1200px) and (orientation: landscape) {
+  form > #info_book > input:first-of-type {
+    font-size: calc(1em + 2.5vw);
+    width: 100%;
+  }
+
+  form > #info_book > input:nth-of-type(2) {
+    grid-area: 2/1/2/1;
+    font-size: calc(1em + 1.5vw);
+    width: 100%;
+  }
+
+  form > #status_book > span {
+    font-size: calc(1em + 1.45vw);
+  }
+
+  form > #status_book > label {
+    font-size: calc(1em + 0.3vw);
+  }
+
+  #progress {
+    grid-area: 1/3/4/3;
+    width: 9vmax;
+    height: 9vmax;
+    min-height: 75px;
+    min-width: 75px;
+    max-width: 110px;
+    max-height: 110px;
+    border-radius: 100%;
+    align-self: center;
+    justify-self: center;
+  }
+
+  #progress > span {
+    height: 10%;
+    width: 100%;
+  }
+
+  #progress::after {
+    font-size: calc(1em + 0.6vmax);
+  }
+
+  #hashtag {
+    grid-area: 3/1/3/1;
+    font-size: calc(1em + 0.3vmax);
+  }
+
+  form > #action_book {
+    grid-area: 4/1/4/1;
+    align-self: end;
+    display: flex;
+    column-gap: 2vmax;
+    grid-template-columns: repeat(2, minmax(180px, 20%));
+  }
+
+  form > #action_book > button {
+    padding: 1em;
+    width: 40%;
+    max-width: 160px;
+    display: flex;
+    border-radius: calc(1px + 0.2vmax);
+  }
+
+  form > #action_book > button > span {
+    font-size: calc(1em + 0.2vw);
+    text-align: center;
+    width: 100%;
+  }
+
+  form > #action_book > button > img {
+    justify-self: end;
+    height: calc(1em + 0.2vw);
   }
 }

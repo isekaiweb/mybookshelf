@@ -160,9 +160,13 @@ function setupItemBook() {
     });
   }
 
-  const coverBookMain = document.querySelector('main > section > #cover_book'),
+  const coverBookMain = document.querySelectorAll(
+      'main > section > #cover_book'
+    ),
     setWidthCoverBook = () => {
-      coverBookMain.style.width = getComputedStyle(coverBookMain).height;
+      coverBookMain.forEach((cover) => {
+        cover.style.width = getComputedStyle(cover).height;
+      });
     };
 
   setWidthCoverBook();

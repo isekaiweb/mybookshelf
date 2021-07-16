@@ -43,7 +43,9 @@ header > div:first-of-type {
 }
 
 #container_input_search > button > img {
-  height: calc(1.5em + 0.5vmax);
+  width:  calc(1em + 2vh);
+  max-width: 40px;
+  min-width: 20px;
   transition: var(--transition-200ms);
 }
 

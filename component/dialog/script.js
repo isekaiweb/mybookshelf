@@ -273,7 +273,7 @@ function setupDialog() {
           progressBook.dataset.progress =
             progress > 100
               ? '100%'
-              : progress < 0.01
+              : progress > 0 && progress < 0.01
               ? '0.01%'
               : progress + '%';
           progressBook.firstElementChild.style.height =
