@@ -19,11 +19,6 @@ This app just using **Vanilla JavaScript** without any library/framework cause i
 - Loading Screen
 - Responsive Web
 
-### Demo 
-
-![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
-
-
 ## How To use it ?
 
 - smile 😀
@@ -32,4 +27,4 @@ This app just using **Vanilla JavaScript** without any library/framework cause i
 
 ## [live web](https://isekaiweb.github.io/mybookshelf/)
 
-
+![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
