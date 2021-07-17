@@ -27,7 +27,7 @@ header > div:first-of-type {
   display: grid;
   column-gap: calc(1em + 1vmax);
   grid-template-rows: repeat(2, auto);
-  grid-template-columns: minmax(120px, 12%) 1fr;
+  grid-template-columns: minmax(120px, 13%) 1fr;
 }
 
 #container_input_search {
