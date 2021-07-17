@@ -23,12 +23,13 @@ This app just using **Vanilla JavaScript** without any library/framework cause i
 
 ![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
 
-## [live web](https://isekaiweb.github.io/mybookshelf/)
 
 ## How To use it ?
 
 - smile 😀
 - give a star 🌟
-- click **live web** above 🔝
+- click **live web** down here 🔽
+
+## [live web](https://isekaiweb.github.io/mybookshelf/)
 
 
