@@ -23,7 +23,7 @@ const update = 'UPDATE',
   </div>`,
   },
   crudBook = `<form>
-    <div id="cover_book" class="stretch" style="background-image: url('assets/ic_cover_placeholder.svg')"></div>
+    <div id="cover_book" class="editable" style="background-image: url('assets/ic_cover_placeholder.svg')"></div>
     <p id="date_book" class="hide">
     </p>
     <div id="info_book">
@@ -52,26 +52,30 @@ const update = 'UPDATE',
         placeholder="year book"
       />
     </div>
-    <div id="status_book">
-      <span>Status</span>
-      <label for="current_page">current page</label>
-      <input
-      name="current-page"
-        type="text"
-        autocomplete="off"
-        required
-        placeholder="0"
-        id="current_page"
-      />
-      <label for="total_page">total page</label>
-      <input
-        type="text"
-        name="total-page"
-        autocomplete="off"
-        required
-        placeholder="0"
-        id="total_page"
-      />
+    <div id="container_status">
+       <div id="status_book">
+       <span>Status</span>
+       <div>
+       <label for="current_page">current page</label>
+       <input
+       name="current-page"
+         type="text"
+         autocomplete="off"
+         required
+         placeholder="0"
+         id="current_page"
+       />
+       <label for="total_page">total page</label>
+       <input
+         type="text"
+         name="total-page"
+         autocomplete="off"
+         required
+         placeholder="0"
+         id="total_page"
+       />
+       </div>
+       </div>
       <div
         id="progress"
         class="hide"

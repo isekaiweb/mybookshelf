@@ -6,7 +6,6 @@ import {
 } from '../../util/key_storage.js';
 
 import {
-  create,
   update,
   detail,
   containerDialogHTML,
@@ -223,18 +222,22 @@ function setupDialog() {
 
   const yearBook = new NumberInput(),
     currentPage = new NumberInput(
-      document.querySelector('#status_book > input:first-of-type')
+      document.querySelector('#status_book > div > input:first-of-type')
     ),
     totalPage = new NumberInput(
-      document.querySelector('#status_book > input:last-of-type')
+      document.querySelector('#status_book > div > input:last-of-type')
     ),
     form = document.querySelector('body > div > form'),
     inputs = form.querySelectorAll('input'),
     coverBook = document.querySelector('form > #cover_book'),
-    statusBook = document.querySelector('form >#status_book > span'),
+    statusBook = document.querySelector(
+      '#container_status > #status_book > span'
+    ),
     dateBook = document.querySelector('form > #date_book'),
     containerDialogElement = document.querySelector('body > div'),
-    progressBook = document.querySelector('form  > #status_book > #progress'),
+    progressBook = document.querySelector(
+      'form  > #container_status > #progress'
+    ),
     btnPrimaryForm = document.querySelector(
       'form > #action_book > button:first-of-type'
     ),
@@ -262,10 +265,10 @@ function setupDialog() {
       if (input.id === 'current_page' || input.id === 'total_page') {
         input.addEventListener('keyup', () => {
           const currentPage = document.querySelector(
-              'form > #status_book > #current_page'
+              '#container_status  > #status_book > div > #current_page'
             ).value,
             totalPage = document.querySelector(
-              'form > #status_book > #total_page'
+              '#container_status  > #status_book > div > #total_page'
             ).value,
             progress = parseFloat(
               ((currentPage / totalPage) * 100).toFixed(2).replace('.00', '')
@@ -337,6 +340,7 @@ function setupDialog() {
       btnSecondaryForm.lastElementChild.textContent = 'remove';
       btnSecondaryForm.firstElementChild.src = 'assets/ic_trash.svg';
 
+      coverBook.removeAttribute('class');
       btnPrimaryForm.addEventListener('click', function () {
         sessionStorage.setItem(KEY_TYPE_CRUD, update);
         removeStyleBody(containerDialogElement);
@@ -370,10 +374,7 @@ function setupDialog() {
     }
   });
 
-  if (
-    coverBook.classList.contains('stretch') ||
-    coverBook.classList.contains('editable')
-  ) {
+  if (coverBook.classList.contains('editable')) {
     setupCoverBook(inputs, coverBook, containerDialogElement);
   }
 

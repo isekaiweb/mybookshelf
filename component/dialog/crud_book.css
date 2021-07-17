@@ -27,15 +27,10 @@ form > #cover_book {
   box-shadow: 1px 1px 10px var(--background-dark);
 }
 
-form > #cover_book.stretch {
-  cursor: pointer;
-}
-
 form > #cover_book:hover.editable {
   cursor: pointer;
 }
 
-form > #cover_book:hover.stretch::after,
 form > #cover_book:hover.editable::after {
   content: 'set cover';
   position: absolute;
@@ -80,33 +75,50 @@ form > #info_book > input:last-of-type {
   font-family: var(--font-secondary);
 }
 
-form > #status_book {
+#container_status,
+#container_status > #status_book,
+#container_status > #status_book > div {
   display: grid;
   margin: 0;
 }
 
-form > #status_book > span {
+#container_status > #status_book > span {
   width: fit-content;
   height: fit-content;
   font-weight: 600;
 }
 
-form > #status_book > label {
+#container_status > #status_book > div > label {
   width: fit-content;
   cursor: pointer;
   position: relative;
 }
 
-form > #status_book > label::after {
+#container_status > #status_book > div > label::after {
   content: ':';
   position: absolute;
   right: 0;
-  transform: translateX(8px);
 }
 
-form > #status_book > input {
+#container_status > #status_book > div > input {
   width: 50px;
   transform: translateY(3px);
+}
+
+#container_status > #status_book > div > label:first-of-type {
+  grid-area: 1/1/1/1;
+}
+
+#container_status > #status_book > div > input:first-of-type {
+  grid-area: 1/2/1/2;
+}
+
+#container_status > #status_book > div > label:last-of-type {
+  grid-area: 2/1/2/1;
+}
+
+#container_status > div > #status_book > input:last-of-type {
+  grid-area: 2/2/2/2;
 }
 
 #progress {
@@ -195,11 +207,6 @@ form > #action_book > button:last-of-type {
     border-radius: calc(1px + 1vw);
   }
 
-  form > #cover_book.stretch {
-    grid-area: 1/2/4/2;
-  }
-
-  form > #cover_book:hover.stretch::after,
   form > #cover_book:hover.editable::after {
     border-radius: calc(1px + 1vw);
     font-size: 2em;
@@ -234,50 +241,43 @@ form > #action_book > button:last-of-type {
     font-size: calc(1em + 0.2vw);
   }
 
-  form > #status_book {
+  #container_status {
     grid-area: 2/1/2/1;
+    grid-template-columns: max-content 1fr;
+  }
+
+  #container_status > #status_book {
+    grid-area: 1/1/1/1;
     column-gap: 10px;
-    grid-template-columns: minmax(100px, 120px) repeat(2, max-content);
-    grid-template-rows: repeat(3, max-content);
     overflow: hidden;
   }
 
-  form > #status_book > span {
-    grid-area: 1/1/1/-2;
-    align-self: end;
+  #container_status > #status_book > span {
+    grid-area: 1/1/1/1;
+    align-self: center;
     font-size: calc(1em + 1vw);
   }
 
-  form > #status_book > label {
+  #container_status > #status_book > div {
+    grid-area: 2/1/2/1;
+    column-gap: 1em;
+    grid-template-columns: minmax(80px, 60%) 50px;
+  }
+
+  #container_status > #status_book > div > label {
     width: 100%;
     position: relative;
     font-size: calc(1em + 0.2vw);
   }
 
-  form > #status_book > input {
-    width: 50px;
+  #container_status > #status_book > div > input {
+    width: 100%;
     align-self: start;
     font-size: calc(1em + 0.1vw);
   }
 
-  form > #status_book > label:first-of-type {
-    grid-area: 2/1/2/1;
-  }
-
-  form > #status_book > input:first-of-type {
-    grid-area: 2/2/2/2;
-  }
-
-  form > #status_book > label:last-of-type {
-    grid-area: 3/1/3/1;
-  }
-
-  form > #status_book > input:last-of-type {
-    grid-area: 3/2/3/2;
-  }
-
   #progress {
-    grid-area: 1/3/4/3;
+    grid-area: 1/2/1/2;
     width: 9vmax;
     height: 9vmax;
     min-height: 75px;
@@ -343,7 +343,7 @@ form > #action_book > button:last-of-type {
     width: 100%;
   }
 
-  form > #status_book > span {
+  #container_status > #status_book > span {
     font-size: calc(1em + 1.45vw);
   }
 
@@ -370,7 +370,6 @@ form > #action_book > button:last-of-type {
     grid-template-columns: 65% 1fr;
   }
 
-
   #date_book {
     font-size: 11px;
   }
@@ -383,7 +382,7 @@ form > #action_book > button:last-of-type {
     font-size: calc(1em + 1vw);
   }
 
-  form > #status_book > span {
+  #container_status > #status_book > span {
     font-size: calc(1em + 0.9vw);
   }
 
@@ -400,7 +399,7 @@ form > #action_book > button:last-of-type {
     font-size: calc(1em + 0.1vw);
   }
 
-  form > #status_book > input:first-of-type {
+  #container_status > #status_book > div > input:first-of-type {
     font-size: 1em;
   }
 
@@ -423,5 +422,249 @@ form > #action_book > button:last-of-type {
 
   form > #action_book > button > img {
     height: 12px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  body > div > form {
+    padding: 3em;
+    width: 90vw;
+    height: fit-content;
+    border-radius: calc(1em + 0.2vmax);
+    row-gap: 3vh;
+    grid-template-rows: minmax(200px, 25vh) repeat(5, max-content);
+  }
+
+  form > #cover_book {
+    grid-area: 1/1/1/1;
+    width: 100%;
+    align-self: start;
+    height: 100%;
+    border-radius: calc(1px + 1vw);
+  }
+
+  form > #cover_book:hover.editable::after {
+    border-radius: calc(1px + 1vw);
+    font-size: 2em;
+    background-color: var(--dialog-dark);
+  }
+
+  #date_book {
+    grid-area: 5/1/5/1;
+    line-height: 1.2;
+    align-self: start;
+    font-size: calc(1em + 10%);
+  }
+
+  form > #info_book {
+    grid-area: 2/1/2/1;
+    grid-template-rows: repeat(3, max-content);
+  }
+
+  form > #info_book > input:first-of-type {
+    grid-area: 1/1/1/1;
+    font-size: calc(1em + 3.5vw);
+    width: 100%;
+  }
+
+  form > #info_book > input:nth-of-type(2) {
+    grid-area: 2/1/2/1;
+    font-size: calc(1em + 2.2vw);
+    width: 100%;
+  }
+
+  form > #info_book > input:last-of-type {
+    font-size: calc(1em + 0.5vw);
+  }
+
+  #container_status {
+    grid-area: 3/1/3/1;
+    grid-template-columns: max-content 1fr;
+  }
+
+  #container_status > #status_book {
+    grid-area: 1/1/1/1;
+    column-gap: 10px;
+    overflow: hidden;
+  }
+
+  #container_status > #status_book > span {
+    grid-area: 1/1/1/1;
+    align-self: center;
+    font-size: calc(1em + 2vw);
+  }
+
+  #container_status > #status_book > div {
+    grid-area: 2/1/2/1;
+    column-gap: 1em;
+    grid-template-columns: minmax(100px, 55%) 50px;
+  }
+
+  #container_status > #status_book > div > label {
+    width: 100%;
+    position: relative;
+    font-size: calc(1em + 0.5vw);
+  }
+
+  #container_status > #status_book > div > input {
+    width: 100%;
+    align-self: start;
+    font-size: calc(1em + 0.1vw);
+  }
+
+  #progress {
+    grid-area: 1/2/1/2;
+    width: 10vmax;
+    height: 10vmax;
+    min-height: 75px;
+    min-width: 75px;
+    max-width: 110px;
+    max-height: 110px;
+    border-radius: 100%;
+    align-self: center;
+    justify-self: center;
+  }
+
+  #progress > span {
+    height: 10%;
+    width: 100%;
+  }
+
+  #progress::after {
+    font-size: calc(1em + 0.6vmax);
+  }
+
+  #hashtag {
+    grid-area: 4/1/4/1;
+    font-size: calc(1em + 1vw);
+  }
+
+  form > #action_book {
+    grid-area: 6/1/6/1;
+    flex-direction: column;
+    display: flex;
+    row-gap: 1vh;
+    grid-template-columns: repeat(2, minmax(180px, 20%));
+  }
+
+  form > #action_book > button {
+    padding: 1em;
+    width: 100%;
+
+    display: flex;
+    border-radius: calc(1px + 0.2vw);
+  }
+
+  form > #action_book > button > span {
+    font-size: calc(1em + 0.3vw);
+    text-align: center;
+    width: 100%;
+  }
+
+  form > #action_book > button > img {
+    justify-self: end;
+    height: calc(1em + 0.5vw);
+  }
+}
+
+@media screen and (min-width: 1200px) and (orientation: portrait) {
+  body > div > form {
+    row-gap: 2vh;
+  }
+
+  form > #info_book > input:first-of-type {
+    font-size: calc(1em + 3vw);
+  }
+
+  form > #info_book > input:nth-of-type(2) {
+    font-size: calc(1em + 2vw);
+  }
+
+  form > #info_book > input:last-of-type {
+    font-size: calc(1em + 0.3vw);
+  }
+
+  #container_status > #status_book > span {
+    font-size: calc(1em + 2vw);
+  }
+
+  #container_status > #status_book > div {
+    grid-template-columns: minmax(100px, 55%) 50px;
+  }
+
+  #container_status > #status_book > div > label {
+    font-size: calc(1em + 0.3vw);
+  }
+
+  #container_status > #status_book > div > input {
+    font-size: calc(1em + 0.1vw);
+  }
+
+  #progress > span {
+    height: 10%;
+    width: 100%;
+  }
+
+  #hashtag {
+    font-size: calc(1em + 0.8vw);
+  }
+}
+
+@media screen and (max-width: 640px) and (orientation: portrait) {
+  body > div > form {
+    height: fit-content;
+    row-gap: 2vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    grid-template-rows: minmax(100px, 25vh) repeat(5, max-content);
+  }
+
+  body > div > form:last-of-type::-webkit-scrollbar {
+    display: none;
+  }
+
+  form > #info_book > input:first-of-type {
+    font-size: calc(1em + 2.8vw);
+  }
+
+  form > #info_book > input:nth-of-type(2) {
+    font-size: calc(1em + 2.2vw);
+  }
+
+  form > #info_book > input:last-of-type {
+    font-size: calc(1em + 0.3vw);
+  }
+
+  #container_status > #status_book > span {
+    font-size: calc(1em + 2vw);
+  }
+
+  #container_status > #status_book > div {
+    grid-template-columns: minmax(100px, 55%) 50px;
+  }
+
+  #container_status > #status_book > div > label {
+    font-size: calc(1em + 1vw);
+  }
+
+  #container_status > #status_book > div > input {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 520px) and (orientation: portrait) {
+  body > div > form {
+    padding: 1.8em;
+  }
+
+  #container_status > #status_book > div {
+    grid-area: 2/1/2/1;
+    column-gap: 1em;
+    grid-template-columns: minmax(85px, 55%) 50px;
+  }
+  form > #action_book > button {
+    padding: 0.6em;
+    margin: 0;
   }
 }
