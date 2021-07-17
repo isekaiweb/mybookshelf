@@ -147,8 +147,6 @@ main > div {
   height: 2em;
   display: flex;
   column-gap: 0.2em;
-
-  margin: 2vmax 0;
   justify-content: center;
 }
 
