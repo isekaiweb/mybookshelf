@@ -1,4 +1,6 @@
 # About
+![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
+
 This is a simple web application to save all your progress from reading a book and keep you on track, so you can easily capture your progress
 
 ## why i'm creating this app? what for?
@@ -26,5 +28,3 @@ This app just using **Vanilla JavaScript** without any library/framework cause i
 - click **live web** down here 🔽
 
 ## [live web](https://isekaiweb.github.io/mybookshelf/)
-
-![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
