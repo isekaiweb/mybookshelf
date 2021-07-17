@@ -29,7 +29,7 @@ import NumberInput from './numberInput.js';
  */
 
 const removeStyleBody = (containerDialogElement) => {
-    body.removeAttribute('style');
+    body.style.removeProperty('overflow');
     containerDialogElement.remove();
   },
   clearSessionStorage = () => {

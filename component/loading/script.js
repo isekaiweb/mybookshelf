@@ -1,6 +1,5 @@
 import { body } from '../../util/constants.js';
 
-
 /********************************
  * @removeLoading this is a function to remove loading after window loaded
  * @setupLoading this is a function to setup loading
@@ -8,7 +7,7 @@ import { body } from '../../util/constants.js';
 
 const removeLoading = () => {
   const loadingContainer = body.querySelector('#loading_container');
-  body.removeAttribute('style');
+  body.style.removeProperty('overflow');
   loadingContainer.classList.add('hide');
 
   setTimeout(() => {

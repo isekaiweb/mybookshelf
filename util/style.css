@@ -43,10 +43,9 @@
 body {
   width: 100%;
   background-color: var(--background-dark);
-  display: flex;
-  flex-direction: column;
+  display: grid;
   row-gap: calc(20px + 1vmax);
-  align-items: center;
+  justify-items: center;
   font-family: var(--font-primary);
 }
 
@@ -68,6 +67,18 @@ body::-webkit-scrollbar-thumb {
 /* Handle on hover */
 body::-webkit-scrollbar-thumb:hover {
   background: var(--dialog-dark);
+}
+
+header {
+  grid-area: 1/1/1/1;
+}
+
+main {
+  grid-area: 2/1/2/1;
+}
+
+footer {
+  grid-area: 3/1/3/1;
 }
 
 header,

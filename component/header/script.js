@@ -1,4 +1,4 @@
-import { headerChildElement } from '../../util/constants.js';
+import { body, headerChildElement } from '../../util/constants.js';
 import {
   KEY_FILTER,
   KEY_PAGE_LIST,
@@ -8,9 +8,9 @@ import {
 import setupItemBook from '../main/script.js';
 import detectMob from '../../util/detectMob.js';
 
-document
-  .querySelector('body > header')
-  .insertAdjacentHTML('afterbegin', headerChildElement);
+const header = document.querySelector('body > header');
+
+header.insertAdjacentHTML('afterbegin', headerChildElement);
 
 const select = document.querySelector('#select'),
   typeSearch = document.querySelectorAll('#type_search > input[type="radio"]'),
@@ -114,6 +114,12 @@ function setHeader() {
       forEachChips(eventClickChips, target);
     }
   });
+
+  body.style.cssText = `grid-template-rows:max-content minmax(calc(${
+    window.innerHeight
+  }px - (${getComputedStyle(header).height} + ${getComputedStyle(header).marginTop} + 20px + 1vmax + 5em)), max-content) max-content;`;
+
+  console.log(body);
 }
 
 function setOverflowChip() {
