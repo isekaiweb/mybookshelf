@@ -1,6 +1,7 @@
 footer {
     position: fixed;
     bottom: 10px;
+    z-index: 999;
 }
 footer > p {
   display: flex;
