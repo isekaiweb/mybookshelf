@@ -19,3 +19,8 @@ This app just using **Vanilla JavaScript** without any library/framework cause i
 - Loading Screen
 - Responsive Web
 
+### Demo 
+
+![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
+
+
