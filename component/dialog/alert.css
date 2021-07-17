@@ -19,7 +19,7 @@
 #alert > p {
   grid-area: 1/2/1/2;
   line-height: 0.7;
-  font-size: calc(4em - 1vmax);
+  font-size: calc(1em + 2vw);
   font-weight: 700;
   color: var(--active-dark);
   align-self: center;
@@ -40,7 +40,7 @@
   width: 100%;
   font-weight: 600;
   border-radius: calc(1px + 0.2vmax);
-  font-size: calc(1.5em - 0.3vmax);
+  font-size: calc(1em + 0.2vw);
   padding: 0.5em;
   transition: var(--transition-200ms);
 }
@@ -60,7 +60,7 @@
   color: var(--active-dark);
   font-weight: 600;
   border-radius: calc(1px + 0.2vmax);
-  font-size: calc(1.5em - 0.3vmax);
+  font-size: calc(1em + 0.2vw);
   padding: 0.5em;
   transition: var(--transition-200ms);
 }
