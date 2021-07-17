@@ -261,11 +261,11 @@ form > #action_book > button:last-of-type {
   #container_status > #status_book > div {
     grid-area: 2/1/2/1;
     column-gap: 1em;
-    grid-template-columns: minmax(80px, 60%) 50px;
+    grid-template-columns: minmax(max-content, 60%) 50px;
   }
 
   #container_status > #status_book > div > label {
-    width: 100%;
+    width: 110%;
     position: relative;
     font-size: calc(1em + 0.2vw);
   }
@@ -497,11 +497,11 @@ form > #action_book > button:last-of-type {
   #container_status > #status_book > div {
     grid-area: 2/1/2/1;
     column-gap: 1em;
-    grid-template-columns: minmax(130px, 55%) 50px;
+    grid-template-columns: minmax(max-content, 60%) 50px;
   }
 
   #container_status > #status_book > div > label {
-    width: 100%;
+    width: 110%;
     position: relative;
     font-size: calc(1em + 1vw);
   }
@@ -588,10 +588,6 @@ form > #action_book > button:last-of-type {
     font-size: calc(1em + 2vw);
   }
 
-  #container_status > #status_book > div {
-    grid-template-columns: minmax(100px, 55%) 50px;
-  }
-
   #container_status > #status_book > div > label {
     font-size: calc(1em + 0.3vw);
   }
@@ -660,12 +656,6 @@ form > #action_book > button:last-of-type {
 @media screen and (max-width: 520px) and (orientation: portrait) {
   body > div > form {
     padding: 1.8em;
-  }
-
-  #container_status > #status_book > div {
-    grid-area: 2/1/2/1;
-    column-gap: 1em;
-    grid-template-columns: minmax(110px, 55%) 50px;
   }
 
   form > #info_book > input:first-of-type {
