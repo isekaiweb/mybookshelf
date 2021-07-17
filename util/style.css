@@ -5,6 +5,7 @@
 @import '../component/header/style.css';
 @import '../component/dialog/main.css';
 @import '../component/main/style.css';
+@import '../component/footer/style.css';
 
 :root {
   /* color for dark theme */

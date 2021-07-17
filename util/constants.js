@@ -135,6 +135,7 @@ const update = 'UPDATE',
     <span class="desktop" >Completed</span>
   </div>`,
   containerDialogHTML = `<div>${crudBook}</div>`,
+  footerHTML = `<p><span>created by isekaiweb</span><img src="assets/ic_github.svg" alt="github"></p>`,
   body = document.querySelector('body');
 
 export {
@@ -146,4 +147,5 @@ export {
   containerDialogHTML,
   alert,
   headerChildElement,
+  footerHTML,
 };

@@ -1,0 +1,24 @@
+footer {
+    position: fixed;
+    bottom: 10px;
+}
+footer > p {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  cursor: pointer;
+}
+
+footer > p > span {
+  color: var(--passive-dark);
+  font-size: calc(1em + 0.3vw);
+  font-weight: 600;
+}
+
+footer > p > span.hover {
+  color: var(--active-dark);
+}
+
+footer > p > img {
+  width: calc(1em + 0.3vw);
+}
