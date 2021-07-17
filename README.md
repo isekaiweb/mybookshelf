@@ -23,4 +23,6 @@ This app just using **Vanilla JavaScript** without any library/framework cause i
 
 ![demo](https://github.com/isekaiweb/assets/blob/main/demo-app/mybookshelf.gif)
 
+## [see live web](https://isekaiweb.github.io/mybookshelf/)
+
 
