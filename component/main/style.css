@@ -234,6 +234,10 @@ main > div > span.disable {
   main > section > #progress_book {
     display: none;
   }
+
+  main > section > #info_book > h3 > span:last-of-type {
+    font-size: 0.6em;
+  }
 }
 
 @media screen and (max-width: 360px) and (orientation: portrait) {
