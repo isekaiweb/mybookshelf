@@ -249,7 +249,6 @@ form > #action_book > button:last-of-type {
   #container_status > #status_book {
     grid-area: 1/1/1/1;
     column-gap: 10px;
-    overflow: hidden;
   }
 
   #container_status > #status_book > span {
@@ -261,7 +260,7 @@ form > #action_book > button:last-of-type {
   #container_status > #status_book > div {
     grid-area: 2/1/2/1;
     column-gap: 1em;
-    grid-template-columns: minmax(max-content, 60%) 50px;
+    grid-template-columns: max-content 50px;
   }
 
   #container_status > #status_book > div > label {
@@ -485,7 +484,6 @@ form > #action_book > button:last-of-type {
   #container_status > #status_book {
     grid-area: 1/1/1/1;
     column-gap: 10px;
-    overflow: hidden;
   }
 
   #container_status > #status_book > span {
@@ -497,7 +495,7 @@ form > #action_book > button:last-of-type {
   #container_status > #status_book > div {
     grid-area: 2/1/2/1;
     column-gap: 1em;
-    grid-template-columns: minmax(max-content, 60%) 50px;
+    grid-template-columns: max-content 50px;
   }
 
   #container_status > #status_book > div > label {
