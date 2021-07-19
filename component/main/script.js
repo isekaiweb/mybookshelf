@@ -163,14 +163,26 @@ function setupItemBook() {
   const coverBookMain = document.querySelectorAll(
       'main > section > #cover_book'
     ),
-    setWidthCoverBook = () => {
+    heightCovers = [];
+
+  const forEachCoverBook = (innerFunction) => {
       coverBookMain.forEach((cover) => {
-        cover.style.width = getComputedStyle(cover).height;
+        innerFunction(cover);
       });
+    },
+    getMaxHeightCovers = (cover) => {
+      heightCovers.push(getComputedStyle(cover).height.replace('px', '') * 1);
+
+      return Math.max(...heightCovers);
+    },
+    setWidthCoverBook = (cover) => {
+      const size = getMaxHeightCovers(cover) + 'px';
+      cover.style.width = size;
+      cover.style.height = size;
     };
 
-  setWidthCoverBook();
-  window.addEventListener('resize', setWidthCoverBook);
+  forEachCoverBook(setWidthCoverBook);
+  window.addEventListener('resize', forEachCoverBook(setWidthCoverBook));
 
   const itemBookElement = main.querySelectorAll('section');
   if (itemBookElement) {

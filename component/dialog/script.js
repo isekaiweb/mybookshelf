@@ -79,7 +79,7 @@ const removeStyleBody = (containerDialogElement) => {
         '#action_book > button:first-of-type'
       ),
       date = new Date(),
-      currentTime = `${date.toDateString()}, ${date.toLocaleTimeString()}`,
+      currentTime = `${date.toDateString().split(' ').splice(1,3).join(' ')}, ${date.toLocaleTimeString()}`,
       currentIndex = sessionStorage.getItem(KEY_INDEX_BOOKS),
       startIndexChange = currentIndex || dataBooks.length,
       countChange = currentIndex != undefined ? 1 : 0,
@@ -185,7 +185,6 @@ const removeStyleBody = (containerDialogElement) => {
           fileReader.addEventListener('load', (e) => {
             imgAddress = e.target.result;
             this.setAttribute('data-local-img', imgAddress);
-            console.log(imgAddress);
           });
 
           btnSetCover.style.backgroundColor = 'var(--fill)';

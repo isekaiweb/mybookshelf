@@ -75,6 +75,7 @@ header {
 
 main {
   grid-area: 2/1/2/1;
+  align-content: start;
 }
 
 footer {

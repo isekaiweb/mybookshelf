@@ -118,8 +118,6 @@ function setHeader() {
   body.style.cssText = `grid-template-rows:max-content minmax(calc(${
     window.innerHeight
   }px - (${getComputedStyle(header).height} + ${getComputedStyle(header).marginTop} + 20px + 1vmax + 5em)), max-content) max-content;`;
-
-  console.log(body);
 }
 
 function setOverflowChip() {
