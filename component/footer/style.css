@@ -18,3 +18,10 @@ footer > p > span.hover {
 footer > p > img {
   width: calc(1em + 0.3vw);
 }
+
+
+@media screen and (max-width: 520px) {
+  footer {
+    transform: translateY(-8px)
+  }
+}
